@@ -19,8 +19,8 @@
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #fff;
 
-$mainColor: rgb(150,150,150);
-$headingColor: rgb(150,150,150);
+$mainColor: hsl(240, 5%, 50%);
+$headingColor: hsl(240, 5%, 50%);
 
 $mainFontSize: 36px;
 $mainFont: 'Lora', Helvetica, sans-serif;
@@ -42,6 +42,11 @@ section.has-dark-background {
 	&, h1, h2, h3, h4, h5, h6 {
 		color: #fff;
 	}
+}
+
+
+.reveal p, .reveal li {
+	line-height: 2;
 }
 
 
