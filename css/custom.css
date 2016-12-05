@@ -1,3 +1,7 @@
+html{
+  line-height: 1.5;
+}
+
 input[type=range] {
   -webkit-appearance: none;
   margin: 10px 0;
@@ -23,14 +27,63 @@ input[type=range]::-webkit-slider-thumb {
   margin-top: -5px;
   box-shadow: 3px 3px 0px #c1c1c1;
 }
-/*input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #FFFFFF;
-  border-radius: 20px;
-}*/
+
 
 #old-school{
   font-family: "Classic Console", monospace;
   color: cyan;
   text-shadow: 0 0 10px cyan;
 
+}
+
+.reveal .line15{
+  line-height: 2;
+}
+
+.reveal .white{
+  color: #fff;
+}
+
+.reveal .sans-serif{
+  font-family: "Open Sans", sans-serif;
+}
+
+
+.reveal .link-hover:hover{
+  background: #222;
+}
+
+.reveal .black-background{
+  background: #222;
+  padding: 5px;
+}
+.controls button{
+  outline: none;
+}
+.reveal .slides section .fragment.highlight-red.visible {
+  color: white;
+  background: #222;
+  padding: 10px;
+}
+.reveal .slides section .fragment.highlight-green.visible {
+  color: hsl(160, 55% , 40%)
+}
+
+
+.reveal .big-font{
+  font-size: 2rem;
+}
+
+.reveal blockquote{
+  padding: 1em;
+}
+
+
+@media print {
+  h3:before{
+    content:"↝";
+  }
+  h3:after{
+    content:"↜";
+  }
 }

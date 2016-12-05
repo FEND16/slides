@@ -23,12 +23,12 @@ $mainColor: hsl(240, 5%, 50%);
 $headingColor: hsl(240, 5%, 50%);
 
 $mainFontSize: 36px;
-$mainFont: 'Lora', Helvetica, sans-serif;
-$headingFont: 'Open Sans', Helvetica, sans-serif;
+$mainFont: 'Lora', Helvetica, serif;
+$headingFont: 'Lora', Helvetica, serif;
 $headingTextShadow: none;
 $headingLetterSpacing: .15em;
 $headingTextTransform: none;
-$headingFontWeight: 600;
+$headingFontWeight: 400;
 $linkColor: #2C2A47;
 $linkColorHover: lighten( $linkColor, 15% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );

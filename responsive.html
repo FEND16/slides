@@ -1,16 +1,418 @@
 <html>
 <head>
-	<base href="file:///Users/jesperorb/Dropbox/courses/fend16/slides/">
-	<!-- <base href="https://fend16.github.io/slides/"> -->
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/custom.css">
-	<link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
-	<link rel="stylesheet" href="css/custom.css">
+  <meta charset="utf-8">
+  <!--   <base href="file:///Users/jesperorb/Dropbox/courses/fend16/slides/">
+ --><base href="https://fend16.github.io/slides/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/custom.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <title>Responsive Web Design</title>
+  <link rel="icon" href="F_LOGO.png"/>
 </head>
 <body>
-	<div class="reveal">
-		<div class="slides">
-		</div>
-	</div>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+      <!-- Responsive Web Design -->
+        <section data-background="hsl(0 , 55%, 40%)">
+          <h1 class="white">Responsive Web Design</h1>   
+        </section>
+        <section data-background="hsl(0 , 55%, 40%)">
+          <blockquote class="white line15">Rather than tailoring disconnected designs to each of an ever-increasing number of web devices, we can treat them as facets of the same experience.</blockquote>
+          <em> - Ethan Marcotte</em>
+        </section>
+        <section data-background="hsl(0 , 55%, 40%)">
+          <p class="line15">Vi ska skapa hemsidor som är anpassade för alla enheter som finns och <span class="fragment fade-in" style="background: #222; padding: 5px;">alla enheter som ska släppas i framtiden.<span></p>
+          <h3 class="fragment fade-in">...ish</h3>
+        </section>
+      </section>
+      <!--METODER INOM WEBBDESIGN -->
+      <section data-background="hsl(330, 55%, 40%)">
+        <section >
+          <h1>Web Design Strategies</h1>
+        </section>
+        <section>
+          <h3>Graceful Degradation</h3>
+          <blockquote>
+            Graceful degradation focuses on building the website for the most advanced/capable browsers. 
+          </blockquote>
+          <blockquote>
+            Under this paradigm, older browsers are expected to have a poor, but passable experience.
+          </blockquote>
+        </section>
+        <section>
+            <h3>Graceful Degradation</h3>
+            <p>Praktiskt exempel</p>
+            <pre><code class="hljs css">
+.box-with-opacity{
+  opacity: 0.5;
+}
+          </code></pre>
+        </section>
+        <section>
+            <h3>Graceful Degradation</h3>
+            <p class="fragment fade-in">just fan.</p>
+            <pre class="fragment fade-in"><code class="hljs css">
+.box-with-opacity{
+  /* IE 8 */
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=50)";
+
+  /* IE 5-7 */
+  filter: alpha(opacity=50);
+}
+          </code></pre>
+        </section>
+        <section class="line15">
+          <h3>Progressive Enhancement</h3>
+          <blockquote>
+            Progressive enhancement focuses on the content. 
+          </blockquote>
+          <blockquote>
+            The goal of Web design is not merely to dazzle, but to deliver information to the widest audience possible.
+          </blockquote>
+        </section>
+        <section>
+          <blockquote class="black-background line15">universal access to a website’s content irrespective of a person’s physical abilities or technological capabilities.</blockquote>
+        </section>
+        <section>
+        <p class="fragment fade-in line15"><span class="fragment highlight-red">Broad version:</span> start with a baseline of functionality, enhance upwards based on capabilities.</p>
+        <p class="fragment fade-in line15"><span class="fragment highlight-red">Narrow version:</span> start with HTML, then add CSS, then add JavaScript.</p>        
+        </section>
+        <section>
+        <pre><code class="big-font line15">
+.box-with-opacity{
+    background: rgb(0,0,0);
+    background: rgba(0,0,0, 0.5);
+}
+        </code></pre>
+        <p>Browsers som stödjer alpha-kanal får det, de andra får nöja sig utan alpha-kanal</p>
+        </section>
+        <section>
+        <a href="http://dowebsitesneedtobeexperiencedexactlythesameineverybrowser.com/">
+        <h1 class="link-hover sans-serif">dowebsitesneed tobeexperienced
+        exactlythesame
+        ineverybrowser</h1>
+        </a>
+        </section>
+        <section>
+          <h3>Läs mer:</h3>
+          <a href="http://alistapart.com/article/understandingprogressiveenhancement"><h3 class="black-background">A List Apart: Understanding Progressive Enhancement<h3></a>
+        </section>
+      </section>
+      <!-- MOBILE FIRST VS. DESKTOP FIRST -->
+      <section>
+              <section>
+          <h1>Mobile First vs. Desktop First</h1>
+        </section>
+       <section>
+<canvas data-chart="bar">
+<!-- 
+{
+ "data": {
+  "labels": [
+  "360x640",
+  "1366x768",
+  "1920x1080",
+  "375x667",
+  "Other"
+  ],
+  "datasets": [
+   {
+    "data":[15.81, 
+    14.1, 
+    6.94,
+    3.81,
+    24.26],
+    "label":"Resolutions ~ Sept - Nov 2016"
+   }
+  ]
+ }, 
+ "options": { "responsive": "true" }
+}
+-->
+</canvas>
+        </section>
+        <section>
+          <canvas data-chart="bar">
+<!-- 
+{
+ "data": {
+  "labels": [
+  "Chrome",
+  "Safari",
+  "UC Browser",
+  "Firefox",
+  "Opera",
+  "IE"
+  ],
+  "datasets": [
+   {
+    "data":[50.73, 
+    13.63, 
+    8.18,
+    7.25,
+    5.12,
+    4.9],
+    "label":"Browsers ~ Sept - Nov 2016"
+   }
+  ]
+ }, 
+ "options": { "responsive": "true" }
+}
+-->
+</canvas>
+        </section>
+        <section>
+          <a href="http://gs.statcounter.com/"><h2>http://gs.statcounter.com</h2></a>
+        </section>
+        <section>
+          <ul style="text-align: left">
+          <li class="fragment fade-in">Ska vi anpassa för alla tänkbara besökare eller enbart vår målgrupp?</li>
+          <li class="fragment fade-in">Måste vi anpassa oss till exakt alla enheter som finns? Är det OK att sidan ser annorlunda ut på vissa enheter och browsers?</li>
+          <li class="fragment fade-in">Måste vi verkligen ha fallbacks eller fixes för webbläsare som 1% av befolkningen använder?</li>
+          </ul>
+          <strong class="fragment fade-in">Inta en roll: den ena tycker att det ska se likadant ut på alla enheter och browsers. Den andra tycker att vi ska strunta i minoriteterna (exempelvis folk som använder IE eller äldre telefoner)</strong>
+        </section>
+        </section>
+
+      <!-- RESPONSIVA MÅTT -->
+      <section data-background="hsl(200, 55%, 40%)">
+        <section>
+        <h1>Responsiva mått</h1>
+        </section>
+        <section><h3>em unit</h3>
+        <blockquote class="line15">Equal to the computed value of the font-size property of the <em class="fragment highlight-red">element on which it is used.</em></blockquote>
+        <a href="https://www.w3.org/TR/css3-values/#font-relative-lengths">W3C CSS Spec ~ Relative Lenghts</a>
+        </section>
+        <section>
+          <h3>em unit</h3>
+          <pre><code class="hljs css">
+/* default font-size: 16px */
+p{
+  font-size: 2em;
+}
+.box{
+  font-size: 2em;
+}
+          </code></pre>
+          <pre><code class="hljs html">
+<div class="box">
+  <p>Please download me</p> <!-- 16 * 2 * 2 === 64px -->
+</div>
+          </code></pre>
+        </section>
+        <section>
+          <h3>rem unit</h3>
+          <blockquote class="line15">Equal to the computed value of font-size <em class="fragment highlight-red">on the root element.</em></blockquote>
+          <p><a href="https://www.w3.org/TR/css3-values/#font-relative-lengths">W3C CSS Spec</a><p>
+        </section>
+        <section>
+        <h3>R.E.M Unit</h3>
+          <img src="images/rem.jpg" class="stretch" alt="R.E.M">
+        </section>
+        <section>
+          <h3>rem unit</h3>
+          <pre><code class="hljs css">
+/* default font-size: 16px */
+p{
+  font-size: 2rem;
+}
+.box{
+  font-size: 2em;
+}
+          </code></pre>
+          <pre><code class="hljs html">
+<div class="box">
+  <p>Please download me</p> <!-- 16 * 2 === 32px -->
+</div>
+          </code></pre>
+        </section>
+        <section data-background="hsl(200, 55%, 40%)">
+          <h3>vh & vw</h3>
+          <div style="text-align: left;">
+            <p><code class="black-background">1vw</code> = 1% of viewport width</p>
+            <p><code class="black-background">1vh</code> = 1% of viewport height</p>
+            <p><code  class="black-background">1vmin</code> = 1vw or 1vh, whichever is smaller</p>
+            <p><code  class="black-background">1vmax</code> = 1vw or 1vh, whichever is larger</p>
+            </div>
+        </section>
+        <section data-background="hsl(200, 55%, 40%)">
+          <pre><code class="hljs css big-font">
+p{
+
+  font-size: 10vw;
+
+}
+          </code></pre>
+          <p><span class="black-background">10%</span> av skärmens storlek, ändras om vi minskar browser-fönstret </p>
+        </section>
+      </section>
+      <!-- Media Queries -->
+      <section data-background="hsl(160, 55%, 40%)">
+        <section>
+          <h1>Media Queries</h1>
+        </section>
+        <section>
+        <h3>Responsive Meta Tag</h3>
+        <pre><code class="hljs html line15">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+        </code></pre>
+        <a href="https://css-tricks.com/snippets/html/responsive-meta-tag/">https://css-tricks.com/snippets/html/responsive-meta-tag</a>
+        </section>
+        <section>
+          <em class="line15">In general, <strong class="fragment highlight-red">a query is a question</strong>, often required to be expressed in a formal way.</em>
+          <pre class="fragment fade-in big-font"><code class="hljs js">if (expression) {
+    /*hack NASA mainframe*/
+}</code></pre>
+        </section >
+        <section>
+          <h3>Basic media query</h3>
+          <pre><code class="hljs css big-font line15">
+@media (max-width: 480px){
+  /*make NASAs mainframe responsive*/
+}
+          </code></pre>
+          <p>alla CSS-rules inom paranteserna kommer att användas om skärmen är max 480px bred</p>
+        </section>
+        <section>
+          <h3>Basic media query</h3>
+          <pre><code class="hljs css big-font line15">@media (max-width: 480px){ 
+  .container{
+    width: 100%;
+  }
+}</code></pre>
+          <p><span class="black-background">Under 480px</span> ska vår sida ta upp hela skärmens bredd</p>
+        </section>
+        <section>
+        <h3>Basic media query</h3>
+        <em>Samma mått (om man utgår från 16px font)</em>
+<pre><code class="hljs css big-font line15">
+@media (max-width: 30em){ 
+  /*make NASAs mainframe responsive */
+}
+          </code></pre>         
+        </section>
+        <section>
+        <h3>Media type</h3>
+<pre><code class="hljs css line15">
+@media screen and (max-width: 30em){
+  p{
+    font-size: 1.5em; /* Enlarge text on smaller screen */
+  }
+}
+          </code></pre> 
+          <pre><code class="hljs js line15">
+if screen && (max-width: 30em){
+  /*hack NASA mainframe
+}
+          </code></pre>       
+        </section>
+        <section>
+          <h3>Mobile first</h3>
+            <pre><code class="hljs css big-font line15">
+@media screen and (min-width: 30em){
+  .container{
+    width: 70%;
+  }
+}
+          </code></pre>
+          <p>30 em och <span class="black-background">uppåt</span>, vi anpassar för större skärmar</p>
+        </section>
+        <section>
+        <pre><code class="hljs css big-font line15">
+@media screen and (orientation: landscape){
+  .container{
+    width: 70%;
+  }
+}
+        </code></pre>
+        <p>Är mobilen liggande eller stående (portrait)</p>
+        </section>
+        <section>
+          <h3>Det vi behöver ha koll på</h3>
+          <p><code class="black-background">max-width / min-width</code></p>
+          <p><code class="black-background">all, screen, print</code></p>
+          <h4 class="fragment fade-in">samt..</h4>
+        </section>
+        <section>
+          <h2>Breakpoints</h2>
+        </section>
+        <section>
+          <h3>Låt ditt innehåll styra dina breakpoints</h3>
+          <pre><code class="hljs css big-font line15">
+@media screen and (min-width: ???){
+  /* Beror på ditt innehåll */
+}
+          </code></pre>
+        </section>
+        <section>
+          <h4>Breakpoint hunt</h4>
+          <ul>
+            <li class="fragment fade-in">Kolla på hemsidor du brukar besöka efter media queries</li>
+            <li class="fragment fade-in">Använd Responsive Mode i din webbläsare för att se vad som händer när du ändrar storleken på fönstret</li>
+          </ul>
+          <a class="fragment fade-in" href="http://material.io/resizer/"><h6>Material.io Resizer</h6></a>
+          <a class="fragment fade-in" href="https://developers.google.com/web/fundamentals/design-and-ui/responsive/patterns"><h6>Google Developers: Responsive Patterns</h6></a>
+        </section>
+      </section>
+    </div>
+  </div>
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      transition: "convex",
+      chart: {
+      defaults: { 
+          global: { 
+              title: { fontColor: "#222" }, 
+          }, 
+            legend: {
+                labels: { fontColor: "#222" },
+            },
+            scale: { 
+                scaleLabel: { fontColor: "#222" }, 
+                gridLines: { color: "#222", zeroLineColor: "#222" }, 
+                ticks: { fontColor: "#222" }, 
+            } 
+        },
+        line: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ], "borderDash": [ [5,10], [0,0] ]}, 
+        bar: { backgroundColor: [ "hsla(20,55%,50%,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+        pie: { backgroundColor: [ ["rgba(0,0,0,.8)" , "rgba(220,20,20,.8)", "rgba(20,220,20,.8)", "rgba(220,220,20,.8)", "rgba(20,20,220,.8)"] ]},
+        radar: { borderColor: [ "rgba(20,220,220,.8)" , "rgba(220,120,120,.8)", "rgba(20,120,220,.8)" ]}, 
+    },
+      dependencies: [
+      {
+        src: 'lib/js/classList.js',
+        condition: function () {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        } 
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        }
+      },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'js/highlightfragment.js', async: true },
+      { src: 'plugin/chart/Chart.min.js' },               
+      { src: 'plugin/chart/csv2chart.js' }
+      ]
+    });
+  </script>
 </body>
 </html>
