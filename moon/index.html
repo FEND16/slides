@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Moon boy</title>
+	<link rel="stylesheet" href="main.css">
+	<link rel="icon" href="moon.png">
+</head>
+<body>
+	<header class="gif">
+		<img src="images/wallace.gif" alt="Wallace">
+	<h2>Min resa till månen</h2>
+	</header>
+	<div class="container">
+	<!--var img = (expression) ? true : false;-->
+	<img sizes="(min-width: 55em) 20vw, 80vw" 
+
+			srcset="
+			images/nasa1_300w.jpg 300w,
+			images/nasa1_600w.jpg 600w,
+			imageS/nasa1_1200w.jpg 1200w" 
+
+			src="images/nasa1_300w.jpg">
+
+	<img sizes="(min-width: 55em) 20vw, 80vw" 
+			srcset="images/nasa2_300w.jpg 300w,
+			images/nasa2_600w.jpg 600w,
+			imageS/nasa2_1200w.jpg 1200w" 
+			src="images/nasa2_300w.jpg">
+
+	<img sizes="(min-width: 55em) 20vw, 80vw" 
+			srcset="images/nasa3_300w.jpg 300w,
+			images/nasa3_600w.jpg 600w,
+			imageS/nasa3_1200w.jpg 1200w" 
+			src="images/nasa3_300w.jpg">
+
+	<img sizes="(min-width: 55em) 20vw, 80vw" 
+			srcset="images/nasa4_300w.jpg 300w,
+			images/nasa4_600w.jpg 600w,
+			imageS/nasa4_1200w.jpg 1200w" 
+			src="images/nasa4_300w.jpg">
+
+	<img sizes="(min-width: 55em) 20vw, 80vw" 
+			srcset="images/nasa5_300w.jpg 300w,
+			images/nasa5_600w.jpg 600w,
+			imageS/nasa5_1200w.jpg 1200w" 
+			src="images/nasa5_300w.jpg">
+	</div>
+	<script>
+		let imgs = document.getElementsByTagName("img");
+		for (let i = 0; i < imgs.length; i++){
+			imgs[i].onload = function(){
+				console.log(`Image width: ${this.currentSrc}`);
+		};
+	};
+	</script>
+</body>
+</html>
