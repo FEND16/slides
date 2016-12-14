@@ -15,12 +15,12 @@
 @import url(../../lib/font/lora/lora.css);
 @import url(../../lib/font/opensans/opensans.css);
 
-
+/*hsl(240, 5%, 50%);*/
 // Override theme settings (see ../template/settings.scss)
 $backgroundColor: #fff;
 
-$mainColor: hsl(240, 5%, 50%);
-$headingColor: hsl(240, 5%, 50%);
+$mainColor: #fff;
+$headingColor: #fff;
 
 $mainFontSize: 36px;
 $mainFont: 'Lora', Helvetica, serif;
