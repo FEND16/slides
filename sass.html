@@ -1,0 +1,416 @@
+<html>
+<head>
+<!--   <base href="file:///Users/jesperorb/Dropbox/courses/fend16/slides/"> -->
+  <base href="https://fend16.github.io/slides/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/custom.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="stylesheet" href="css/custom.css">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="hsl(330, 50%, 55%)">
+        <section> 
+        <h1>SASS</h1>
+        <h4>Syntactically Awesome Style Sheets</h4>
+        </section> 
+        <section>
+          <h3>Installera först</h3>
+          <p>Windows: <code class="black-background">http://rubyinstaller.org/</code> eller sök på <code class="black-background">ruby installer</code></p>
+
+          <h4>Sen i terminalen: <code class="black-background">gem install sass</code></h4>
+        </section>
+        <section>
+          <h3>SASS är ett <code class="black-background">superset</code> av CSS</h3>
+          <p>SASS kan allt som CSS kan</p>
+        </section>
+        <section>
+          <h3>Med sass får vi <code class="black-background">variabler</code>,<code class="black-background">funktioner</code>, <code class="black-background">loopar</code> etc. i <code class="black-background">CSS</code></h3>
+        </section>
+        <section>
+          <h4>All <code class="black-background">sass</code> konverteras till vanlig <code class="black-background">css</code></h4>
+          <p><code class="black-background">preprocessor</code></p>
+        </section>
+        <section>
+          <h4>Syntax för SASS</h4>
+          <pre class="fragment fade-in rc"><code class="hljs css big-font line15 rc">
+.container{
+  background: hsl(330, 50%, 55%);
+}    
+          </code></pre>
+          <p class="fragment fade-in">Även fast vi använder sass behöver vi inte använda dess funktioner..</p>
+          <p class="fragment fade-in">...men vi ska använda dem</p>
+        </section>
+        <section>
+          <h4>Filändelser</h4>
+          <p class="fragment fade-in">Standard filändelse: <code class="black-background">.scss</code></p>
+          <p class="fragment fade-in">Kan förekomma: <code class="black-background">.sass</code></p>
+        </section>
+        <section>
+          <h4>.sass syntax</h4>
+                    <pre class="fragment fade-in rc"><code class="hljs css big-font line15 rc">
+.container
+  background: hsl(330, 50%, 55%)
+    
+          </code></pre>
+          <p class="fragment fade-in">Indenteringbaserad</p>
+        </section>
+        <section>
+          <h4>.scss syntax</h4>
+                    <pre class="fragment fade-in rc"><code class="hljs css big-font line15 rc">
+.container{
+  background: hsl(330, 50%, 55%);
+}    
+          </code></pre>
+          <p class="fragment fade-in">"Vanlig syntax"</p>
+        </section>
+        <section><h4>Men vad är det som är så bra med det då?</h4></section>
+      </section>
+      <section data-background="hsl(200,55%,60%)">
+        <section><h1>Filstruktur</h1></section>
+        <section data-background="images/monkey.gif">
+      </section>
+      <section>
+        <h4>Nja.</h4>
+        <img src="images/folder_structure_example.png" alt="Folder Structure Example">
+      </section>
+      <section>
+        <h4>Nice.</h4>
+        <img src="images/folder_structure_example2.png" alt="Folder Structure Example 2">
+      </section>
+      <section>
+        <h4>Hitta rätt snabbt, lägga till nytt material enkelt</h4>
+        <img src="images/folder_structure_example3.png" alt="Folder Structure Example 3">
+      </section>
+      <section>
+        <h4><code class="black-background">.scss-filer</code></h4>
+        <p class="fragment fade-in">Sass-filerna är enbart för utvecklingsbruk. Vi länkar fortfarande till vår <code class="black-background">.css-fil</code></p>
+      </section>
+      <section>
+      <pre class="fragment fade-in rc"><code class="hljs html big-font line15 rc">
+<link rel="stylesheet" href="css/main.css">
+          </code></pre>
+        <p class="fragment fade-in">Vi konverterar alltid till <code class="black-background">.css</code></p>
+      </section>
+      </section>
+      <section data-background="hsl(290,20%,55%)">
+        <section>
+        <h1>SASS</h1>
+        </section>
+        <section>
+          <h2>$Variabler</h2>
+          <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* Deklarera med $ */
+$primary-color: hsl(330, 50%, 55%);
+
+.container{
+  background: $primary-color;
+}    
+          </code></pre>
+          </section>
+          <section>
+            <h2>Kan vara alla olika egenskaper</h2>
+<pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* main.scss */
+$full-width: 100%;
+
+.container{
+  width: $full-width;
+}    
+          </code></pre>
+          </section>
+          <section>
+            <h2>Kan kombineras</h2>
+<pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* Doesn't have to be kebab-case */
+$main-margin: 2rem;
+
+.container{
+  margin: 0 0 $main-margin $main-margin;
+}    
+          </code></pre>
+        </section>
+        <section>
+          <h2>Variabler i variabler</h2>
+          <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">
+$main-padding: 2rem;
+$super-padding: main-padding * 2;
+          </code></pre>
+        </section>
+      </section>
+      <!-- NESTING -->
+      <section data-background="hsl(90,30%,60%)">
+        <section>
+          <h1>Nesting</h1>
+        </section>
+        <section>
+        <pre class="fragment fade-in rc"><code class="hljs css big-font line15 rc">
+nav a{
+  color: #fff;
+}
+          </code></pre>
+          <p class="fragment fade-in">Väljer alla <code class="black-background">a</code>-element i <code class="black-background">nav</code></p>
+        </section>
+        <section>
+          <h2>sass nesting</h2>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">nav{    /* i .scss-filen */
+  a{
+    color: #fff;
+  }
+}</code></pre>
+            <pre class="fragment fade-in rc"><code class="hljs css big-font line15 rc">nav a{    /* i vår konverterade css-fil */
+  color: #fff;
+}</code></pre>
+        </section>
+        <section>
+          <h2>sass ampersand</h2>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* main.scss */
+  a{
+    color: marine;
+    &:hover {
+      color: #fff;
+    }
+  }
+}</code></pre>
+  <p><code class="black-background">&</code> ersätter föräldern</p>
+        </section>
+        <section>
+          <h2>sass ampersand</h2>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* main.scss */
+  .box{
+    color: marine;
+    &-article{
+      color: #fff;
+    }
+  }
+}</code></pre>
+        </section>
+        <section>
+          <pre class="fragment fade-in rc"><code class="hljs scss line15 rc">nav{
+  li{
+    a{
+      em{
+        span{
+
+        }
+      }
+    }
+  }
+}</code></pre>
+        </section>
+        <section data-background="images/what.jpg" ></section>
+        <section>
+          <img class="stretch" src="images/fib_dent.png" alt="Fibonacci Indentation">
+        </section>
+      </section>
+      <section data-background="hsl(350, 55%, 50%)" >
+        <section>
+          <h1>Partials</h1>
+          <p></p>
+        </section>
+        <section>
+          <h3>Vi behöver inte ha allt i samma <code class="black-background">.css</code>-fil</h3>
+<pre class="fragment fade-in rc"><code class="hljs html big-font line15 rc"><link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/shame.css"></code></pre>
+        </section>
+        <section>
+          <h2>Lättare med <code class="black-background">sass</code></h2>
+          <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* i main.scss */
+@import "shame";
+
+body{
+  /* Style goes here */
+}</code></pre>
+          </section>
+        <section>
+            <h3>_partials</h3>
+            <p>Partials börjar med <code class="black-background">_</code>: <code class="black-background">_shame.scss</code></p>
+            <p>Vi behöver inte inkludera varken <code class="black-background">_</code> eller <code class="black-background">.scss</code> när vi använder <code class="black-background">@import</code></p>
+        </section>
+      </section>
+
+      <!-- MIXINS SECTION -->
+      <section data-background="hsl(150,40%,50%)" >
+        <section><h2>Mixins & Functions</h2></section>
+        <section>
+          <h2><code class="black-background">Keep it DRY</code></h2>
+        </section>
+        <section>
+          <h2>Mixins och funktioner gör så att vi kan återanvända kod som vi använder ofta</h2>
+        </section>
+        <section>
+          <h3>Flex</h3>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* i main.scss */
+@mixin flex-center(){
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}</code></pre>
+        </section>
+        <section>
+          <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* i main.scss */
+.container{
+  @include flex-center;
+}</code></pre>
+      </section>
+      <section>
+        <pre class="fragment fade-in rc"><code class="hljs css big-font line15 rc">/* i main.css */
+.container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}</code></pre>
+  </section>
+  <section>
+    <h3>Skicka med variabler</h3>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">@mixin flex($align){
+  display: flex;
+  align-items: $align;
+  justify-content: center;
+}
+  </code></pre>
+  </section>
+    <section>
+    <h3>Defaults</h3>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">@mixin flex($align: center){
+  display: flex;
+  align-items: $align;
+  justify-content: center;
+}
+  </code></pre>
+  </section>
+    <section>
+    <h3>Flera variabler</h3>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">@mixin flex($align: center, $justify: center){
+  display: flex;
+  align-items: $align;
+  justify-content: $justify;
+}
+  </code></pre>
+  </section>
+  <section>
+    <h3>Vanligt användningsområde: <code class="black-background">Vendor prefix</code></h3>
+        <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">@mixin border-radius($radius){
+  -webkit-border-radius: $radius;
+  border-radius: $radius;
+}
+  </code></pre>
+  </section>
+  <section>
+    <ul>
+    <li><code class="black-background">-webkit-</code>: Chrome</li>
+    <li><code class="black-background">-moz-</code>: Firefox</li>
+    <li><code class="black-background">-ms-</code>: IE</li>
+    <li><code class="black-background">-o-</code>Opera</li>
+  </ul>
+  </section>
+  <section>
+    <h3>Bourbon</h3>
+    <a href="http://bourbon.io/"><h3><code class="black-background">Bourbon.io</code></h3></a>
+    <p>Färdiga mixins för vanliga problem</p>
+  </section>
+      </section>
+      <!-- ÖVRIGT -->
+      <section data-background="hsl(250,50%,60%)">
+      <section>
+       <h1>Övriga funktioner i SASS</h1>
+      </section>
+      <section>
+        <h3>Operatorer</h3>
+        <ul>
+          <li>+</li>
+          <li>-</li>
+          <li>*</li>
+          <li>/</li>
+          <li>%</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Faktiska funktioner</h3>
+        <pre class="fragment fade-in rc"><code class="hljs css big-font line15 rc">
+@function advancedMath($a, $b){
+  @return $a * $b;
+}
+        </code></pre>
+      </section>
+      <section>
+        <h3>Lists</h3>
+                    <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* main.scss */
+$colors: red green blue;
+
+/* Det är skillnad på dessa två */
+
+$colors: "red green blue";
+</code></pre>
+      </section>
+      <section>
+        <h3>Maps</h3>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* main.scss */
+$colors:(
+  "red":  "#ff0000",
+  "green": "#00ff00",
+  "blue": "#0000ff"
+);
+  </code></pre>
+      </section>
+      <section>
+        <h3>if/for/while/each</h3>
+            <pre class="fragment fade-in rc"><code class="hljs scss big-font line15 rc">/* main.scss */
+@mixin color($color){
+  @if $color == white{
+    background: black;
+  } @else{
+    background: teal;
+  }
+}</code></pre>
+      </section>
+      <section>
+        <h3>Dokumentation</h3>
+        <p><code class="black-background white">http://www.sass-lang.com/documentation/file.SASS_REFERENCE.html</code></p>
+      </section>
+      <section>
+      <h4>Övning: använd sass i ett projekt</h4>
+      <ul>
+        <li>Standardfärg? Vanligt förekommande mått? gör en <code class="black-background">$variabel</code></li>
+        <li>Upprepade kodblock? <code class="black-background">Gör en mixin</code></li>
+        <li>Gör minst en mixin där du skickar med variabler och en där du använder <code class="black-background">default parameters</code></li>
+        <li>Dela upp din kod, lägg alla mixins i t.ex. <code class="black-background">_mixins.scss</code> och importera i <code class="black-background">main.scss</code></li>
+      </ul>
+      </section>
+      </section>
+    </div>
+  </div>
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      {
+        src: 'lib/js/classList.js',
+        condition: function () {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        } 
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        }
+      },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'js/highlightfragment.js', async: true }
+      ]
+    });
+  </script>
+</body>
+</html>
