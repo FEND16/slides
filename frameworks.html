@@ -1,0 +1,152 @@
+<html>
+<head>
+  <!-- <base href="file:///Users/jesperorb/Dropbox/courses/fend16/slides/"> -->
+  <base href="https://fend16.github.io/slides/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/custom.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <title>Frameworks</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="hsl(10,55%,55%)" >
+      <section>
+      	<h1>Frameworks</h1>
+      </section>
+      <section>
+        <h3>Färdig CSS</h3>
+<pre class="fragment fade-in rc"><code class="hljs big-font html line15 rc stretch"><link rel="stylesheet" href="bootstrap.css"></code></pre>
+      <p class="fragment fade-in">Färdiga <code class="black-background">classes</code> som vi kan använda.</p>
+      </section>
+      <section>
+        <h3>CDN</h3>
+        <p><code class="black-background">Content Delivery Network</code></p>
+      <p>Lokalt vs. remote</p>
+      <p>Hämtar css-en från en server varje gång</p>
+      </section>
+      <section>
+        <h3><code class="black-background">Opinionated</code></h3>
+        <p>Inversion of control</p>
+        <p class="fragment fade-in">Gör på det här sättet, då blir det enkelt, annars blir det svårt.</p>
+        <p class="fragment fade-in">Ibland ingår <code class="black-background">js</code></p>
+      </section>
+      <section>
+      	<h3>Bootstrap</h3>
+      	<img src="http://logonoid.com/images/bootstrap-logo.png" height="300px" alt="Bootstrap Logo">
+      </section>
+      <section>
+      <h3>Foundation</h3>
+      	<img src="http://info.wiscwebcms.wisc.edu/images/zurb-yeti.png" alt="Foundation">
+      </section>
+      <section>
+        <h3>CSS Frameworks</h3>
+        <p><code class="black-background">http://www.cssreflex.com/css-frameworks/</code></p>
+        <blockquote>A directory of the best css frameworks, we have a total of <strong>68</strong> css frameworks in our database</blockquote>
+      </section>
+      <section>
+        <h3>Rows and columns</h3>
+        <img src="images/grid.png" alt="Grids">
+      </section>
+      <section>
+        <img src="https://i.imgur.com/FaYuui8.png" alt="Bootstrap grid">
+      </section>
+      <section>
+        <h3>Bootstrap 4 responsive grid</h3>
+        <ul>
+          <li><code class="black-background">.col-xs-*</code>: < 554px </li>
+          <li><code class="black-background">.col-sm-*</code>: > 554px </li>
+          <li><code class="black-background">.col-md-*</code>: > 768px</li>
+          <li><code class="black-background">.col-lg-*</code>: > 992px</li>
+          <li><code class="black-background">.col-xl-*</code>: > 1200px</li>
+        </ul>
+        <p class="fragment fade-in">Allt ska bli 12 columner</p>
+        <p class="fragment fade-in">Två columner på stor skärm: <code class="black-background">col-lg-6</code> + <code class="black-background">col-lg-6</code></p>
+      </section>
+      <section>
+        <pre class="rc"><code class="hljs big-font html line15 rc stretch"><div class="row">
+  <div class="col-lg-6"></div>
+  <div class="col-lg-6"></div>
+</div></code></pre>
+      </section>
+      <section>
+        <h3>Foundation grid</h3>
+        <ul>
+          <li><code class="black-background">.small-* .columns</code> </li>
+          <li><code class="black-background">.medium-* .columns</code></li>
+          <li><code class="black-background">.large-* .columns</code></li>
+        </ul>
+        <p class="fragment fade-in">Två columner på stor skärm: <code class="black-background">large-6 columns</code> + <code class="black-background">large-6 columns</code></p>
+      </section>
+      <section>
+        <h3>Skeleton grid</h3>
+<pre class="rc">
+<code class="hljs big-font html line15 rc stretch"><div class="container">
+  <div class="row">
+    <div class="six columns">One</div>
+    <div class="six columns">Eleven</div>
+  </div>
+</code></pre>
+      </section>
+      <section>
+      <h3>Egenskriven CSS</h3>
+<pre class="rc"><code class="hljs big-font html line15 rc stretch"><link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/main.css"></code></pre>
+      </section>
+      <section>
+        <h3>Framework elements</h3>
+        <p>Förutom grid-system får man oftast också klasser för:</p>
+        <ul>
+          <li><code class="black-background">Buttons</code> : <code class="black-background">.btn</code></li>
+          <li><code class="black-background">Forms</code>: <code class="black-background">.form-*</code></li>
+          <li><code class="black-background">Responsive images</code>: <code class="black-background">.img-fluid</code></li>
+          <li><code class="black-background">Lists</code></li>
+          <li><code class="black-background">Typography</code></li>
+        </ul>
+      </section>
+      <section>
+        <h3>Länkar</h3>
+        <p><code class="black-background white">https://v4-alpha.getbootstrap.com/</code></p>
+        <p><code class="black-background">https://v4-alpha.getbootstrap.com/examples/</code></p>
+        <p><code class="black-background">https://hackerthemes.com/bootstrap-cheatsheet/</code></p>
+      </section>
+      </section>
+    </div>
+  </div>
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      {
+        src: 'lib/js/classList.js',
+        condition: function () {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        } 
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        }
+      },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'js/highlightfragment.js', async: true }
+      ]
+    });
+  </script>
+</body>
+</html>
