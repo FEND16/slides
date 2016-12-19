@@ -1,0 +1,361 @@
+<html>
+<head>
+<!-- <base href="file:///Users/jesperorb/Dropbox/courses/fend16/slides/">-->  
+  <base href="https://fend16.github.io/slides/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/custom.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="stylesheet" href="css/custom.css">
+  <title>Animation</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section data-background="hsl(170,55%,50%)">
+      	<section >
+      		<h1>Transition</h1>
+      		<h1>Animation</h1>
+      		<h1>Transform</h1>
+      	</section>
+      	<section>
+      		<div id="anim"></div>
+      		<style>
+      			#anim{
+      				margin: 0 auto;
+      				width: 300px;
+      				height: 300px;
+      				background: teal;
+      				box-shadow:   10px 10px 0px salmon,
+					                 20px 20px 0px gray;
+      				transition: all 500ms ease;
+      			}
+      			#anim:hover{
+					     box-shadow: -10px 10px 0px salmon,
+					       -20px 20px 0px gray;
+					
+      			}
+      		</style>
+      	</section>
+      	<section>
+      			<div id="perspective1">
+      			
+      			</div>
+      			<div id="perspective2">
+      			
+      			</div>
+      		<style>
+      			#perspective1{
+      				display: inline-block;
+      				transition: all 500ms ease-in-out;
+      				width: 300px;
+      				height: 300px;
+      				background: teal;
+					     transform: rotateY(30deg);
+              -webkit-transform-style: preserve-3d;
+              -webkit-backface-visibility: hidden;
+      			}
+            #perspective1:after{
+               content: url(images/catty.gif);
+                right: 0px;
+                bottom: 0px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background: lightsalmon;
+                -webkit-transform: rotateY( 180deg );
+                -webkit-transform-style: preserve-3d;
+                -webkit-backface-visibility: hidden;
+            }
+      			#perspective2{
+      				display: inline-block;	
+      				width: 300px;
+      				height: 300px;
+      				background: teal;
+					   transform: rotateY(-30deg);
+					     transition: all 500ms ease-in-out;
+      			}
+      			#perspective2:hover{
+      				transform: rotateY(-210deg);
+      			}
+      			#perspective1:hover{
+      				transform: rotateY(210deg);
+      			}
+      		</style>
+      	</section>
+      	
+      </section>
+      <section data-background="hsl(340,55%,50%)">
+      	<section><h1>Transition</h1></section>
+		<section>
+		<h3><code class="black-background">transition:</code></h3>
+			<blockquote>				
+			the process or a period of changing from one state or condition to another.
+			</blockquote>
+		</section>
+		<section>
+			<h4>Syntax</h4>
+		<pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">
+.box{
+	transition: all 1s ease;
+}
+		</code></pre>
+		</section>
+		<section>
+			<h3>Properties</h3>
+			<p><code class="black-background">transition-property</code></p>
+			<p><code class="black-background">transition-duration</code></p>
+			<p><code class="black-background">transition-timing-function</code></p>
+			<p><code class="black-background">transition-delay</code></p>
+		</section>
+		<section>
+		<h3>Shorthand</h3>
+<pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">
+.box{
+  transition: all 1s ease 1s;
+}
+    </code></pre>   
+		</section>
+    <section>
+      <h3>Flera transitions</h3>
+          <pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">
+.box{
+  transition: color 1s ease,
+              background 0.5s ease-in-out;
+}
+    </code></pre>
+    </section>
+    <section>
+      <h3>transition-duration</h3>
+<pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">.box{
+  transition: all 0.4s ease;
+}
+.box{
+  transition: all 400ms ease;
+}
+    </code></pre> 
+    </section>
+    <section>
+      <h3>transition-timing-function</h3>
+      <p><code class="black-background">linear</code></p>
+      <p><code class="black-background">ease</code></p>
+      <p><code class="black-background">ease-in</code></p>
+      <p><code class="black-background">ease-out</code></p>
+      <p><code class="black-background">ease-in-out</code></p>
+      <p><code class="black-background">step-start</code></p>
+      <p><code class="black-background">step-end</code></p>
+    </section>
+    <section>
+        <a href="http://css3.bradshawenterprises.com/">
+          <h2>css3.bradshawenterprises.com</h2>
+        </a>
+    </section>
+      </section >
+      <section data-background="hsl(10,50%,50%)" >
+        <section><h1>Transform</h1></section>
+        <section>
+          <h3><code class="black-background">transform properties</code></h2>
+        </section>
+        <section>
+        <pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">
+.box{
+  transform: transform-value;
+}
+    </code></pre>
+        <pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">
+.box{
+  transform: translate(30px, 30px);
+}
+    </code></pre>
+        </section>
+        <section>
+          <h3>translate()</h3>
+<pre class="rc translate"><code class="hljs big-font css line15 rc stretch">
+transform: translate(x,y);
+
+transform: translateX(30px);
+transform: translateY(30px);
+</code></pre>
+  <style>
+    .translate:hover{
+      transform: translate(30px, 30px);
+    }
+  </style>
+        </section>
+        <section>
+          <h3>scale()</h3>
+          <pre class="rc scale"><code class="hljs big-font css line15 rc stretch">transform: scale(2);
+</code></pre>
+<style>
+    .scale:hover{
+      transform: scale(2);
+    }
+  </style>
+        </section>
+        <section>
+          <h3>skew()</h3>
+ <pre class="rc skew"><code class="hljs big-font css line15 rc stretch">
+transform: skew(10deg, 20deg);
+
+transform: skewX(10deg);
+transform: skewY(20deg);
+</code></pre>
+<style>
+  .skew:hover{
+    transform: skew(10deg, 20deg);
+  }
+</style>
+        </section>
+        <section>
+          <h3>rotateX()</h3>
+ <pre class="rc rotatex"><code class="hljs big-font css line15 rc stretch">
+transform: rotateX(30deg);
+
+</code></pre>
+<style>
+  .rotatex:hover{
+    transform: rotateX(30deg);
+  }
+</style>
+        </section>
+                <section>
+          <h3>rotateY()</h3>
+ <pre class="rc rotatey"><code class="hljs big-font css line15 rc stretch">
+transform: rotateY(30deg);
+
+</code></pre>
+<style>
+  .rotatey:hover{
+    transform: rotateY(30deg);
+  }
+</style>
+        </section>
+                        <section>
+          <h3>rotateZ()</h3>
+ <pre class="rc rotatez"><code class="hljs big-font css line15 rc stretch">
+transform: rotateZ(30deg);
+
+</code></pre>
+<style>
+  .rotatez:hover{
+    transform: rotateZ(30deg);
+  }
+</style>
+        </section>
+      </section>
+      <section data-background="hsl(150,35%,50%)">
+        <section><h1>Keyframe Animation</h1></section>
+        <section>Vi kan definiera egna animationer förutom de inbyggda</section>
+        <section>
+          <h1>@keyframes</h1>
+        </section>
+        <section>
+          <h3>@keyframes</h3>
+<pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">@keyframes myAnimation { 
+  from{
+    opacity: 0;
+  }
+  to{
+    opacity: 1;
+  }
+}</code></pre>
+        </section>
+        <section>
+<pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">@keyframes myAnimation { 
+  from{
+    opacity: 0;
+    background: teal;
+  }
+  to{
+    opacity: 1;
+    background: slategray;
+  }
+}</code></pre>
+        </section>
+        <section>
+<pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">@keyframes myAnimation { 
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}</code></pre>
+        </section>
+        <section>
+          <h4 class="black-background">2.3.1 Three Flashes or Below Threshold</h4>
+          <blockquote>Web pages do not contain anything that flashes more than three times in any one second period, or the flash is below the general flash and red flash thresholds. (Level A)</blockquote>
+          <a href="https://www.w3.org/TR/WCAG20/#seizure">W3C Recommendation</a>
+        </section>
+
+        <section>
+          <h3>Animation properties</h3>
+            <p><code class="black-background fragment fade-in">animation-name</code></p>
+            <p><code class="black-background fragment fade-in">animation-duration</code></p>
+            <p><code class="black-background fragment fade-in">animation-timing-function</code></p>
+            <p><code class="black-background fragment fade-in">animation-delay</code></p>
+            <p><code class="black-background fragment fade-in">animation-iteration-count</code></p>
+            <p><code class="black-background fragment fade-in">animation-duration</code></p>
+            <p><code class="black-background fragment fade-in">animation-fill-mode</code></p>
+            <p><code class="black-background fragment fade-in">animation-play-state</code></p>
+        </section>
+        <section>
+          <pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">.box {
+  animation-name: myAnimation;
+  animation-duration: 2s;
+  animation-delay: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: normal;
+  animation-timing-function: ease;
+  animation-fill-mode: none;
+  animation-play-state: running;
+}</code></pre>
+        </section>
+        <section>
+          <h3><code class="black-background white">https://css-tricks.com/snippets/css/keyframe-animation-syntax/</code></h3>
+        </section>
+        <section>
+          <pre class="fragment fade-in rc"><code class="hljs big-font css line15 rc stretch">.box{
+  animation: myAnimation 2s 1s normal ease none running ;
+  }</code></pre>
+    <p class="fragment fade-in"><code class="black-background">normal</code> samt <code class="black-background">none</code> är default, behöver egentligen inte skrivas</p>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      {
+        src: 'lib/js/classList.js',
+        condition: function () {
+          return !document.body.classList;
+        }
+      }, {
+        src: 'plugin/markdown/marked.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        } 
+      }, {
+        src: 'plugin/markdown/markdown.js',
+        condition: function () {
+          return !!document.querySelector('[data-markdown]');
+        }
+      },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'js/highlightfragment.js', async: true }
+      ]
+    });
+  </script>
+</body>
+</html>
