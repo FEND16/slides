@@ -1,0 +1,183 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>Cross Browser</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section data-background="hsl(170, 44%, 42%)">
+        <section>
+          <h1>Progressive Enhancement</h1>
+        </section>
+        <section data-background="https://blog.ampedsoftware.com/wp-content/uploads/2015/01/enhance.png"></section>
+        <section>
+          <img src="http://alistapart.com/d/understandingprogressiveenhancement/m-m.jpg" class="stretch" alt="Progressive enhancement">
+        </section>
+        <section>
+          <p class="fragment slide-down"><strong>Broad version</strong>: start with a baseline of functionality, enhance upwards based on capabilities.</p>
+          <p class="fragment slide-down"><strong>Narrow version</strong>: start with HTML, then add CSS, then add JavaScript.</p>   
+        </section>
+        <section>
+          <h3>Basupplevelse för så många som möjligt</h3>
+          <p>Omöjligt att inkludera alla: <strong>opinionated</strong></p>
+        </section>
+        <section>
+          <h3>Ett förhållningssätt, en metod för att arbeta.</h3>
+          <p>"Vi har använt Progressive Enhancement" går inte att säga</p>
+        </section>
+        <section>
+          <p>Om vi fortsätter att skapa webbsidor som inkluderar typ <strong>IE6</strong> låter vi denna skitwebbläsare leva kvar</p>
+        </section>
+        <section>
+          <h3>Konkret kopplat till betygskriteriet <strong>VG</strong></h3>
+          <ul>
+          <li class="fragment fade-down">På egen hand kunskap i att implementera Progressive Enhancement.</li>
+          <li class="fragment fade-down">God förståelse att anpassa en HTML- och CSS-mall att fungera väl i olika enheter
+(Responsive web).</li>
+      </ul> 
+      <p class="fragment fade-down"><strong>Ska fungera i de flesta nyare browsers</strong></p>
+        </section>
+        <section>
+          <h3>Validering</h3>
+          <h3><strong><a href="https://validator.w3.org/">https://validator.w3.org/</a></strong></h3>
+          <p>Fixa stora <strong>errors</strong>, utvärdera om ni behöver fixa <strong>warnings</strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Cross Browser & Cross Device</h1>
+        </section>
+        <section>
+          <h3>Cross Device</h3>
+          <p class="fragment fade-down">Tänk på hur vi lägger upp vårt innehåll</p>
+          <p class="fragment fade-down">Tänk på vilket innehåll som är viktigast</p>
+          <p class="fragment fade-down"> <strong>@media</strong> queries </p>
+        </section>
+        <section>
+          <h3>Mobile first</h3>
+          <p class="fragment fade-down">Ursprungsläget är mobilen</p>
+          <p class="fragment fade-down"><strong>(min-width: 40em)</strong></p>
+          <p class="fragment fade-down">Maxa alla bredd!</p>
+        </section>
+        <section>
+          <h3>@media</h3>
+<pre><code class="hljs css">
+@media (min-width: 40em){
+  .container {
+    width: 70%;
+  }
+}</code></pre>
+        </section>
+        <section>
+          <h3>Cross Browser</h3>
+        </section>
+        <section>
+          <h3>Vendor prefixes</h3>
+          <p><strong>beta</strong>-implementationen av en viss egenskap</p>
+          <ul>
+            <li class="fragment fade-down"><strong>-webkit-</strong>: Google & Apple</li>
+            <li class="fragment fade-down"><strong>-moz-</strong>: Mozilla Firefox</li>
+            <li class="fragment fade-down"><strong>-o-</strong>: Opera</li>
+            <li class="fragment fade-down"><strong>-ms-</strong>: Micorosoft</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Vendor prefixes</h3>
+          <p>Används sällan av nyare browsers</p>
+          <p>Men det finns knappt någon nackdel med att använda det</p>
+        </section>
+        <section>
+          <h3>Order!</h3>
+          <p>Ordningen som prefixen kommer i är viktig</p>
+          <p class="fragment fade-down"><strong>W3C Spec</strong> sist</p>
+<pre><code class="hljs scss">  -webkit-transition: all 1s ease;
+  -moz-transition: all 1s ease;
+  -ms-transition: all 1s ease;
+  -o-transition: all 1s ease;
+  transition: all 1s ease;</code></pre>
+        </section>
+        <section>
+          <h3>Ska man skriva alla?</h3>
+          <p>Exemplet <strong>transition</strong></p>
+<pre><code class="hljs scss">  -webkit-transition: all 1s ease;
+  transition: all 1s ease;</code></pre>
+        </section>
+        <section>
+          <h3>Autoprefixer</h3>
+          <p>Lägger automatiskt till prefixes på de egenskaper som behövs</p>
+          <p>Använder <strong>can i use</strong>-databaser</p>
+        </section>
+        <section>
+          <h1><a href="https://autoprefixer.github.io/">Autoprefixer</a></h1>
+        </section>
+        <section>
+          <h3><strong>@supports</strong></h3>
+          <p>feature detection</p>
+<pre><code class="hljs css">@supports (display: flex) {
+  .box{
+    display: flex;
+  }</code></pre>
+    <p class="fragment fade-down">Vi kollar egenskap och värde</p>
+        </section>
+        <section>
+          <pre><code class="hljs css">@supports not(display: flex) {
+  .box{
+    display: block;
+  }</code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Källor</h1>
+        </section>
+        <section>
+          <h3>Den heliga skriften</h3>
+          <h3><strong><a href="http://caniuse.com/">caniuse.com</a></strong></h3>
+        </section>
+        <section>
+          <h1><strong><a href="http://shouldiprefix.com/">Should I Prefix</a></strong></h1>
+        </section>
+        <section>
+          <h1><strong><a href="http://html5please.com/">HTML5 Please</a></strong></h1>
+        </section>
+        <section>
+          <h3>Specifika lösningar</h3>
+          <p>Prefix löser långt från allt</p>
+          <p class="fragment fade-down">Lösa t.ex. flex-specifika buggar: <a href="https://github.com/philipwalton/flexbugs">Flexbugs</a></p>
+        </section>
+        <section data-background="https://media.giphy.com/media/jYAGkoghdmD9S/giphy.gif">
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      ]
+    });
+  </script>
+</body>
+</html>
