@@ -1,0 +1,248 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>Common Standards</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1>Vanliga standarder</h1>
+        </section>
+        <section>
+          <h3>HTML</h3>
+            <p class="fragment slide-down"><strong>HyperText Markup Language</strong></p>
+            <blockquote class="fragment slide-down" style="text-transform: none;">
+              Hypertext is text which contains links to other texts.
+            </blockquote>
+          </section>
+          <section>
+            <h3>Markup Language</h3>
+            <p class="fragment slide-down">Språk för att märka upp innehåll</p>
+            <p class="fragment slide-down">HTML, XML, <em>MarkDown</em></p>
+          </section>
+          <section>
+            <h3>SGML</h3>
+            <p class="fragment slide-down"><strong>Standardized Generalized Markup Language</strong></p>
+            <p class="fragment slide-down">Inget språk utan ett sätt att strukturera data</p>
+            <blockquote class="fragment slide-down">
+              (SGML; ISO 8879:1986) is a standard for defining generalized markup languages for documents.
+            </blockquote>
+        </section>
+        <section>
+          <h3>HTML</h3>
+          <p class="fragment slide-down"><strong>HTML</strong> var baserat på standarden SGML</p>
+          <p class="fragment slide-down">Med <strong>HTML5</strong> frångick HTML den standarden</p>
+          <p class="fragment slide-down">HTML5 Saknar <strong>DTD</strong>: DocType Definition</p>
+        </section>
+        <section>
+          <h3>XHTML</h3>
+          <p class="fragment slide-down"><strong>XHTML</strong> är ett försök att få mer strukturerad HTML</p>
+
+          <p class="fragment slide-down">Använder en <strong>DTD</strong></p>
+          <pre class="fragment slide-down"><code class="hljs html">&lt;!DOCTYPE html PUBLIC &quot;-
+          //W3C//DTD XHTML 1.0 Strict
+          //EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD
+          /xhtml1-strict.dtd&quot;&gt;</code></pre>
+        </section>
+        <section>
+          <h3>HTML4 Doctype</h3>
+          <pre><code class="hljs html">&lt;!DOCTYPE HTML PUBLIC &quot;-
+          //W3C//DTD HTML 4.01 Transitional
+          //EN&quot; &quot;http:
+          //www.w3.org/TR/html4/loose.dtd&quot;&gt;
+          </code></pre>
+          <p>Inget vi behöver oroa oss för</p>
+        </section>
+        <section>
+          <h3>XML</h3>
+          <p class="fragment slide-down">eXtensible Markup Language</p>
+          <p class="fragment slide-down">Bygger också på SGML</p>
+          <p class="fragment slide-down">Ett sätt att strukturera data och inte för att visa data</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs xml">&lt;person&gt;
+  &lt;name&gt; Gooby Flooby &lt;/name&gt;
+  &lt;occupation&gt; Made up &lt;/occupation&gt;
+&lt;/person&gt;</code></pre>
+        </section>
+        <section>
+          <h3>XML & HTML</h3>
+          <p class="fragment slide-down">Är lika för de bygger på samma ISO-standard i grunden</p>
+          <p class="fragment slide-down">XML är för att strukturera data</p>
+          <p class="fragment slide-down">HTML är för att visa data</p>
+        </section>
+        </section>
+        <section>
+          <section>
+            <h1>Document Object Model</h1>
+          </section>
+          <section>
+            <h3>DOM</h3>
+            <p class="fragment slide-down">Varje <strong>tag</strong> i både XML & HTML skapar en <em>node</em></p>
+            <p class="fragment slide-down">En nod är ungefär som ett objekt som kan manipuleras med hjälp av JavaScript</p>
+            <p class="fragment slide-down">DOM är inte vår HTML men det är också vår HTML</p>
+          </section>
+          <section data-background="http://i3.kym-cdn.com/photos/images/facebook/000/993/875/084.png"></section>
+          <section>
+            <h3>Noder</h3>
+            <ul>
+              <li><strong>text node</strong></li>
+              <li><strong>element node</strong></li>
+              <li><strong>attribute node</strong></li>
+            </ul>
+          </section>
+          <section>
+            <img class="stretch" src="https://upload.wikimedia.org/wikipedia/commons/5/5a/DOM-model.svg" alt="Node List">
+          </section>
+          <section data-background="#2d2d2d">
+          <pre><code class="hljs js">var els = document.getElementsByTagName('li');</code></pre>
+        </section>
+        <section>
+          <h3>Vad returneras?</h3>
+          <p class="fragment slide-down">"Array-like" collection</p>
+          <p class="fragment slide-down">Något som liknas en array men egentligen är:</p>
+          <p class="fragment slide-down"><strong>HTMLCollection</strong> eller <strong>NodeList</strong></p>
+        </section>
+        <section>
+          <h3>Complications</h3>
+          <p class="fragment slide-down">Inte en riktig array</p>
+          <p class="fragment slide-down">Har inte en arrays metoder</p>
+          <p class="fragment slide-down"><strong>Array.from(elements)</strong></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">
+  //dot notation, som javascript
+  body.style.background = "red";</code></pre></section>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">
+  //Returnerar en NodeList
+  var els = document.querySelectorAll('li');</code></pre>
+        </section>
+        <section>
+          <section>
+            <h1>Standarder för datalagring</h1>
+          </section>
+          <section>
+            <h3>Hur ska data lagras</h3>
+            <p class="fragment slide-down">Data ska kunna <strong>parsas</strong></p>
+            <p class="fragment slide-down">Ska kunna läsas enkelt av både <em>människa</em> och <strong>maskin</strong></p>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre><code class="hljs js">var jsObject = {
+  name: "Gurt Flurgur",
+  weapon: "Rusty knife",
+  hp: 10
+  warCry: function(){
+    return "ugh";
+  }
+}</code></pre>
+          </section>
+          <section>
+            <h1>JSON</h1>
+            <em>JavaScript Object Notation</em>
+          </section>
+          <section>
+            <h3>JSON</h3>
+            <p class="fragment slide-down">Subset of ECMAScript Objects</p>
+            <p class="fragment slide-down">Kommer ifrån JavaScript</p>
+            <p class="fragment slide-down">Till skillnad från XML som har satt standarden för allt annat</p>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre><code class="hljs js">{
+  "name": "Gurt Flurgur",
+  "weapon": "Rusty knife",
+  "hp": "10"
+  "warCry": "function(){
+    return 'ugh';
+  }"
+}</code></pre>
+          </section>
+          <section>
+            <h3><strong>Allowed datatypes</strong></h3>
+            <ul class="fragmet slide-down">
+              <li>Number</li>
+              <li>String</li>
+              <li>Bool</li>
+              <li>Array</li>
+              <li>Object</li>
+              <li>Whitespace</li>
+              <li>Null</li>
+            </ul>
+          </section>
+          <section>
+            <h3><strong>Unallowed datatypes</strong></h3>
+            <p>function()</p>
+            <p>undefined</p>
+            <p class="fragment slide-down"><em>DATA SOM DATA</em>: Vi kan skicka med en function men vi ska inte</p>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre><code class="hljs js">{
+  "name": "Gurt Flurgur",
+  "weapon": "Rusty knife",
+  "hp": "10",
+}</code></pre>
+          </section>
+          <section>
+            <h3>Läsbart för datorn</h3>
+            <p class="fragment slide-down"><strong>JSON</strong> är standarden för att skicka information på webben</p>
+            <p class="fragment slide-down">I princip ett mer strukturerat och strikt objekt</p>
+          </section>
+          <section>
+            <h3>Key / Value pair</h3>
+            <p class="fragment slide-down"></p>
+          </section>
+          <section>
+            <h3>Serialization</h3>
+            <p class="fragment slide-down">Processen att ta ett objekt och konvertera den till en sträng</p>
+            <p class="fragment slide-down">Alla värden som skickas med måste vara i form av en sträng</p>
+            <p class="fragment slide-down">Datorn ska kunna veta hur den ska konvertera tillbaka till ett objekt</p>
+            <p class="fragment slide-down">I JavaScript: <strong>JSON.stringify()</strong></p>
+          </section>
+          <section>
+            <h3>Parsing</h3>
+            <p class="fragment slide-down">Även kallat <strong>de-serialization</strong></p>
+            <p class="fragment slide-down">När vi väl ska använda data från <em>JSON</em></p>
+            <p class="fragment slide-down">Konvertera tillbaka till ett objekt</p>
+            <p class="fragment slide-down">I JavaScript: <strong>JSON.parse()</strong></p>
+          </section>
+          <section>
+            <h3>JSON-file</h3>
+            <p class="fragment slide-down">Filändelse: <strong>.json</strong></p>
+            <p class="fragment slide-down">JSON strukutureras på detta sätt för att data ska skickas</p>
+          </section>
+        </section>
+      </div>
+    </div>
+    <!-- reveal.js scripts -->
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        controls: true,
+        transition: 'convex',
+        progress: true,
+        history: true,
+        keyboard: true,
+        overview: true,
+        center: true,
+        dependencies: [
+        { src: 'lib/js/classList.js',condition: function (){
+          return !document.body.classList;}},
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true },
+          { src: 'plugin/notes/notes.js', async: true },
+          ]
+        });
+      </script>
+    </body>
+    </html>
