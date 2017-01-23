@@ -1,0 +1,203 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>Webbstandard</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1>Webbstandard</h1>
+        </section>
+        <section>
+          <h3>HTML5</h3>
+          <ul>
+            <li class="fragment slide-down">Standarden vi använder för att skriva våra hemsidor</li>
+            <li class="fragment slide-down"><strong>index.html</strong> måste alltid finnas</li>
+            <li class="fragment slide-down">WHATWGs specifikation</li>
+            <li class="fragment slide-down"><strong>!DOCTYPE html</strong></li>
+          </ul>
+        </section>
+        <section>
+          <h3><em>Document Object Model</em></h3>
+          <blockquote>
+            The DOM provides a representation of <strong style="padding: 5px 10px 5px 7px;">the document as a structured group of nodes and objects</strong> that have properties and methods. Essentially, it connects web pages to scripts or programming languages.
+          </blockquote>
+        </section>
+        <section>
+          <h3>DOM</h3>
+          <p class="fragment slide-down" ><strong>DOM</strong> är ett interface som ska användas i kombination med HTML/XML samt SVG</p>
+        </section>
+        <section>
+          <h3>XML / <em>JSON</em></h3>
+          <p class="fragment slide-down">Standard sätt för att strukturera data</p>
+          <p class="fragment slide-down">Key/value pair</p>
+          <p class="fragment slide-down">Vi ska dela data, därför måste vi ha det i ett format som mottagaren kan tolka</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs json">{
+  "key": "value",
+  "name": "Florbor Trufyr",
+  "likes": ["sunset walks", "fine arts"]
+}</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs xml"><person>
+  <key>Value</key>
+  <name>Florbor Trufyr</name>
+  <likes>
+    <like>sunset walks</like>
+    <like>fine arts</like>
+  </likes>
+</person></code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3>Standarder för att koppla samman webben</h3>
+        </section>
+        <section>
+          <h3><strong>www</strong></h3>
+          <p>Tim Berners-Lee</p>
+            <img class="stretch" src="http://myhero.com/images/guest/g264555/hero90466/bernerslee-404_682192c.jpeg" alt="">
+        </section>
+        <section>
+          <h3>ARPANET</h3>
+          <p class="fragment slide-down">Första internet</p>
+          <p class="fragment slide-down">Lyckades senare koppla ihop två datorer mellan Europa och Nordamerika</p>
+          <p class="fragment slide-down"><strong>IP connection</strong></p>
+        </section>
+        <section data-background-image="http://media0.giphy.com/media/LGzrggUppEBdm/giphy.gif" data-background-size="contain"></section>
+        <section>
+          <h3><em>Internet Protocol</em></h3>
+          <p>Adressen till varje enhet kopplad till internet</p>
+        </section>
+        <section>
+          <h3>Internal vs. External IP</h3>
+          <p class="fragment slide-down">External IP: <a href="https://www.whatismyip.com/">whatismyip</a></p>
+        </section>
+        <section>
+          <h3>Internal vs. External IP</h3>
+          <img src="https://wiki.openkm.com/images/f/fe/Internal_ip.png" alt="">
+          <p class="fragment slide-down">En router fördelar internet till flera enheter under samma external IP</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">// Orka memorera
+          215.155.46.122
+
+// Har du besökt 215.155.46.122? Grymt bra!
+          </code></pre>
+        </section>
+        <section>
+          <h3>IPV4 vs. IPV6</h3>
+          <p>Det nuvarande sättet att skriva IP-nummer är påväg bort</p>
+          <p class="fragment slide-down">2011 tog de sista IP-adresserna slut</p>
+          <p class="fragment slide-down">Detta har varit känt sedan 90-talet och därför arbetade man fram IPV6</p>
+          <p class="fragment slide-down">Ännu längre adresser som troligtvis inte kommer att ta slut</p>
+        </section>
+        </section>
+        <section>
+        <section>
+          <h1>URL / Domännamn</h1>
+        </section>
+        <section>
+          <h3>URL</h3>
+          <p class="fragment slide-down"><strong>Uniform Resource Locator</strong></p>
+          <p class="fragment slide-down">Istället för att använda IP använder vi ju namn</p>
+          <p class="fragment slide-down">En URL är en typ av <strong>URI</strong></p>
+        </section>
+        <section>
+          <img class="stretch" src="https://i.imgur.com/ENfn5Mf.png" alt="">
+        </section>
+        <section>
+          <h3>Uniform Resource Identifier</h3>
+          <p class="fragment slide-down">Spotify: <strong>spotify:track:65qFx9XzeUV2LavwcF7tkf</strong></p>
+          <p class="fragment slide-down">Till skillnad från vår <strong>URL</strong> kan bara programmet Spotify hantera denna länk</p>
+        </section>
+        <section>
+          <h3><em>https://fend16.github.io</em></h3>
+          <p>Man utläser länken från höger till vänster</p>
+        </section>
+        <section>
+          <h3>https://fend16.github.<strong>io</strong></h3>
+          <p><em>Top Level Domain</em></p>
+          <p><strong>.com, .org, .net, .int, .edu, .gov, .mil, .arpa</strong></p>
+        </section>
+        <section>
+          <h3>https://fend16.<strong>github</strong>.io</h3>
+          <p><em>Second-level domain</em></p>
+          <p>Man skaffar domännamnet i kombination med topdomännamnet</p>
+        </section>
+          <section>
+          <h3>https://<strong>fend16</strong>.github.io</h3>
+          <p><em>Subdomain</em></p>
+          <p>Standard är <strong>www.</strong> men man kan definiera vilka subdomän man vill.</p>
+          </section>
+        <section>
+          <h3><strong>https://</strong>fend16.github.io</h3>
+          <p class="fragment slide-down">Protokoll</p>
+          <p class="fragment slide-down">Vi definerar <strong>hur</strong> resursen ska hämtas</p>
+          <p class="fragment slide-down">default: http</p>
+        </section>
+        <section>
+          <p><em>https://fend16.github.io:80/index.html</em></å>
+          <p>Sättet att besöka hemsidor är standardiserat. Filen vi letar efter samt porten sätts implicit</p>
+        </section>
+        <section>
+          <h3>Domännamn</h3>
+            <p class="fragment slide-down">Finns bara ett register</p>
+            <p class="fragment slide-down">Man köper enbart namnet sedan måste man peka namnet mot en <strong>IP-adress</strong></p>
+        </section>
+        <section>
+          <img class="stretch" src="http://i.imgur.com/gA1wb8n.png" alt="fan">
+        </section>
+        <section data-background-image="file:///Users/jesperorb/Dropbox/courses/fend16/slides/images/vladstudio_how_internet_works_1920x1440_signed.jpg">
+        </section>
+        <section>
+          <h3>DNS-server</h3>
+          <p>Ett system måste hålla koll på vilka namn som går var</p>
+          <p>Varje gång vi går till en adress kontaktas en DNS-server</p>
+          <a class="fragment slide-down" href="https://en.wikipedia.org/wiki/2016_Dyn_cyberattack"><strong>2016 Dyn cyberattack</strong></a>
+        </section>
+        <section>
+          <h3><em>Praktiskt exempel</em></h3>
+        </section>
+        <section>
+          <h3><strong>Nu: Nätverkskollen</strong></h3>
+          <p><em>Efter: göra övningen som finns på GitHub</em></p>
+        </section>
+      </section>
+
+
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      ]
+    });
+  </script>
+</body>
+</html>
