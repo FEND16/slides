@@ -1,0 +1,332 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/"> 
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>HTTP</title>
+  <style>
+    .reveal .slides section .fragment .highlight-red.visible{
+      color: white;
+      background-color: #2d2d2d;
+      padding-right: 5px;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1>HTTP-protokollet</h1>
+        </section>
+        <section>
+          <h3><em>HyperText Transfer Protocol</em></h3>
+        </section>
+        <section data-background-image="http://vignette3.wikia.nocookie.net/starwars/images/a/ae/Hyperspace_falcon.png/revision/latest?cb=20130312014242">
+        </section>
+        <section>
+          <h3>Rewind</h3>
+          <p>Vi använder en URL för att besöka en hemsida:</p>
+          <p class="fragment slide-down"><span class="fragment highlight-red">https://</span><span class="fragment highlight-red">vecka</span><span class="fragment highlight-red">.nu</span></p>
+          <p class="fragment slide-down">protokoll://domainname.topdomain</p>
+        </section>
+        <section data-background-image="images/vladstudio_how_internet_works_1920x1440_signed.jpg">
+        </section>
+        <section>
+          <h3><strong>IP/DNS</strong></h3>
+          <p>Varje enhet på internet har ett unikt IP.</p>
+          <p>Vi kopplar upp oss mot varandras IP via ett domännamn</p>
+          <p class="fragment slide-down">All data skickas via detta protokoll</p>
+          <p class="fragment slide-down">Men det är inte allt...</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>TCP/IP</h1>
+        </section>
+        <section>
+          <h3><strong>Transmission Control Protocol</strong></h3>
+          <p class="fragment slide-down"><strong>Transmission</strong>: Överföring av data</p>
+          <p class="fragment slide-down"><strong>Control</strong>: Kontrollera att data är skickad</p>
+          <p class="fragment slide-down"><strong>Protocol</strong>: standardiserat sätt</p>
+        </section>
+        <section>
+          <h3>Control</h3>
+          <p>Vid varje överföring måste protokollet verifera att data skickas mellan parterna</p>
+          <img class="stretch" src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/AAEAAQAAAAAAAAQfAAAAJDZjYTU5NDQ0LWQ0OTMtNDAxMS1hMDU1LTMzZjE5ZWM0MjkxYg.gif" alt="TCP">
+          <p><strong>SYN</strong>, <strong>SYN/ACK</strong>, <strong>SYN</strong></p>
+        </section>
+        <section>
+          <h3>SYN / ACK</h3>
+          <p><strong>Synchronize</strong>: Ena sidan skickar sin info</p>
+          <p><strong>Acknowledgment</strong>: Den andra bekräftar att infon är mottaget</p>
+          <p class="fragment slide-down">Processen brukar kallas <em>Three-way handshake</em></p>
+        </section>
+        <section>
+          <h3>TCP har koll på sin shit</h3>
+          <p>TCP är säkert, själva protokollet kollar att allting kommer fram och att allting kommer fram i rätt ordning.</p>
+          <img src="https://cdn.businesscollective.com/wp-content/uploads/newhire-675x320.jpg" alt="Important">
+          <p>Här skakas viktiga händer</p>
+        </section>
+        <section>
+          <h3>Vi har också <strong>UDP</strong></h3>
+          <ul>
+            <li><strong>U</strong>ser</li>
+            <li><strong>D</strong>atagram</li>
+            <li><strong>P</strong>rotocol</li>
+          </ul>
+        </section>
+        <section>
+          <img src="https://coarpk.files.wordpress.com/2014/05/drinking-from-firehose.jpg" alt="Firehose">
+        </section>
+        <section>
+          <h3>Use Cases</h3>
+          <p>Multiplayer games</p>
+          <p>Vi vill inte ha uppkoppling mellan enskilda spelar</p>
+          <p>Alla som spelar eller "lyssnar på informationen ska få den</p>
+          <p><strong>Broadcast</strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>HTTP</h1>
+        </section>
+        <section>
+          <h3><em>HyperText Transfer Protocol</em></h3>
+          <p>En överföring sker på webben sker via HTTP-protokollet</p>
+          <p>Främst via <strong>GET</strong> för att hämta från en server</p>
+          <p class="fragment slide-down"><strong>POST</strong> för att skicka till en server</p>
+        </section>
+        <section>
+          <h3>HTTP</h3>
+          <p><strong>REQUEST</strong> - <em>RESPONSE</em></p>
+          <p><strong>CLIENT</strong> - <em>SERVER</em></p>
+        </section>
+        <section>
+          <h3>Primära metoder</h3>
+          <p><strong>GET</strong>: Hämta data</p>
+          <p><strong>POST</strong>: Skicka data</p>
+          <p><strong>PATCH</strong>: Uppdatera data</p>
+          <p><strong>PUT</strong>: Byta ut data</p>
+          <p><strong>DELETE</strong>: Ta bort data</p>
+        </section>
+        <section>
+          <h3><em>CRUD</em></h3>
+          <p>Metoderna brukar kallas för CRUD:</p>
+          <ul>
+            <li><strong>C</strong>reate</li>
+            <li><strong>R</strong>ead</li>
+            <li><strong>U</strong>pdate</li>
+            <li><strong>D</strong>elete</li>
+          </ul>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>Typisk GET</h3>
+          <img class="stretch" src="https://s-media-cache-ak0.pinimg.com/originals/8c/d0/6a/8cd06a1e9863595ba76ee9932fc4a164.jpg" alt="Goat">
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>Typisk GET</h3>
+          <pre><code class="hljs http">
+            GET /index.html HTTP/1.1
+            Host: fend16.github.io </code></pre>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre><code class="hljs http">HTTP/1.1 200 OK
+
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;FEND16 HomePage bla bla&lt;/title&gt;
+&lt;/head&gt;</code></pre>
+          </section>
+          <section>
+            <h3>HTTP Status Codes</h3>
+            <p>Den bästa: <strong>200 OK</strong></p>
+            <p>Den sämsta: <strong>404 NOT FOUND</strong></p>
+          </section>
+          <section>
+            <img src="https://i.imgur.com/thV9tPv.png" alt="I'm a Teapot">
+            <a style="color: white;" href="https://httpstatuses.com/">httpstatuses.com</a>
+          </section>    
+        <section>
+          <h3>HTTP Headers</h3>
+          <p>Liknande som en html har en <strong>&lt;head&gt;</strong>-tagg samt en <strong>&lt;body&gt;</strong>-tagg</p>
+          <p>Har varje request <strong>HEADERS</strong> och <strong>BODY</strong></p>   
+        </section>
+        <section>
+          <h3>HEADERS</h3>
+          <p><em>meta data</em> om varje förfrågan</p>
+          <p>Berättar om vilket typ av innehåll som levereras, hur länge innehållet ska samt vilka som får komma åt innehållet</p>
+        </section>
+        </section>
+        <section>
+          <section>
+            <h1>API</h1>
+            <em>Application Programmable Interface</em>
+          </section>
+          <section>
+            <h3>API is all around us</h3>
+            <p class="fragment slide-down">So come on and let it show!</p>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre><code class="hljs js">//Funktionen innehåller vår implementation
+function getAllListItems(){
+  return document.getElementsByTagName('li');
+}</code></pre>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre><code class="hljs js">//När vi kallar på den
+//använder vi abstraktionen
+  getAllListItems();</code></pre>
+            </section>
+            <section>
+              <h3>Abstraktion / Implementation</h3>
+              <p>Interfacet utåt, det vi döper våra funktioner till i princip</p>
+              <p class="fragment slide-down">Implementationen är själva koden som ligger i funktionen eller metoden. Den är undangömd.</p>
+              <p class="fragment slide-down">Vi behöver läsa ut vad abstraktionen gör och inte bry oss om implementationen.</p>
+            </section>
+            <section>
+              <h3><strong>Application Programmable Interface</strong></h3>
+              <p>Ett API är de funktioner/metoder som din applikation visar utåt publikt.</p>
+              <p class="fragment slide-down">Är de funktioner som vi interagerar med, vi behöver inte se koden bakom.</p>
+            </section>
+            <section>
+              <h3>Olika API:er</h3>
+              <p class="fragment slide-down">DOM API</p>
+              <p class="fragment slide-down">JavaScript API</p>
+            </section>
+            <section>
+              <img src="https://i.imgur.com/wZQdG4I.png" alt="Api">
+            </section>
+            <section>
+              <h3>API i relation till webben</h3>
+              <p>Oftast pratar man om APIer som har endpoints där man hämtar data ifrån</p>
+              <p class="fragment slide-down">Servrar som exponerar URLer där man kan hämta enbart data ifrån och inte hemsidor.</p>
+              <p class="fragment slide-down">Oftat får man tillbaka informationen i form av <em>JSON</em></p>
+            </section>
+            <section data-background="#2d2d2d">
+<pre><code class="hljs http">GET HTTP/1.1
+Host: https://myapi.com/users</code></pre>
+<pre><code class="hljs json">[
+  {
+    "id": "1",
+    "name": "User1"
+  }
+]</code></pre>
+            </section>
+            <section>
+              <h3>Web API</h3>
+              <p>Skicka och hämta data via HTTP-protokollet med enkla medel</p>
+              <p>GET / POST / PATCH / DELETE</p>
+            </section>
+            <section>
+              <h3>ReST API</h3>
+              <p><em>Representational State Transfer</em></p>
+              <p>Servern bestämmer vad som kan skickas ut. Användaren behöver i princip bara gå till URLen för att hämta informationen.</p>
+              <p>Vi som användare behöver inte känna till strukturen av APIt, bara hur vi ska komma åt den.</p>
+            </section>
+            <section>
+              <h3>Öppna APIer</h3>
+              <p>Internt använder alla sidor sitt eget API för att manipulera data</p>
+              <p class="fragment slide-down">Vissa företag väljer att göra denna data publik och öppna sina endpoints för externa användare.</p>
+            </section>
+            <section>
+              <h3>GET All users</h3>
+              <p>Alla moderna APIer har följande upplägg:</p>
+              <p class="fragment slide-down"><strong>GET</strong>: https://myapi.com/users</p>
+              <p class="fragment slide-down">Hämtar samtliga användare</p>
+              <p class="fragment slide-down">Det som returneras är nästan alltid <em>JSON</em></p>
+            </section>
+            <section>
+              <h3>Create a new user</h3>
+              <p><strong>POST</strong>: https://myapi.com/users</p>
+              <p>Samma url men metoden är annorlunda</p>
+              <p>Vi indikerar att vi ska skicka med information till servers med POST</p>
+            </section>
+            <section data-background="#2d2d2d">
+              <pre><code class="hljs http">GET /users</code></pre>
+              <pre><code class="hljs json">[
+  {
+    "name": "Gurt"
+  },
+  {
+    "name": "Flurt"
+  }
+]</code></pre>
+            </section>
+            <section data-background="#2d2d2d">
+              <pre><code class="hljs http">POST /users
+name=Kurt</code></pre>
+<pre><code class="hljs json">{
+  "name": "Kurt"
+}</code></pre>
+            </section>
+            <section data-background="#2d2d2d"><pre><code class="hljs">GET /users</code></pre>
+            <pre><code class="hljs json">[
+  {
+    "name": "Gurt"
+  },
+  {
+    "name": "Flurt"
+  },
+  {
+    "name": "Kurt"
+  }
+]</code></pre>
+            </section>
+            <section>
+              <h3>Enskilda resurser</h3>
+              <p><strong>GET https://myapi.com/user/12</strong></p>
+              <p>URLen indikerar singular: en användare</p>
+              <p>12 är i det här fallet ett unikt id för användaren</p>
+            </section>
+            <section>
+              <h3>Enskilda resurser</h3>
+              <p><strong>DELETE</strong> https://myapi.com/user/12</p>
+              <p>Samma URL men metoden är annorlunda</p>
+              <p>Användare nr 12 ska bort!</p>
+            </section>
+            <section>
+              <h3>Enskilda resurser</h3>
+              <p><strong>PATCH</strong> https://myapi.com/user/12</p>
+              <p>Samma URL men metoden är annorlunda</p>
+              <p>Användare nr 12 ska ändras!</p>
+            </section>
+            <section>
+              <h3>GET / POST / PATCH / DELETE</h3>
+              <p>Med <strong>POST</strong> och <strong>PATCH</strong> måste vi skicka med ny information</p>
+              <p>Med <strong>GET</strong> och <strong>DELETE</strong> behöver vi inte skicka med ny information eftersom vi inte ska modifiera</p>
+              <p class="fragment slide-down"><strong>GET</strong> är den enda "säkra" metoden</p>
+            </section>
+            <section>
+              <h3>Postman exempel</h3>
+            </section>
+          </section>
+        </div>
+      </div>
+      <!-- reveal.js scripts -->
+      <script src="lib/js/head.min.js"></script>
+      <script src="js/reveal.js"></script>
+      <script>
+        Reveal.initialize({
+          transition: 'convex',
+          controls: true,
+          progress: true,
+          history: true,
+          keyboard: true,
+          overview: true,
+          center: true,
+          dependencies: [
+          { src: 'lib/js/classList.js',condition: function (){
+            return !document.body.classList;}},
+            { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+            { src: 'plugin/zoom-js/zoom.js', async: true },
+            { src: 'plugin/notes/notes.js', async: true },
+            ]
+          });
+        </script>
+      </body>
+      </html>
