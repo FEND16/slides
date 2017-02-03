@@ -1,0 +1,189 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>Fetch</title>
+  <style>
+    body{
+      background-color: hsl(200,45%,50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1>Trötta standarder</h1>
+        </section>
+        <section>
+          <h3>Man måste förstå historien för att uppfatta vad som händer i nuet</h3>
+        </section>
+        <section>
+          <h3>Sjukt trötta grejer</h3>
+          <ul>
+            <li class="fragment slide-down"><strong>IP</strong>: Sen Jura-period</li>
+            <li class="fragment slide-down"><strong>TCP</strong>: Neandertalare som skakar hand</li>
+            <li class="fragment slide-down"><strong>HTTP/1.1</strong>: Djingkis Khan tycker det är lite passé</li>
+            <li class="fragment slide-down"><strong>XMLHttpRequest</strong>: ????</li>
+          </ul>
+        </section>
+        <section>
+          <img class="stretch" src="http://i.dailymail.co.uk/i/pix/2009/06/14/article-0-05548294000005DC-299_634x477.jpg" alt="Archeologist">
+        </section>
+        <section>
+          <h3>Inte jättetrötta ändå</h3>
+          <ul>
+            <li class="fragment slide-down"><strong>IP</strong>: 1974</li>
+            <li class="fragment slide-down"><strong>TCP</strong>: 1974 </li>
+            <li class="fragment slide-down"><strong>HTTP/1.1</strong>: 1989</li>
+            <li class="fragment slide-down"><strong>XMLHttpRequest</strong>: 1999 (Standard 2006)</li>
+          </ul>
+        </section>
+        <section>
+          <h3>"Jag använder ett bibliotek"</h3>
+          <p>Bibliotek är bara förlängningar av aktuella standarder</p>
+          <p class="fragment slide-down"><em>Inget hokus pokus</em></p>
+          <p class="fragment slide-down"><em>jQuerys</em> GET/POST metoder är bara en wrapper runt <strong>XMLHttpRequest</strong> </p>
+        </section>
+        <section>
+          <h3>Det funkar</h3>
+          <p>Vad man än tycker så funkar det.</p>
+          <p class="fragment slide-down">Standarder tar lång tid att implementera</p>
+          <p class="fragment slide-down">Nya standarder innehåller många buggar och kompabilitetsproblem</p>
+        </section>
+        <section>
+          <h3>Utifall det dåliga händer</h3>
+          <p>Kunden kanske sitter där med IE 8, kodat i XHTML, Vanilla JS och hämtar sin data med XML via XMLHttpRequest.</p>
+          <p class="fragment slide-down">Då drar man.</p> 
+          <p class="fragment slide-down">Men man vet ändå hur allting uppkommit och hur de har varit <strong>viktiga byggstenar</strong> i framtagandet av de aktuella webbstandarderna.</p>
+          <p class="fragment slide-down">Alla gamla standarder har varit <em>de nya fräscha</em> en gång i tiden</p>
+        </section>
+        <section>
+          <h3>Protokollens påverkan</h3>
+          <p>HTTP/1.1 är inte optimerad för dagens användning av webben</p>
+          <p class="fragment slide-down">Varje förfrågan måste vänta på nästa</p>
+          <p class="fragment slide-down">Det uppmanas att man ska göra så få förfrågningar som möjligt</p>
+        </section>
+        <section data-background="#2d2d2d">
+<pre><code class="hljs html"><!-- Bara en förfrågan efter css?? -->
+&lt;link rel=&quot;stylesheet&quot; href=&quot;main.css&quot;&gt;</code></pre>
+        </section>
+        <section>
+          <h3>Sprite sheets</h3>
+          <p>Istället för att skicka många små bilder skickar man en stor bild som innehåller alla små bilder</p>
+          <p class="fragment slide-down">Sedan "klipper" man arket med bilder</p>
+        </section>
+        <section>
+          <h3>HTTP2</h3>
+          <p>Förfrågningar måste inte vänta på varandra</p>
+          <p>Minifierade <strong>HEADERS</strong></p>
+          <p><strong>Vi ska i framtiden inte behöva bry oss om hur många förfrågningar vi skickar</strong></p>
+        </section>
+        <section>
+          <h3>Polyfill</h3>
+          <p><strong>Poly</strong>: många, <strong>fill</strong>: att fylla</p>
+          <p class="fragment slide-down">Utifall vi vill använda en standard som inte stöds</p>
+          <p class="fragment slide-down"><em>Feature Detection</em>: Känna igen vilka saker som stöds och vilka som inte stöds</p>
+          <p style="color: white;" class="fragment slide-down"><a href="https://modernizr.com/">Modernizer.com</a></p>
+        </section>
+        <section>
+          <h3>Polyfill</h3>
+          <p>JavaScript bibliotek som hanterar en specifik feature som en webbläsare saknar.</p>
+          <p>Förser webbläsaren med en alternativ lösning</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><em>FETCH</em></h1>
+        </section>
+        <section>
+          <h3><strong>Fetch</strong></h3>
+          <p>Möjlig ersättare för XMLHttpRequest</p>
+          <p class="fragment slide-down">Alternativ finnns till XMLHttpRequest men samtliga är bibliotek</p>
+          <p class="fragment slide-down"><em>Fetch</em> är native</p>
+        </section>
+        <section>
+          <img class="stretch" src="https://i.imgur.com/7eTqE1h.png" alt="CIU: Fetch">
+        </section>
+        <section>
+          <h3>Promises</h3>
+          <p>Fetch bygger på ES6 <strong>Promises</strong></p>
+          <p class="fragment slide-down">Eftersom GET körs asynkront vill man ha ett sätt att fastställa att att all data kommer in.</p>
+          <blockquote class="fragment slide-down">
+            “a proxy for a value that will eventually become available.”
+          </blockquote>
+        </section>
+        <section>
+          <h3>Promises</h3>
+          <p>Promises används i många bibliotek men man har sällan fall där man behöver göra ett eget promise.</p>
+          <p class="fragment slide-down">Fallet <em>Fetch</em></p>
+        </section>
+        <section data-background="#2d2d2d">
+         <pre><code class="hljs js stretch">request.onreadystatechange =
+          function(){
+          if(request.readyState === 4 && request.status === 200){
+          //Do stuff
+        }
+      }</code></pre>
+    </section>
+    <section data-background="#2d2d2d">
+      <pre><code class="hljs js">var ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.onreadystatechange = function(){
+        if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
+        console.log(ajaxRequest.responseText);
+      }
+    };
+    ajaxRequest.open('GET', 'http://fend16.azurewebsites.net/albums', true);
+    ajaxRequest.send();</code></pre>
+  </section>
+  <section data-background="#2d2d2d">
+    <pre><code class="hljs js">
+      fetch('https://fend16.azurewebsites.net')</code></pre>
+    </section>
+    <section>
+      <h3>Viktiga punkter</h3>
+      <p>Fetch returnerar inte färdig <em>JSON</em> som XMLHttpRequest</p>
+      <p class="fragment slide-down">Fetch returnerar ett <strong>Promise</strong> som är ett objekt som innehåller vår JSON men med mer <em>metadata</em></p>
+      <p class="fragment slide-down">Vi måste hantera svaret</p>
+    </section>
+    <section data-background="#2d2d2d">
+      <pre><code class="hljs js">fetch('https://fend16.azurewebsites.net')
+        .then(function(response){
+        //DO stuff
+      });</code></pre>
+    </section>
+  </section>
+
+
+
+</div>
+</div>
+<!-- reveal.js scripts -->
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.js"></script>
+<script>
+  Reveal.initialize({
+    transition: 'convex',
+    controls: true,
+    progress: true,
+    history: true,
+    keyboard: true,
+    overview: true,
+    center: true,
+    dependencies: [
+    { src: 'lib/js/classList.js',condition: function (){
+      return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      ]
+    });
+  </script>
+</body>
+</html>
