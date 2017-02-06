@@ -1,0 +1,106 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>Tentamen</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1>Att kunna till provet</h1>
+        </section>
+        <section>
+          <h3>Vad kommer inte</h3>
+          <p>Inga koduppgifter, mer övergripligt hur saker implementeras.</p>
+          <p class="fragment slide-down">De mer praktiska exemplena under kursen har varit för att försöka ge en bild av hur allting används</p>
+        </section>
+        <section>
+          <h3>Upplägg</h3>
+          <p><strong>Fredag 09.15</strong></p>
+          <p>Kör tills ni är klara</p>
+          <p><em>Penna och sudd</em></p>
+          <p>Ni får skriva på svenska eller engelska</p>
+          <p class="fragment slide-down"><strong>Provresultat tillbaka efter max 2 veckor</strong></p>
+        </section>
+        <section>
+          <h3>Document Object Model</h3>
+          <p class="fragment slide-down"><strong>Hur DOM är uppbyggt</strong></p>
+          <ul>
+            <li>Element node</li>
+            <li>Attribute node</li>
+            <li>Text node</li>
+          </ul>
+          <p class="fragment slide-down">Trädstrukturen: <em>Parent/child</em></p>
+          <p class="fragment slide-down">Dess relation till HTML/XML & JavaScript</p>
+        </section>
+        <section>
+          <h3>HyperText Markup Language</h3>
+          <p class="fragment slide-down">HTML i relation till XML/XHTML</p>
+          <p class="fragment slide-down">HTMLs ursprung</p>
+          <p class="fragment slide-down">Semantisk HTML</p>
+        </section>
+        <section>
+          <h3>HyperText Transfer Protocol</h3>
+          <p class="fragment slide-down">Hur protokollet fungerar: GET/POST</p>
+          <p class="fragment slide-down">Hur protokollet påverkar oss i vårt yrkesutövande.</p>
+          <p class="fragment slide-down">Några viktiga headers och statuskoder</p>
+        </section>
+        <section>
+          <h3>Create, Read, Update, Delete</h3>
+          <p>Hur dessa metoder är kopplade till HTTP-metoderna</p>
+          <p class="fragment slide-down">Varför de är viktiga för frontend</p>
+          <p class="fragment slide-down">Hur de kan implementeras, t.ex. med JavaScript.</p>
+        </section>
+        <section>
+          <h3><em>JSON/XML</em></h3>
+          <p>Hur de är uppbyggda, främst JSON</p>
+          <p>Användningsområden</p>
+          <p>Hur vi kan använda dem</p>
+        </section>
+        <section>
+          <h3>Domänamn/URL</h3>
+          <p>Vad en <strong>URL</strong> är och hur den är uppbyggd</p>
+          <p>Vad en domännamnsserver är, <strong>DNS</strong> och hur den fungerar.</p>
+        </section>
+        <section>
+          <h3>Fokus</h3>
+          <p>Beskriva sammanhang</p>
+          <p class="fragment slide-down">Användare - webbläsare - webbstandard - organisation</p>
+          <p class="fragment slide-down">Klient - server</p>
+        </section>
+      </section>
+
+
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      ]
+    });
+  </script>
+</body>
+</html>
