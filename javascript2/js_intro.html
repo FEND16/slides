@@ -1,0 +1,398 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <style>
+    .reveal .reference{
+      font-size: 1rem;
+      color: #fff;
+      position: absolute;
+      bottom: -100;
+      left: -100;
+    }
+  </style>
+  <title>JavaScript 1 - Intro</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section data-background="hsl(50, 91%, 64%)">
+          <h1 style="color: hsl(60, 2%, 18%)">JavaScript 2</h1>
+          <h3 style="color: hsl(60, 2%, 18%)">The Return</h3>
+        </section>
+        <section>
+          <h3>Dagens Agenda</h3>
+          <div style="float: left;" class="fragment slide-down">
+            <p><strong>Förmiddag</strong></p>
+            <p>Kursens innehåll</p>
+            <p>Repetition av JS1</p>
+          </div>
+          <div style="float: right;" class="fragment slide down">
+            <p><strong>Eftermiddag</strong></p>
+            <p>Praktiska JS-uppgifter</p>
+            <p>Arrayer & Objekt</p>
+          </div>
+        </section>
+        <section>
+          <h3><strong>Fokus</strong></h3>
+          <p>Fördjupning inom vanilla JavaScript</p>
+          <ul>
+            <li class="fragment slide-down"><em>this</em> och objekt</li>
+            <li class="fragment slide-down">Prototyper</li>
+            <li class="fragment slide-down">Designmönster</li>
+            <li class="fragment slide-down">AJAX</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Tillåtet</h3>
+          <p>jQuery får användas för att lösa den andra examinerande.</p>
+          <p>Men inga häftiga ramverk.</p>
+        </section>
+        <section>
+          <p>Förslag: Introduktion till <strong>nodes</strong>ekosystem och grundläggande om byggverktyg</p>
+          <a style="color: white" href="https://github.com/FEND16/javascript2/pull/1">https://github.com/FEND16/javascript2/pull/1</a>
+        </section>
+        <section>
+          <h3>Vad säger den allsmäktiga kursplanen</h3>
+        </section> 
+        <section>
+          <h3>JSDoc</h3>
+          <p>Ni kommer att se kommentarer som ser ut såhär:</p>
+          <pre style="width: 1100px"><code class="hljs js">/**
+ * Function that says your name with hello before
+ * @param  {String} name Your name
+ * @return {String}      Your name with hello in front
+ */
+function hello(name){
+    return 'Hello' + name;
+}</code></pre>
+        </section>
+        <section>
+          <h3>ES6 / E2015</h3>
+          <p>Ni kommer att se kod som ser ut såhär:</p>
+          <pre><code class="hljs js">const multiply = (a, b) => {
+  return `Summan av talen är: ${a * b}`;
+}</code></pre>
+          <p class="fragment slide-down">Jag kommer att använda ES6-syntax</p>
+          <p class="fragment slide-down">För att det är nice.</p>
+        </section>
+        <section>
+          <h3>ES6</h3>
+          <p class="fragment slide-down"><strong>let</strong></p>
+          <p class="fragment slide-down"><strong>const</strong></p>
+          <p class="fragment slide-down"><strong>arrow function</strong></p>
+          <p class="fragment slide-down"><strong>Template Literals</strong></p>
+        </section>
+        <section>
+          <h3>Looping</h3>
+          <p>Jag kommer ibland att ersätta <strong>for</strong>-loopen med:</p>
+          <p><em>Array.map()</em></p>
+          <p><em>Array.reduce()</em></p>
+          <p><em>Array.filter()</em></p>
+          <p><em>Array.forEach()</em></p>
+          <p class="fragment slide-down">Inget krav men väldigt bra funktioner att kunna</p>
+        </section>
+        <section>
+          <h3>Examination</h3>
+          <p>Två examinerande inlämningar</p>
+          <p class="fragment slide-down">Designmönster: skapa en Movie Database</p>
+          <p class="fragment slide-down"><em>Fokus på att skriva tydlig och fräsch kod</em></p>
+          <p class="fragment slide-down">AJAX: Hämta data från öppna APIer</p>
+          <p class="fragment slide-down"><em>Fokus på att använda AJAX</em></p>
+        </section>
+        <section>
+          <h3><strong>Man ska även visa att man förstår prototypkedjan</strong></h3>
+          <p class="fragment slide-down">Kunna skriva läsbar och strukturerad kod</p>
+          <p class="fragment slide-down">Kunna använda ES6</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Repetition</h1>
+        </section>
+        <section>
+          <h3>Built in types</h3>
+          <ul>
+            <li><em>Number</em></li>
+            <li><em>String</em></li>
+            <li><em>Bool</em></li>
+            <li><em>Object</em></li>
+            <li><em>null</em></li>
+            <li><em>undefined</em></li>
+            <a class="reference" href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#values--types">Ref: YDKJ - Values & Types</a>
+          </ul>
+        </section>
+        <section>
+          <h3>Falsy values</h3>
+          <ul>
+            <li><em>""</em></li>
+            <li><em>0, -0, NaN</em></li>
+            <li><em>null</em></li>
+            <li><em>undefined</em></li>
+            <li><em>false</em></li>
+          </ul>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#truthy--falsy" class="reference">Ref: YDKJ - Truthy & Falsy</a>
+        </section>
+        <section>
+          <h3>Type Coersion</h3>
+          <p><em>JavaScript</em> är ett dynamiskt typat språk</p>
+          <p class="fragment slide-down">Det finns bara <strong>var</strong> och alla värden konverteras implicit om man inte säger annat</p>
+          <p class="fragment slide-down">Viktigt: <strong>===</strong> vs. <strong>==</strong></p>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#coercion" class="reference">Ref: YDKJ - Type Coercion</a>
+        </section>
+        <section>
+          <h3><strong>for</strong></h3>
+          <pre><code class="hljs js">for(var i = 0; i < 10; i++){
+  console.log(i);
+}</code></pre>
+          <pre><code class="hljs js">for(start; duration; incrementation){
+  console.log();
+}</code></pre>
+          <p class="fragment slide-down">Ökningen behöver inte alltid vara <strong>i++</strong> men är oftast det.</p>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch1.md#loops" class="reference">Ref: YDKJ - Loops</a>
+        </section>
+        <section>
+          <h3><strong>if/else/else if</strong></h3>
+          <pre><code class="hljs js">if(condition){
+  //Run code
+}</code></pre>
+          <p class="fragment slide-down">Om ett villkor inte uppfylls kommer koden aldrig att nås.</p>
+          <p class="fragment slide-down">Därför viktigt att att tänka på i vilken ordning <strong>if-satserna</strong> positioneras.</p>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#conditionals" class="reference">Ref: YDKJ - Conditionals</a>
+        </section>
+        <section>
+          <h3>Nested hell</h3>
+          <pre><code class="hljs js">if(condition){
+  if(condition){
+    if(condition){
+      if(condition){
+        eturn true;
+    }
+  }
+}</code></pre>
+    </section>
+    <section>
+      <img src="http://i.imgur.com/11evlld.jpg" class="stretch" alt="Bad news frank">
+    </section>
+    <section>
+      <h3>Abstrahera</h3>
+      <p>Känner man att koden är för rörig på vissa ställen: <strong>abstrahera</strong></p>
+      <p class="fragment slide-down">Lägg delar av koden i en ny funktion</p>
+      <pre><code class="hljs js">if(condition){
+  doMoreCode();
+}</code></pre>
+      <p class="fragment slide-down">Många och små funktioner är inget problem, bara man är tydlig med vad funktionen gör.</p>
+    </section>
+    <section>
+      <h3>Function declaration</h3>
+      <pre><code class="hljs js">function sayHello(){
+  return "Hello!";
+}</code></pre>
+      <p class="fragment slide-down">Funktionen <em>hoistas</em>: skjuts upp i scopet och kommer att vara tillgänglig i hela scopet</p>
+      <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#functions-as-values" class="reference">Ref: YDKJ - Functions as values</a>
+    </section>
+    <section>
+      <h3>Scope</h3>
+      <pre><code class="hljs js">//Global scope
+function sayHello(){
+  //Function scope
+  return "Hello!";
+}</code></pre>
+      <p class="fragment slide-down">En variabel i en funktion är inte tillgänglig utanför funktionen men en variabel i global scope är tillgänglig överallt. (Dålig grej)</p>
+      <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#function-scopes" class="reference">Ref: YDKJ - Function Scopes</a>
+    </section>
+    <section>
+      <h3>Function expression</h3>
+      <pre><code class="hljs js">var sayHello = function(){
+  return "Hello!";
+}</code></pre>
+      <p class="fragment slide-down">Spara en anonym function i en variabel. Fungerar på samma sätt som en "vanlig funktion".</p>
+      <p class="fragment slide-down">Det spelar oftast ingen roll vilken du använder.</p>
+      <a href="http://stackoverflow.com/a/336868" class="reference">Ref: SO - FD vs. FE</a>
+    </section>
+    <section>
+      <h3><strong>no return</strong></h3>
+      <p class="fragment slide-down">INGEN funktion MÅSTE returnera någonting</p>
+      <pre><code class="hljs js">function hello(){
+  console.log("Hello");
+}</code></pre>
+      <p class="fragment slide-down">Funktionen loggar ENBART ut värden. Vi kan inte använda funktionen till något annat.</p>
+      <p class="fragment slide-down">Funktioner <em>BORDE</em> returnera <strong>ETT</strong> värde/array/objekt</p>
+    </section>
+    <section>
+      <h3>return</h3>
+      <pre><code class="hljs js">function hello(){
+  return "Hello";
+}</code></pre>
+      <p class="fragment slide-down"><strong>console.log(hello());</strong></p>
+      <p class="fragment slide-down"><strong>hello() === "Hello"</strong></p>
+      <p class="fragment slide-down"><strong>return</strong> betyder att funktionen är klar, inget mer ska hända. Gå tillbaka till stacken.</p>
+    </section>
+    <section>
+      <h3>Funktionernas funktion</h3>
+      <ul>
+        <li>Funktioner ska vara korta</li>
+        <li>Funktioner ska oftast bara göra <em>EN</em> grej</li>
+        <li class="fragment slide-down">Det finns dock ingen <em>funktions-polis</em></li>
+        <li class="fragment slide-down">Ibland kan man inte/har inte tid att göra världens bästa funktioner.</li>
+      </ul>
+    </section>
+    <section>
+      <img src="http://i.imgur.com/11evlld.jpg" class="stretch" alt="Bad News Frank">
+    </section>
+    <section>
+      <h3>Arrayer</h3>
+      <pre><code class="hljs js">var array = [0, 5, 6, 0, 12];</code></pre> 
+      <p class="fragment slide-down">Arrayer är samlingar av variabler.</p>
+      <p class="fragment slide-down">Index, startplatsen är 0</p>
+      <p class="fragment slide-down">Även om längden är 3 är sista indexet 2: 0 1 2</p>
+      <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#arrays" class="reference">Ref: YDKJ - Arrays</a>
+    </section>
+    <section>
+      <h3>Arrayens innehåll</h3>
+      <p>Arrayen kan innehålla alla olika värden</p>
+      <pre><code class="hljs js">var array = [ null, true, "string", 0, "0", []]</code></pre>
+      <p class="fragment slide-down">Försök att hålla arrayen fylld med samma sorts <em>typ</em></p>
+    </section>
+    <section>
+      <h3>Object</h3>
+      <p>Objekt är datastrukturer som använder <em>key/value</em></p>
+      <p>Vanligaste sättet att skapa objekt är <em>Object literal</em></p>
+      <pre><code class="hljs js">var object = {
+  property: value,
+  property2: value
+};</code></pre>
+      <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/up%20%26%20going/ch2.md#objects" class="reference">Ref: YDKJ - Objects</a>
+    </section>
+    <section>
+      <h3>Object</h3>
+      <pre><code class="hljs js">var recipe = {
+  name: 'Mandelkubb',
+  characteristics: 'Sjukt torr, blötlägg innan',
+  ingredients: []
+}</code></pre>
+      <p class="fragment slide-down">Ett objekts property value kan vara ett annat objekt, eller en array.</p>
+      <p class="fragment slide-down">Allting i JavaScript är <em>objekt</em> så allting kan lagras i ett objekt.</p>
+    </section>
+    <section>
+      <h3>Loopa objekt</h3>
+      <pre><code class="hljs js">for (var property in obj){
+  console.log(property, obj[prop]);
+}</code></pre>
+      <p class="fragment slide-down">Vi kommer åt ett objekts värden med <em>dot-notation</em>: <strong>obj.property</strong></p>
+      <p class="fragment slide-down">Eller som här: <strong>obj[prop]</strong></p>
+    </section>
+    <section>
+      <h3>Array of objects</h3>
+      <pre><code class="hljs js">var arr = [
+  { name: "Bobbo"},
+  { name: "Kloppsky"},
+  { name: "Charles VII"}
+];</code></pre>
+      </section>
+      <section>
+        <h3>DOM-manipulation</h3>
+        <pre><code class="hljs js">var el = document
+  .getElementById('clicky');</code></pre>
+        <pre><code class="hljs js">var tagList = document
+  .getElementsByTagName('li');</code></pre>
+        <pre><code class="hljs js">var classes = document
+  .getElementsByClassName('btn-default');</code></pre>
+  <a href="http://callmenick.com/post/basics-javascript-dom-manipulation" class="reference">Ref: DOM-manipulation</a>
+      </section>
+      <section>
+        <h3>document.createElement()</h3>
+        <pre><code class="hljs js">var el = document.createElement('div');</code></pre>
+        <p class="fragment slide-down"><em>argumentet</em> specificerar vilken typ av element som ska skapas.</p>
+        <p class="fragment slide-down">funktionen <strong>createElement()</strong> tillhör <em> document</em></p>
+      </section>
+      <section>
+        <h3>appendChild()/removeChild()</h3>
+          <ul>
+            <li><strong>parent.appendChild(childElement)</strong></li>
+            <li><strong>parent.removeChild(childElement)</strong></li>
+          </ul>
+        <a href="http://callmenick.com/post/basics-javascript-dom-manipulation" class="reference">Ref: DOM-manipulation</a>
+      </section>
+      <section>
+        <h3><strong>.innerHTML</strong></h3>
+        <p><strong>.innerHTML</strong> byter ut allt innehåll innanför taggarna på diven</p>
+        <p><strong>.appendChild</strong> lägger till ett nytt <em>child</em> innanför taggarna på diven</p>
+        <p class="fragment slide-down">Ska du uppdatera en hel lista så kötta <strong>.innerHTML</strong></p>
+      </section>
+      <section>
+        <h3>Events</h3>
+        <pre><code class="hljs js">element.
+  addEventListener('click', function(){
+    console.log('You clicked!');
+});</code></pre>
+        <p class="fragment slide-down">Detta är att föredra</p>
+        <p class="fragment slide-down">allting samlat i js-filen</p>
+      </section>
+      <section>
+        <pre><code class="hljs js">element.onclick = function(){
+  console.log('You clicked!');
+}</code></pre>
+      </section>
+      <section>
+        <pre><code class="hljs html">
+&lt;button onClick=&quot;clickFunction()&quot;&gt;Click&lt;button&gt;
+          </code></pre>
+          <p class="fragment slide-down">Jag gillar inte den här metoden.</p>
+          <p class="fragment slide-down">Men gör som ni vill.</p>
+          <p class="fragment slide-down">Men inte såhär tack.</p>
+        </section>
+        <section>
+          <h3>classList</h3>
+          <p>Vanligaste sättet att animera eller dölja/visa element genom att toggla en klass</p>
+          <pre><code class="hljs js">el.addEventListener('click', function(){
+  div.classList.toggle('visible');
+  }</code></pre>
+          <ul>
+            <li class="fragment slide-down"><em>classList.add('class');</em></li>
+            <li class="fragment slide-down"><em>classList.remove('class');</em></li>
+            <li class="fragment slide-down"><em>classList.toggle('class');</em></li>
+            <li class="fragment slide-down"><em>classlist.contains()</em></li>
+            <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/classList" style="bottom: -50" class="reference">Ref: MDN - classList</a>
+          </ul>
+        </section>
+        <section>
+          <h3><em>Övning: World Stats</em></h3>
+          <p>Loopa igenom en array med information om olika länder</p>
+          <p>Varje land är ett eget objekt med olika egenskaper</p>
+          <p>Sålla och sortera</p>
+          <a style="color: #fff" href="https://github.com/fend16/javascript2/exercises/01_world.stats.md"><em>GitHub: 01_world_stats @ javascript2</em></a>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        { src: 'plugin/zoom-js/zoom.js', async: true },
+        { src: 'plugin/notes/notes.js', async: true },
+        ]
+      });
+    </script>
+  </body>
+  </html>
