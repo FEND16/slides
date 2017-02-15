@@ -1,0 +1,347 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>Scopes & Closures</title>
+  <style>
+    .reveal .reference{
+      font-size: 1rem;
+      color: #fff;
+      position: absolute;
+      bottom: -100;
+      left: -100;
+    }
+    .reveal p {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255, 0.3);
+    }
+    .reveal a{
+      color: hsl(60, 50%, 50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1><em>Scope, closures & context</em></h1>
+        </section>
+        <section>
+          <h3>Litteratur</h3>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/scope%20&%20closures/README.md#you-dont-know-js-scope--closures">You Don't Know JavaScript: Scopes & Closure</a>
+          <p>Djupgående men nyttig</p>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">Mozilla Developer Network: JavaScript Reference</a>
+          <p>Trist men bra</p>
+        </section>
+        <section>
+          <h3><strong>.map</strong> <strong>.filter</strong> <strong>.reduce</strong></h3>
+        </section>
+        <section>
+          <h3>Funktionell programmering</h3>
+          <p><strong>Immutability</strong>: inte ändra på datastrukturer bara kopiera</p>
+          <p class="fragment fade-down">Bygg på från föregående <strong>return</strong></p>
+          <p class="fragment fade-down"><strong>Pure functions</strong></p>
+          <p class="fragment fade-down">No side effects</p>
+          <a href="https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0#.kbd4p585g" class="reference">Ref: What is Functional Programming</a>
+        </section>
+        <section>
+          <h3><strong>.map</strong></h3>
+          <p>Vi mappar om arrayen. Returnerar en ny array baserad på den gamla arrayen.</p>
+        <pre><code class="hljs js">var newArray = countries
+  .map(function(country){
+    return country.name;
+})</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">var timestwo = numbers.
+  map(function(number){
+    return number * 2;
+}
+console.log(timestwo);</code></pre>
+        </section>
+        <section>
+          <h3><strong>.filter</strong></h3>
+          <p>Returnerar en filtrerad array baserad på vårt villkor.</p>
+<pre><code class="hljs js">var newArray = countries
+  .filter(function(country){
+    return country.population > 5000000;
+}</code></pre>
+        <p class="fragment slide-down">Om villkoret ställer kommer objektet att sparas i den nya arrayen</p>
+        <p class="fragment slide-down">Funktionen som <strong>filter()</strong> tar emot bestämmer vad filter ska göra. </p>
+        </section>
+        <section>
+        <h3>.reduce</h3>
+        <p>Reducerar innehållet i arrayen baserat på vårt vilkor.</p>
+      </section>
+      <section>
+        <h3>Den förvirrande delen</h3>
+        <pre><code class="hljs js">countries.map(country, index, array){
+  return country.map;
+}</code></pre>
+        <p class="fragment slide-down"><strong>country</strong>: värdet på varje index</p>
+        <p class="fragment slide-down"><strong>index</strong>: varje index helt enkelt</p>
+        <p class="fragment slide-down"><strong>array</strong>: själva arrayen vi loopar igenom</p>
+      </section>
+      <section>
+        <h3>Den förvirrande delen: del 2</h3>
+        <pre><code class="hljs js">countries.
+  reduce(function(pop, country, index, array){
+  return pop += country.population;
+}, 0)</code></pre>
+      <p class="fragment slide-down"><strong>pop</strong>: det samlade värdet efter varje iteration</p>
+      <p class="fragment slide-down"><strong>country</strong>: värdet på varje index</p>
+      <p class="fragment slide-down"><strong>0</strong>: Vi säger åt reduce att startvärdet ska vara 0.</p>
+      </section>
+      <section>
+      <pre><code class="hljs js">countries.
+  reduce(function(semla, obama){
+    return semla + obama.population;
+}, 0)</code></pre>
+      <p class="fragment fade-down">Som en tumregel spelar det nästan aldrig någon roll vad du döper dina parametrar till, bara vilken ordning de är i.</p>
+      <p class="fragment fade-down">Gäller det mesta i JavaScript</p>
+      </section>
+      </section>
+      <section>
+        <section>
+          <h1>Scopes & Closures</h1>
+          <em>Context, hoisting & shadowing</em>
+        </section>
+        <section>
+          <h3><strong>Scope</strong></h3>
+          <p>Beroende på vilket scope vårt kodblock körs i så kommer koden att ha tillgång till olika variabler. <em>Scope</em> bestämmer vad som är tillgängligt var.</p>
+          <p class="fragment slide-down">Men vi bestämmer i vilket <em>scope</em> vi lägger koden i.</p>
+          <p class="fragment slide-down">Om vi lägger en variabel i en funktion så har vi valt att variabeln ska tillhöra det scopet och får ta konsekvenserna.</p>
+        </section>
+        <section>
+          <h3>Principe of Least Privilege</h3>
+          <blockquote>
+            Every program and every privileged user of the system should operate using the least amount of privilege necessary to complete the job.
+          </blockquote>
+          <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege" class="reference">Ref: Principle of Least Privilege</a>
+        </section>
+        <section>
+          <h3>Runtime</h3>
+          <p>Hur koden väl körs bestäms under <strong>Runtime</strong>: när koden körs</p>
+          <p class="fragment slide-down">Variabler och funktioner är inte strikt bundna till ett objekt</p>
+          <p class="fragment slide-down">Hur funktioner körs och hur värden konverteras bestäms vid <em>runtime</em>. Ska värdet bli <strong>"0"</strong> eller <strong>0</strong>?</p> 
+        </section>
+        <section>
+          <h3>Lexical scope</h3>
+          <p class="fragment slide-down">Det scope som en variabel eller funktion ligger i kallas <strong>lexical scope</strong></p>
+          <p class="fragment slide-down">På det ställe som variablen är på i kodstrukturen.</p>
+          <p class="fragment slide-down">En funktion behöver inte nödvändigtvis vara bunden till sitt lexical scope.</p>
+        </section>
+        <section>
+          <h3>Lexical scope</h3>
+          <p>Jag äger en cykel, det är min cykel</p>
+          <img style="width: 300px;; height: 300px; position: absolute; top: -100; left: -200; " src="http://4.bp.blogspot.com/_TLNCcju9Yyw/TFhbayeOvPI/AAAAAAAABXk/7JF1ooITUbA/s1600/Swedish+militärcykel.jpg" alt="Militärcykel">
+          <p class="fragment slide-down">Det hindrar inte dig från att cykla på min cykel. Du kan cykla och jag kan låta dig låna min cykel.</p>
+          <p class="fragment slide-down">Men cykeln är min, den står utanför min lägenhet.</p>
+        </section>
+        <section>
+          <img class="stretch" src="https://github.com/getify/You-Dont-Know-JS/raw/master/scope%20%26%20closures/fig2.png" alt="Scopes">
+        </section>
+        <section>
+          <h3>Context</h3>
+          <p>När man pratar om <em>context</em> brukar man oftast prata om vad exakt <em>this</em> är.</p><p class="fragment slide-down">Vår kod körs alltid i browsern, alltså i webbläsaren</p>
+          <p class="fragment slide-down"><em>this</em> i global är <strong>window</strong></p>
+        </section>
+        <section>
+          <img class="stretch" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5a/DOM-model.svg/428px-DOM-model.svg.png" alt="DOM">
+        </section>
+        <section>
+          <h3>Tumregel</h3>
+          <p class="fragment fade-down"><em>Scope</em> är var variabeln/funktionen ligger</p>
+          <p class="fragment fade-down"><em>Context</em> är vilket objekt variabeln/funktionen tillhör.</p>
+        </section>
+        <section>
+          <h3><strong>var</strong> vs. <strong>let</strong></h3>
+          <p>I JavaScript har vi i princip bara <strong>Global</strong> och <strong>function</strong> scope</p>
+          <p><strong>let</strong> används för att skapa block-baserade variabler</p>
+          <p class="fragment slide-down">Men vad är ett <strong>block</strong></p>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let" class="reference">Ref: MDN - let</a>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>let</h3>
+          <pre class="fragement slide-down"><code class="hljs js">for(var i = 0; i < 10; i++){
+  console.log("i exists outside of loop");
+}</code></pre>
+  <pre class="fragment slide-down"><code class="hljs js">for(let i = 0; i < 10; i++){
+  console.log("i only exists in loop")
+}</code></pre>
+        </section>
+        <section>
+          <h3>Block scope</h3>
+          <p><em>if/else/else if</em></p>
+          <p><em>for/while/do while</em></p>
+          <p><em>{}</em></p>
+          <p class="fragment slide-down">Använd <strong>let</strong> så mycket som möjligt.</p>
+          <p class="fragment slide-down">Använd när du vill skapa tillfälliga variabler</p>
+          <p class="fragment slide-down"><strong>let</strong> hoistas inte</p>
+        </section>
+        <section>
+          <h3>Hoisting</h3>
+          <p>Variabler och <strong>Function declarations</strong> läggs högst upp i dess nuvarande <em>scope</em></p>
+          <p class="fragment fade-down">Undantag: <strong>let</strong></p>
+          <p class="fragment fade-down">Funktioner och variabler är tillgängliga för hela scopet</p>
+          <p class="fragment fade-down">Undatag: <strong>Function Expression</strong></p>
+        </section>
+        <section>
+          <h3>Danger danger</h3>
+          <p>Variablen <em>hoistas</em> men det är inte säkert att värdet gör det</p>
+          <pre><code class="hljs js">var func = function(){}</code></pre>
+          <p class="fragment fade-down"></p>
+        </section>
+        <section>
+          <h3>Shadowing</h3>
+          <p>När en variabel <em>skuggar</em> en annan</p>
+          <blockquote>
+            when a variable declared within a certain scope (decision block, method, or inner class) has the same name as a variable declared in an outer scope.
+          </blockquote>
+          <a href="https://en.wikipedia.org/wiki/Variable_shadowing" class="reference">Ref: Wiki - Variable Shadowing</a>
+        </section>
+        <section>
+          <pre><code class="hljs js">var data = 42;
+  function funkis(){
+    var data = 0;
+    console.log(data);
+}</code></pre> 
+          <p class="fragment slide-down">Den inre variablen skuggar den yttre</p>
+          <p class="fragment fade-down">Bra & Dålig grej: ofta dålig</p>
+        </section>
+        <section>
+          <h3>const</h3>
+          <pre><code class="hljs js">const PI = 3.14;</code></pre>
+          <p class="fragment slide-down">pi är alltid detsamma</p>
+          <p class="fragment slide-down">Använd när något värde inte ska ändras</p>
+          <p class="fragment slide-down">Skriv med stora bokstäver för att förtydliga, men inget måste.</p>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const" class="reference">Ref: MDN - const</a>
+        </section>
+        <section>
+          <h3>Vad ska vara konstant?</h3>
+          <pre><code class="hljs js">const sayHello = function(){
+  return "Hello";
+}</code></pre>
+        <p class="fragment slide-down">Semantisk skillnad: vi säger att denna funktion inte ska skrivas över.</p>
+        <p class="fragment slide-down">Särskiljer den från vanliga variabler.</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>Arrow Function => </h3>
+          <pre class="fragment slide-down"><code class="hljs js">var hello = function(){
+  return "Hello";
+};</code></pre>
+<pre class="fragment slide-down"><code class="hljs js">var hello = () => {
+  return "Hello";
+};</code></pre>
+<pre class="fragment slide-down"><code class="hljs js">var hello = () => "Hello"</code></pre>
+        </section>
+        <section>
+          <h3><strong>Arrow function => </strong></h3>
+          <p>NÄSTAN samma sak som en vanlig funktion</p>
+          <p class="fragment slide-down">Binder funktionen till den nuvarande kontexten (<em>this</em>)</p>
+          <p class="fragment slide-down">Bra <strong>OCH</strong>dålig grej</p>
+          <p class="fragment slide-down">Inte alltid en direkt ersättare för en funktion. Används oftast istället för anonyma funktioner.</p>
+          <a href="http://exploringjs.com/es6/ch_arrow-functions.html" class="reference">Ref: Exploring ES6 - Arrow functions</a>
+        </section>
+        <section>
+          <h3> () => Lexical scope </h3>
+          <p>Oftast bra när man ska köra anonyma funktioner (kallas även <em>lambdas</em>)</p>
+          <p>Försäkra sig om att <em>this</em> alltid är detsamma.</p>
+          <p class="fragment slide-down">Ibland vill vi dock att <em>this</em> ska kunna ändras.</p>
+          <a href="http://exploringjs.com/es6/ch_arrow-functions.html" class="reference">Ref: Exploring ES6 - Arrow functions</a>
+        </section>
+        <section>
+          <h3><strong>call</strong>, <strong>apply</strong></h3>
+          <p>Vi kan kalla på en funktion som inte är bunden till ett objekt</p>
+          <pre><code class="hljs js">myFunction.call(obj, arguments);</code></pre>
+          <pre><code class="hljs js">myFunction.call(obj, [arguments]);</code></pre>
+          <p class="fragment fade-down">Vi kan ha fristående funktioner som kan kalla på vilket objekt vi vill.</p>
+          <p class="fragment fade-down">Har vi mer generella metoder behöver de inte vara bunda till objektet.</p>
+        </section>
+        <section>
+          <h3>Kodexempel</h3>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Closures</h1>
+        </section>
+        <section>
+          <h3>Free variables</h3>
+          <p>En closure är egentligen inget fuffens.</p>
+          <p class="fragment slide-down"><em>Variabler i det yttre scopet finns kvar som referens även fast funktionen har kört klart.</em></p>
+          <p class="fragment slide-down">Funktionen "kommer ihåg" variablen och kan använda den även fast den är utom räckhåll för resten av koden.</p>
+          <p class="fragment slide-down">Skapas automatiskt när vi deklarerar en funktion i en annan funktion.</p>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Closures" class="reference">Ref: MDN - Closures</a>
+        </section>
+        <section>
+          <h3>Privata variabler</h3>
+          <p>Oftast används det för att skapa privata variabler i en funktion eller objekt</p>
+          <p class="fragment slide-down">Variabler som man döljer undan och kan styra hur de sätts och hämtas </p>
+          <p class="fragment slide-down"><strong>Principle of Least Privilege</strong></p>
+        </section>
+        <section>
+          <h3>IIFE</h3>
+          <p>Immediately-Invoked Function Expression</p>
+          <p class="fragment slide-down">Function expression som kallar på sig själv</p>
+          <pre class="fragment slide-down"><code class="hljs js">(x => x * 10)(2)</code></pre>
+          <pre class="fragment slide-down"><code class="hljs js">var invoked = (function(){
+  return "Hello IIFE!";
+})();</code></pre>
+        <p class="fragment slide-down">Observera paranteserna</p>
+        <a href="http://adripofjavascript.com/blog/drips/an-introduction-to-iffes-immediately-invoked-function-expressions.html" class="reference">Ref: A Drip of JavaScript: IIFE</a>
+        </section>
+        <section>
+          <p>IIFE används ofta för att skapa <em>closures</em> för att hålla privata variabler</p>
+          <pre><code class="hljs js">function foo(){
+  var bar = 'Private variable';
+  return function(){
+    console.log(bar);
+  }
+}</code></pre>
+<pre><code class="hljs js">var innerFunction = foo();
+innerFunction();</code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Sammanfattning</h1>
+        </section>
+        <section>
+          <p>Använd <strong>let</strong> när det behövs, tänk på att variabeln inte hoistas</p>
+          <p class="fragment slide-down">Använd <strong>const</strong> för konstanter och funktioner</p>
+          <p class="fragment slide-down">Använd <strong>=></strong> så ofta som möjligt men tänk på att det kan ställa till det. <em>this</em> är alltid bundet.</p> 
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      ]
+    });
+  </script>
+</body>
+</html>
