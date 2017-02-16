@@ -1,0 +1,311 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Prototypes</title>
+  <style>
+    .reveal p {
+      padding-bottom: 1rem;
+      border-bottom: 1px solid rgba(255,255,255, .3);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1>Objects & Prototypes</h1>
+          <em>Inheritance & shared properties</em>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><em>Repetition</em></h1>
+        </section>
+        <section>
+          <h3>Scope & Context</h3>
+          <p><em>Scope</em> kan vara <strong>Global</strong> eller <strong>Function</strong> </p>
+          <p><em>Context</em> är vilket objekt som vi refererar till</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">function newScope(){
+  //this is now a new scope that 
+  // we can declare variables in
+  if(true){
+    // no new scope
+  }
+}</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">function newScope(){
+  //this is now a new scope that we can 
+  //declare variables in
+  if(true){
+    let i = 0; //new scope
+  }
+}</code></pre>
+        </section>
+        <section>
+        <pre><code class="hljs js">const arrow = () => {
+  return "Arrow Function Expression";
+}</code></pre>
+<pre><code class="hljs js">const arrow = () => "Arrow"</code></pre>
+<p class="fragment fade-down">paranteser runt parametrarna om det saknas parametrar eller har flera parametrar</p>
+<p class="fragment fade-down">return och brackets kan ibland skippas</p>
+        </section>
+        <section>
+          <h3>Lexical scope</h3>
+          <p><strong> => </strong> binder till lexical scope</p>
+          <p class="fragment fade-down">Inte bra att använda: som objektmetod t.ex.</p>
+          <p class="fragment fade-down">Bra att använda: Anonyma funktioner</p>
+        </section>
+        <section>
+          <h3>Har du problem med en funktion som använder this, logga <em>this</em></h3>
+          <p class="fragment fade-down">Börja använda <strong>const</strong> och <strong>let</strong> där det behövs.</p>
+        </section>
+      </section>
+
+      <!-- Objects -->
+      <section>
+        <section>
+          <h1>Objects</h1>
+          <em>Property: value</em>
+        </section>
+        <section data-background="#2d2d2d" data-transition="zoom">
+          <h3>Objektets uppbyggnad</h3>
+          <pre><code class="hljs js">let country = {
+  country: "Brunei",
+  capital: "Bandar Seri Begawan",
+  population: 417200
+}</code></pre>
+        </section>
+        <section>
+          <h3>Property access</h3>
+          <blockquote>...the <code><strong>.</strong></code> operator requires an <code>Identifier</code> compatible property name after it, whereas the <code><strong>[".."]</strong></code> syntax can take basically any  </br ><em>UTF-8/unicode compatible string</em> as the name for the property.</blockquote>
+          <a style="bottom: 0;" href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch3.md#contents" class="reference">Ref: YDKJ - Contents</a>
+        </section>
+        <section data-background="#2d2d2d" data-transition="zoom">
+          <pre><code class="hljs js">var obj = {
+  bad-name! : "Really Bad Name",
+  goodName : "Really Good Name"
+};</code></pre>
+  <pre class="fragment grow"><code class="hljs js">obj["bad-name!"]</code></pre>
+  <pre class="fragment grow"><code class="hljs js">obj.goodName</code></pre>
+  <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch3.md#contents" class="reference">Ref: YDKJ - Contents</a>
+        </section>
+        <section>
+          <h3>Object properties</h3>
+          <p>Alla objekt beter sig likadant oberoende av innehåll.</p>
+          <p class="fragment fade-down">Vi kan iterera igenom objektet (loopa)</p>
+          <p class="fragment fade-down">Vi kan konvertera objektet till JSON t.ex.</p>
+          <p class="fragment fade-down">Vi kan <strong>INTE</strong> använda t.ex. <em>map</em></p>
+          <p class="fragment fade-down">Varför?</p>
+        </section>
+        <section>
+          <h3>Shared properties</h3>
+          <p>Varje funktion/objekt/variabel har inneboende egenskaper som är delade.</p>
+          <p class="fragment fade-down">Alla strängar kan man använda <strong>.substr()</strong> på</p>
+          <p class="fragment fade-down">Alla arrayer kan man använda <strong>.sort()</strong> på</p>
+          <p class="fragment fade-down">En <em>HTMLCollection</em> kan man inte använda <strong>.sort()</strong> på.</p>
+        </section>
+        <section>
+          <h3>Mother Object</h3>
+          <ul>
+            <li>Alla objekt ärver av <em>Object</em></li>
+            <li>Alla arrayer ärver av <em>Array</em></li>
+            <li>Alla nummer ärver av <em>Number</em></li>
+            <li>Alla strängar ärver av <em>String</em></li>
+            <li><em>Allt ärver från Object</em></li>
+          </ul>
+        </section>
+        <section>
+          <h3></h3>
+          <pre><code class="hljs js">let string = "Hello";</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">var string = new String("Hello");</code></pre>
+          <p class="fragment fade-down">Använd alltid den första</p>
+          <a href="http://stackoverflow.com/questions/5750656/whats-the-point-of-new-stringx-in-javascript#5750721" class="reference">Ref: SO - new String();</a>
+        </section>
+        <section>
+          <pre><code class="hljs js">let string = "I am a string"</code></pre>
+          <blockquote>The primitive value "I am a string" is <strong>not an object</strong>. To perform operations on it, such as checking its length, a <em>String object</em> is required.</blockquote>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch3.md#type" class="reference">Ref: YDKJ - Types</a>
+        </section>
+        <section>
+        <blockquote>Luckily, the language <em>automatically coerces</em> a "string" primitive to a String object when necessary, which means you almost never need to explicitly create the Object form.
+          </blockquote>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch3.md#type" class="reference">Ref: YDKJ - Types</a>
+        </section>
+        <section>
+          <code><strong>.defineProperty()</strong></code>
+          <pre><code class="hljs js">Object.defineProperty(obj, 'property', 
+          {options});</code></pre>
+          <p class="fragment fade-down">3 värden sätts implicit för varje property</p>
+          <p class="fragment fade-down"><em>writable</em>: går värdet att skriva över</p>
+          <p class="fragment fade-down"><em>enumerable</em>: går det att loopa igenom värdet</p>
+          <p class="fragment fade-down"><em>configurable</em>: om den går att ta bort</p>
+        </section>
+        <section>
+          <pre><code class="hljs js">var obj = { prop: "Hello!"};</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">Object.defineProperty( obj, 'prop', {
+  value: "Hello!",
+  enumerable: false,
+  writable: false,
+  configurable: false
+});</code></pre>
+<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty" class="reference">Ref: MDN - Object.defineProperty()</a>
+        </section>
+      </section>
+      <section>
+      <section>
+        <h1>Prototypes</h1>
+      </section>
+        <section>
+          <h3><strong>.prototype</strong> property</h3>
+          <p class="fragment fade-down">Alla Objekt har en <strong>.prototype</strong>-egenskap</p>
+          <p class="fragment fade-down">I den finns alla funktioner och värden som är kopplade till varje typ av objekt.</p>
+          <p class="fragment fade-down">Vi kan använda <strong>.sort()</strong> på varje array eftersom varje array har funktionen <strong>.sort()</strong> i egenskapen <em>.prototype</em></p>
+          <pre class="fragment fade-down"><code class="hljs js">Array.prototype.sort()</code></pre>
+        </section>
+        <section>
+          <h3>Prototypal Inheritance</h3>
+          <blockquote>if a property or a method is not found in the object itself, then there is an attempt to find this property/method in the prototype chain.</blockquote>
+          <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" class="reference">Ref: Js - The Core</a>
+        </section>
+        <section>
+          <h3>Prototypal Inheritance</h3>
+          <p>När ett objekt inte hittar en egenskap letar objektet vidare i prototypkedja tills den når <strong>null</strong></p>
+          <p class="fragment fade-down">Liknande som med scope. Hittas inte variabeln i <strong>function scope</strong> letar funktionen vidare i <strong>global scope</strong></p>
+          <pre class="fragment fade-down"><code class="hljs js">var a = {}</code></pre>
+          <p class="fragment fade-down"><strong class="fragment">a </strong><strong class="fragment"> --> Object</strong><strong class="fragment">--> null</strong></p>
+        </section>
+        <section>
+          <h3>Skapa objekt av andra objekt</h3>
+          <pre><code class="hljs js">var a = {};</code></pre>
+          <pre><code class="hljs js">var b = a;</code></pre>
+          <p class="fragment fade-down">Båda ärver av <strong>Object.prototype</strong></p>
+          <p class="fragment fade-down">Refererar till <em>samma objekt</em></p>
+          <p class="fragment fade-down">Detta är dock inte direkt <em>arv</em></p>
+        </section>
+        <section>
+          <h3><strong>Object.prototype</strong></h3>
+          <ul>
+            <li><em>Object.prototype.constructor()</em></li>
+            <li><em>Object.prototype.hasOwnProperty()</em></li>
+            <li><em>Object.prototype.isPrototypeOf()</em></li>
+            <li><em>Object.prototype.toString()</em></li>
+            <li>Buncha other stuff</li>
+          </ul>
+        </section>
+        <section>
+        <h3>Object.create()</h3>
+          <pre><code class="hljs js">var a = { x : 5 }</code></pre>
+          <p class="fragment fade-down">Vi skapar ett objekt med egenskapen x med värdet 5</p>
+          <pre><code class="hljs js">var b = Object.create(a)</code></pre> 
+          <p class="fragment fade-down">Vi skapar sedan ett objekt baserat på ett annat objekt. </p> 
+        <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md#you-dont-know-js-this--object-prototypes" class="reference">Ref: YDKJ - Prototypes</a>
+        </section>
+        <section>
+          <h3><strong>Constructor functions</strong></h3>
+          <pre><code class="hljs js">function Cat(name, type){
+  this.name = name;
+  this.type = type;
+}</code></pre>
+          <p class="fragment fade-down">Function som skapar objekt. Parametrarna sparas i den nya <em>kontexten</em></p>
+          <p class="fragment fade-down">En vanlig function. Om vi skulle kalla på funktionen som vanligt skulle <em>this</em> vara <strong>window</strong></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">var a = new Cat("Missy", "Burma");</code></pre>
+          <pre><code class="hljs js">{
+  name : "Missy",
+  type: "Burma"
+}</code></pre> 
+          <p class="fragment fade-down"><code>new måste användas för att ett nytt objekt ska skapas utifrån funktionen och att värderna ska bindas till kontexten.</code></p> 
+        </section>
+        <section>
+          <blockquote>
+            In other words, in JavaScript, it's most appropriate to say that a "constructor" is any function called with the new keyword in front of it.
+          </blockquote>
+          <a href="https://github.com/getify/You-Dont-Know-JS/blob/master/this%20%26%20object%20prototypes/ch5.md#constructor-or-call" class="reference">Ref: YDKJ - Constructor or call</a>
+        </section>
+        <section>
+          <h3>Cat.prototype.mjau()</h3>
+          <pre><code class="hljs js">Cat.prototype.mjau = function(){
+  console.log("Mjau I'm " + this.name);
+}</code></pre>
+<p class="fragment fade-down">Alla katter som skapas med <strong><code>new Cat()</code></strong> kommer att kunna mjaua</p>
+        </section>
+        <section>
+          <h3>new Obj():</h3>
+            <ul>
+              <li>create new Object() obj</li>
+              <li>set obj.__proto__ to Obj.prototype</li>
+              <li>return obj;</li>
+              <li>Object.create( Obj.prototype )</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Object.create(obj)</h3>
+          <ul>
+            <li>create new Object() obj</li>
+            <li>set obj.__proto__ to Test.prototype</li>
+            <li>return obj;</li>
+          </ul>
+        </section>
+        <section>
+        <blockquote>...obj.prototype is in general not the obj’s <strong><code>[[Prototype]]</code></strong>. The standard does not provide any way to retrieve the [[Prototype]] property from an object.</blockquote>
+          <a href="https://zeekat.nl/articles/constructors-considered-mildly-confusing.html" class="reference">Ref: constructors considered mildly confusing</a>
+        </section>
+        <section>
+          <h3><strong>Ett objekts egna värden</strong></h3>
+          <p>Allting ärvs automatiskt om värdet går att ärva.</p>
+          <p class="fragment fade-down">Prototypkedjan letas igenom tills den tar slut.</p>
+          <p class="fragment fade-down">Det betyder att vi kan få ut värden ur ett objekt som inte tillhör ett objekt</p>
+          <p class="fragment fade-down">Vare sig vi vill det eller inte.</p>
+        </section>
+        <section>
+          <h3><strong>for...in</strong></h3>
+          <pre><code class="hljs js">
+for(let prop in obj){
+  console.log(prop);
+}</code></pre>
+        <p class="fragment fade-down">for..in letar även igenom prototypkedjan vilket betyder att vi kan få ett <strong>false positive</strong></p>
+        <p class="fragment fade-down">for..of är ES6</p>
+        </section>
+        <section>
+          <h3>Övning</h3>
+          <p>Skapa objekt med <strong>Constructor</strong> och <strong>Object.create</strong></p>
+          <p>Finns på GitHub, snart.</p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      ]
+    });
+  </script>
+</body>
+</html>
