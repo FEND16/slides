@@ -1,0 +1,322 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>JavaScript Design Patterns</title>
+  <style>
+    .reveal h3 strong{
+      padding: 1rem;
+    }
+    .reveal strong {
+      padding: 0.5rem;
+    }
+    .reveal em{
+      padding: 0.5rem;
+    }
+    .reveal .w50{
+      width: 50%;
+    }
+    .reveal .reference{
+      left: 0;
+    }
+    .reveal .topsubject{
+      position:absolute;
+      top: 0;
+      right: 0;
+      font-size: 1.3rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1><em>JavaScript</em></br>
+            Design Patterns</h1>
+          </section>
+        </section>
+
+        <!-- REPETITION: PROTOTYPES -->
+        <section>
+          <section>
+            <h1>Prototyper</h1>
+          </section>
+          <section>
+            <h3><strong>[[Prototype]]</strong></h3>
+            <p>Varje objekt har en <em>prototyp</em>:</br>en egenskap som innehåller gemensamma funktioner och variabler för alla objekt som du skapar.</p>
+            <p class="fragment fade-down">Varje objekt ärver från <strong>Object</strong></p> 
+            <pre class="fragment fade-down w50"><code class="hljs js">var a = {}</code></pre>
+            <pre class="fragment fade-down w50"><code class="hljs js">a --> Object --> null</code></pre>
+          </section>
+          <section data-background="#2d2d2d">
+            <code>Object.create()</code>
+            <pre><code class="hljs js">var a = {};</code></pre>
+            <pre><code class="hljs js">var a = Object.create(Object.prototype);</code></pre>
+            <pre class="fragment fade-down"><code class="hljs js">var b = Object.create(null);</code></pre>
+            <p class="fragment fade-down">Om du vill ha ett helt tomt objekt</p>
+            <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Object/create" class="reference">Ref: Object.create();</a>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre class="fragment fade-down w50"><code class="hljs js">var a = {};</code></pre>
+            <pre class="fragment fade-down w50"><code class="hljs js">var b = Object.create(a)</code></pre>
+            <pre class="fragment fade-down w50"><code class="hljs js">b --> a --> Object --> null</code></pre>
+          </section>
+          <section data-background="#2d2d2d">
+            <pre class="w50"><code class="hljs js">var a = Object.create(null);</code></pre>
+            <pre class="fragment fade-down w50"><code class="hljs js">a --> null</code></pre>
+          </section>
+          <section>
+            <h3><strong>Function.[[prototype]]</strong></h3>
+            <pre><code class="hljs js">function logContent(){}</code></pre>
+            <pre><code class="hljs js">logContent --> Function --> Object --> null</code></pre>
+          </section>
+          <section>
+            <h3>Prototypal Inheritance</h3>
+            <blockquote>..if a property or a method is not found in the object itself, then there is an attempt to find this property/method in the prototype chain.</blockquote>
+            <a href="http://dmitrysoshnikov.com/ecmascript/javascript-the-core/" class="reference">Ref: Js - The Core</a>
+          </section>
+        </section>
+        <!-- DESIGN PATTERNS -->
+        <section>
+          <section>
+            <h1>Design Patterns</h1>
+          </section>
+          <section>
+            <blockquote>
+              A pattern is a <em>reusable solution</em> that can be applied to commonly occurring problems in software design - in our case - in writing JavaScript web applications.
+            </blockquote>
+            <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#whatisapattern" class="reference">Ref: What is a Design Pattern</a>
+          </section>
+          <section>
+            <h3>Vad är ett mönster?</h3>
+            <p><em>Problem:</em> Jag måste skapa jättemånga olika objekt som följer samma struktur.</p>
+            <pre class="fragment fade-down"><code class="hljs js">function Country(name, population){
+  this.name = name;
+  this.population;
+}</code></pre>  
+            <p class="fragment fade-down"><em>Lösning:</em> Jag skapar en funktion som skapar objektet åt mig.</p>
+          </section>
+          <section>
+            <p><em>Problem:</em> Jag måste gruppera ett antal funktioner som logiskt hört samman.</p>
+            <pre class="fragment fade-down"><code class="hljs js">var CountryDatabase = {
+  dataAboutCountries: [],
+  functionUsingTheData : function(){
+  }
+}
+function functionThatDoesNotUseTheData(){
+  //I'm a function that does another thing
+}</code></pre>
+          </section>
+          <section data-background="#282c35">
+            <img  src="http://i.imgur.com/ahgMVRI.jpg" alt="Pattern" />
+          </section>
+          <section>
+            <h3>Användningsområden</h3>
+            <p>När ska jag använda vad?</p>
+            <p style="line-height: 1.5" class="fragment fade-down"><em>"Ugh, hittar ingenting och jag har döpt massa grejer till samma sak så jag är osäker på vilken kod jag kallar på."</em></p>
+            <p class="fragment fade-down">Du behöver troligen strukturera din kod bättre, t.ex. med beprövade metoder.</p>
+            <p class="fragment fade-down">Samma som med allt annat: behöver inte följas strikt, de är bara hjälpmedel.</p>
+          </section>
+          <section>
+            <h3>Oberoende av språk</h3>
+            <p>Oberoende av programmeringsspråk har nästan alla samma sort problem: svårt att lägga upp koden.</p>
+            <p class="fragment fade-down">Du kommer stöta på samma sorts mönster i andra språk men med olika implementationer: språk som är lika varandra har liknande problem.</p>
+            <p class="fragment fade-down">Jag tar upp några JavaScript-implementationer som man kan använda sig av.</p>
+          </section>
+          <section>
+            <h3>Constructor Pattern</h3>
+            <pre><code class="hljs js">function Person(name, age, vegan){
+  this.name = name;
+  this.age = age;
+  this.vegan = vegan;
+}</code></pre>
+  <p class="fragment fade-down">Vi har ju flera olika sätt att skapa objekt, <strong>Constructor pattern</strong> är ett av dessa vi kan använda.</p>
+          </section>
+          <section>
+            <pre><code class="hljs js">Person.prototype.isVegan = function(){
+  return this.vegan;
+}
+Person.prototype.sayName = function(){
+  console.log("I'm " + this.name);
+}</code></pre>
+<p class="fragment fade-down">Det skapas ett <strong>prototype</strong>-objekt som är kopplat till varje nytt objekt.</p>
+<p class="fragment fade-down">Ärvda properties</p>
+          </section>
+          <section data-background="#2d2d2d">
+            <h3>Prototype Pattern</h3>
+            <pre><code class="hljs js">var prototype = {
+  prototypeFunction: function(){
+    console.log("Hello from prototype!");
+  }
+}
+var a = Object.create(prototype);</code></pre>
+          <p class="fragment fade-down">Vi skapar ett objekt baserat på ett annat objekt, ärver det första objektets funktioner.</p>
+          <p class="fragment fade-down">Behöver inte instansiera med <em>new</em></p>
+          </section>
+          <section>
+            <h3><strong>Constructor</strong> vs. <em>Prototype</em> Pattern</h3>
+            <p>Använd den som känns mest logisk för dig</p>
+            <p class="fragment fade-down">Med Object.create måste man skapa en egen constructor</p>
+            <p class="fragment fade-down">Människor som är <em>true</em> till JavaScript brukar förespråka att man inte ska använda <strong>new</strong> t.ex. </p>
+            <p class="fragment fade-down">Båda utför jobbet, välj den som gör jobbet enkelt för dig.</p>
+          </section>
+          <section>
+            <h1>Immedietly-invoked Function Expression</h1>
+            <em>IIFE</em>
+            <a href="https://en.wikipedia.org/wiki/Immediately-invoked_function_expression" class="reference">Ref: Wiki - IIFE</a>
+          </section>
+          <section>
+            <h3>IIFE</h3>
+            <pre ><code class="hljs js">(function(){
+  console.log("I run and log directly!");
+  console.log("I don't have to be called by you!");
+  console.log("Praise our robot overlords");
+})();</span></code></pre>
+          </section>
+          <section>
+            <h3>IIFE</h3>
+            <pre><code class="hljs js">(function(){
+  return "I get returned but not saved :(";
+})();</code></pre>
+            <pre class="fragment fade-down"><code class="hljs js">var saved = (function(){
+  return "Yay, I now exists in the variabel 'saved'";
+})();</code></pre>
+          </section>
+          <section>
+            <h3>IIFE</h3>
+            <p>Använd när du behöver skapa closures för att bevara variabler</p>
+            <p>Använd när du har kod som t.ex. ska kallas på automatisk: init-funktion</p>
+            <p><em>Funktionen körs direkt efter att den är skapad</em></p>
+            <p><em>Ligger den däremot inuti en annan funktion körs den inte förän den yttre funktionen kallas på</em></p>
+          </section>
+          <section data-background="#2d2d2d">
+            <h3>Parameters</h3>
+            <pre><code class="hljs js">(function(param){
+  console.log(param + ' So anonymous!');
+})("Wow!");
+//"Wow! So anonymous!"</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">(param => {
+  console.log(param + ' So anonymous!');
+})("Wow!");
+//"Wow! So anonymous!"</code></pre>
+          </section>
+          <section>
+            <h3>Module Pattern</h3>
+            <p><em>Problem:</em>All min kod är tillgänglig överallt. Jag vill följa Principle of Least Privilege</p>
+            <pre class="fragment fade-down"><code class="hljs js">var obj = {
+  importantProp: "importantValue"
+};</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">obj.importantProp = "";</code></pre>
+          <p class="fragment fade-down">Inte så viktig längre</p>
+          </section>
+          <section>
+            <pre><code class="hljs js">Object.defineProperty(obj, 'importantProp',{});</code></pre>
+          <p class="fragment fade-down">Omständligt och vi kanske vill ändra värdet i framtiden.</p>
+          <p class="fragment fade-down">Vi vill kunna skriva över värdet, men det ska inte kunna ske av misstag.</p>
+          </section>
+          <section data-background="#2d2d2d">
+            <h3>Module Pattern</h3>
+            <img class="fragment fade-down" style="z-index: 999; height: 200px; width: auto; position:absolute; top: 0; right: 0;" src="http://blacksportsonline.com/home/wp-content/uploads/2015/06/nick-young-confused-face.jpg" alt="Nick Young Confused">
+            <pre><code class="hljs js">var Module = (function(){
+  var importantProp = "importantValue";
+  return {
+    getImportantValue: function(){
+      return importantValue;
+    }
+  }
+})();</code></pre>
+          <p class="fragment fade-down">En IIFE som direkt returnerar ett objekt. <em>importantProp</em> finns bara i en closure</p>
+          </section>
+          <section>
+            <h1>Revealing Module Pattern</h1>
+          </section>
+          <section>
+            <h3>Revealing Module Pattern</h3>
+            <p><strong>Revealing module pattern</strong> är en variant på Module Pattern</p>
+            <p>Vi får här välja vilka funktioner och variabler som blir <em>revealed</em>: synliga för resten av koden</p>
+            <p>Privata funktioner kan heta något helt annat än publika funktioner</p>
+          </section>
+          <section data-background="#2d2d2d">
+          <img class="fragment fade-down" style="z-index: 999; height: 200px; width: auto; position:absolute; top: 0; right: 0;" src="http://blacksportsonline.com/home/wp-content/uploads/2015/06/nick-young-confused-face.jpg" alt="Nick Young Confused">
+          <img class="fragment fade-down" style="z-index: 999; height: 200px; width: auto; position:absolute; top: 40; right: 40;" src="http://blacksportsonline.com/home/wp-content/uploads/2015/06/nick-young-confused-face.jpg" alt="Nick Young Confused">
+          <img class="fragment fade-down" style="z-index: 999; height: 200px; width: auto; position:absolute; top: 80; right: 80;" src="http://blacksportsonline.com/home/wp-content/uploads/2015/06/nick-young-confused-face.jpg" alt="Nick Young Confused">
+          <img class="fragment fade-down" style="z-index: 999; height: 200px; width: auto; position:absolute; top: 120; right: 120;" src="http://blacksportsonline.com/home/wp-content/uploads/2015/06/nick-young-confused-face.jpg" alt="Nick Young Confused">
+            <pre><code class="hljs js" style="min-height: 450px;">var Module = (function(){
+  var importantProp = "importantValue";
+  var getImportantValue = function(){
+      return importantValue;
+  }
+  return {
+    getIt: getImportantValue
+  }
+})();</code></pre>
+<p class="fragment fade-down">I objektet som returneras så väljer vi vad vi ska returnera och efter vilket namn</p>
+          </section>
+          <section>
+            <h1>Namespaces</h1>
+          </section>
+          <section>
+            <blockquote>Namespaces can be considered a logical grouping of units of code under a unique identifier. </blockquote>
+            <pre><code class="hljs js">var namespace = {
+  prop: val
+}</code></pre>
+            <pre><code class="hljs js">namespace.prop === val</code></pre>
+          </section>
+          <section>
+            <blockquote>In JavaScript, they help us avoid <em>collisions</em> with other objects or variables in the global namespace. They're also extremely useful for helping <em>organize blocks of functionality</em> in a code-base so that it can be more easily referenced and used.</blockquote>
+            <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#detailnamespacing" class="reference">Ref: Namespacing Patterns</a>
+          </section>
+          <section>
+            <p>Koden vi arbetar med är inte alltid vår egen kod</p>
+            <p>Det är inte alltid lätt att få en överblick över vad som är deklarerat redan.</p>
+            <p class="fragment fade-down">När man använder bibliotek eller plugins t.ex.</p>
+          </section>
+          <section>
+            <blockquote>Namespacing any serious script or application is critical as it's important to <em>safeguard our code from breaking</em> in the event of another script on the page using the same variable or method names we are. </blockquote>
+            <a href="https://addyosmani.com/resources/essentialjsdesignpatterns/book/#detailnamespacing" class="reference">Ref: Namespacing Patterns</a>
+          </section>
+          <section>
+            <h3>Namspacing Pattern</h3>
+            <p><em>Object Literal</em>, <em>Module Pattern</em> och <em>Revealing Module Pattern</em> är olika mönster för att hantera namespaces</p>
+            <p><strong>Constructor</strong> & <strong>Protoypes</strong> är olika mönster för att skapa objekt</p>
+            <p class="fragment fade-down">Allt använder sig av objekt och prototyper, scope och context.</p>
+          </section>
+          <section>
+            <h3>Övning</h3>
+            <p>Implementera <em>Module Pattern</em> och <em>Revealing Module Pattern</em></p>
+          </section>
+        </section>
+
+
+
+      </div>
+    </div>
+    <!-- reveal.js scripts -->
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        transition: 'convex',
+        width: '80%',
+        height: '100%',
+        controls: true,
+        progress: true,
+        history: true,
+        keyboard: true,
+        overview: true,
+        center: true,
+        dependencies: [
+        { src: 'lib/js/classList.js',condition: function (){
+          return !document.body.classList;}},
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          ]
+        });
+      </script>
+    </body>
+    </html>
