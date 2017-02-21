@@ -1,0 +1,272 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <title>ES6 & ES6 Classes</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1><em>ES6 & ES6 Classes</em></h1>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><a href="Exploring ES6" style="color: white;">Exploring ES6</a></h1>
+          <h1><a href="https://github.com/DrkSephy/es6-cheatsheet" style="color: white;">ES6 Cheat Sheet</a></h1>
+          <h1><a href=""></a></h1>
+        </section>
+        <section>
+          <h3>Vad vi redan berört</h3>
+          <ul>
+            <li><strong>Arrow function => </strong></li>
+            <li><strong>const & let</strong></li>
+            <p>Tar nu upp några som jag tycker är användbara</p>
+          </ul>
+        </section>
+        <section>
+          <h3><em>Template Literals</em></h3>
+          <em>"Backticks"</em>
+          <p class="fragment fade-down">"Är det jQuery?"</p>
+          <p class="fragment fade-down">jQuery har inte patent på <em>$$$$</em></p>
+          <pre class="fragment fade-down"><code class="hljs js">var name = "Ronny";
+console.log(`Hi, my name is ${name}`);</code></pre>
+          <a href="http://exploringjs.com/es6/ch_template-literals.html" class="reference">Ref: Exploring ES6 - Template Literals</a>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>Template Literals</h3>
+          <img class="fragment fade-down" style="position: absolute; top: 0; right: -50; height: 200px; width: auto;" src="http://moore.se/frame/uploads/2012/12/santa-1024x768.jpg" alt="Tomten grav accent">
+          <img class="fragment fade-down" style="position: absolute; top: 0; left: -50; height: 200px; width: auto;" src="https://imganuncios.mitula.net/tomt_kolvik_2050134473883791738.jpg" alt="Tomten akut accent">
+          <p><em>Shift + ´</em>: Grav accent</p>
+          <pre class="fragment fade-down"><code class="hljs js">var a = 5;
+var b = 10;</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">console.log(`${a} + ${b} equals ${ a + b }`);
+//5 + 10 equals 15</code></pre>
+        <pre class="fragment fade-down"><code class="hljs js">var name = "Gnurufr";
+console.log(`I AM ${name.toUpperCase()}!!!!`);</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>Template literals</h3>
+          <p>Vi slipper oroa oss för att behöva escapea</p>
+          <pre><code class="hljs js">var text = " \"double quotes\"";</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">var text = `"double quotes"`;</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">var text = 'I'm a noob';</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">var text = `I'm a noob`;</code></pre>
+        </section>
+        <section>
+          <h3>Template literals</h3>
+          <p>Behåller newline <strong>\n</strong>, ny rad</p>
+          <pre><code class="hljs js">var html = `
+  <ul>
+    <li>Wowo this is great</li>
+    <li>Awesome</li>
+  </ul>`;</code></pre>
+  <p>Soft att skriva html-block.</p>
+        </section>
+        <section>
+          <h1><em>Destructuring</em></h1>
+          <a href="http://exploringjs.com/es6/ch_destructuring.html" class="reference">Ref: ExploringJS - Destructing</a>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">var obj = {
+          x: 100,
+          y: 100
+};</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">var x = obj.x;
+var y = obj.y;</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>ES6 Destructuring</h3>
+          <pre><code class="hljs js">var obj = {
+  x: 100,
+  y: 100
+}</code></pre>
+          <pre><code class="hljs js">var { x , y } = obj;</code></pre>
+        </section>
+        <section>
+          <h3>Destructuring</h3>
+          <p>När du vill plocka ut egenskaper eller värden från ett objekt eller array</p>
+          <p class="fragment fade-down">Tänk på att det är viktigt med positionen i arrayen:</p>
+          <pre><code class="hljs js">//Jumping over values
+var [x,,,,y] = array;</code></pre>
+          <a href="http://exploringjs.com/es6/ch_destructuring.html" class="reference">Ref: ExploringJS - Destructuring</a>
+        </section>
+        <section>
+          <h1><em>rest</em> &amp; <em>spread</em></h1>
+        </section>
+        <section>
+          <blockquote>
+            The spread syntax allows an expression to be expanded in places where multiple arguments/elements or variables are expected.
+          </blockquote>
+          <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator" class="reference">Ref: MDN - Spread Operator</a>
+        </section>
+        <section>
+          <h3>Rest operator</h3>
+          <p>Ser exakt ut som spread operator</p>
+          <p>Skillnaden är bara hur <em>...</em> används</p>
+          <p class="fragment fade-down">"Gör detta med resten av argumenten"</p>
+          <pre class="fragment fade-down"><code class="hljs js">function restFunction(a, b, ...rest){
+  console.log(a,b, rest);
+}</code></pre>
+          <a href="http://exploringjs.com/es6/ch_parameter-handling.html#sec_rest-parameters" class="reference">Ref: ExploringJS - Rest parameters</a>
+        </section>
+        <section>
+          <h3>Spread/rest</h3>
+          <blockquote>
+            The spread operator (...) looks exactly like the rest operator, but is used inside function calls and Array literals (not inside destructuring patterns).
+          </blockquote>
+          <a href="http://exploringjs.com/es6/ch_parameter-handling.html#sec_spread-operator">Ref: ExploringJS - Spread</a>
+        </section>
+        <section>
+          <p>I JavaScript kan vi skicka med fler eller färre argument än parametrar.</p>
+          <p class="fragment fade-down">De överiga argumenten kommer bara att struntas i. </p>
+          <pre><code class="hljs js">function add(a,b,c){
+  add a + b + c;
+}
+add(5,5); //Will work</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>Default parameters</h3>
+          <p>ES6 gör det även möjligt att skicka med default värden</p>
+          <pre><code class="hljs js">function add(x = 0, y = 2){
+  return x + y;
+}</code></pre>
+        <pre class="fragment fade-down"><code class="hljs js">add() //2</code></pre>
+        <pre class="fragment fade-down"><code class="hljs js">add(2) //4</code></pre>
+        <pre class="fragment fade-down"><code class="hljs js">add(2,8) // 10</code></pre>
+        </section>
+        
+      </section>
+      <!-- ES6 Classes -->
+      <section>
+        <section>
+          <h1><em>ES6 Classes</em></h1>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">//class keyword
+class Person{
+  //explicit constructor method
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+  }
+}</code></pre>
+        </section>
+        <section>
+          <h3><strong>class</strong></h3>
+          <p>Kan liknas vid Constructor Pattern</p>
+          <p>Måste alltid skrivas med <strong>class</strong></p>
+          <p class="fragment fade-down">Måste alltid skapas med <strong>new</strong></p>
+          <pre class="fragment fade-down"><code class="hljs js">var newPerson = new Person("Ronny", 52);</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>class methods</h3>
+          <pre><code style="min-height: 600px;" class="hljs js">class Person{
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+  }
+  getName(){
+    return this.name;
+  }
+  setName(newName){
+    this.name = newName;
+  }
+}</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>get & set</h3>
+          <pre class="fragment fade-down"><code style="min-height: 600px;" class="hljs js">class Person{
+  constructor(name, age){
+    this.name = name;
+    this.age = age;
+  }
+  get name(){
+    return this.name;
+  }
+  set name(newName){
+    this.name = newName;
+  }
+}</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">class Person{
+  set name(newName){
+    if(newName !== ''){
+      this.name = newName;
+    }
+    return 'You must supply a name!';
+  }
+}</code></pre>
+        </section>
+        <section>
+          <h3>ES6 Classes</h3>
+          <p>Tillför inget nytt egentligen</p>
+          <p><em>"Syntactical sugar"</p></em></p>
+          <p class="fragment fade-down">Ärver med <strong>extends</strong></p>
+          <p class="fragment fade-down">Den klassen man ärver ifrån kan kallas på med <strong>super</strong></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>ES6 Object method syntax</h3>
+          <pre><code class="hljs js">var obj = {
+  printStuff(){
+    console.log('Hey!')
+  }
+  printName(){
+    console.log('Hey again!');
+  }
+}</code></pre>
+        <p class="fragment fade-down">Objektets funktioner kan skrivas i stil med en klass metoder.</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>ES6 Object Shorthand</h3>
+          <pre><code class="hljs js">var name = "Gnurfur";
+var race = "Troll";
+var char = {
+  name: name,
+  race: race
+};</code></pre>
+        </section>
+        <section>
+  <h3>ES6 Object shorthand</h3>
+  <pre><code class="hljs js">var name = "Gnurfur";
+var race = "Troll";
+var char = {
+  name,
+  race
+};</code></pre>
+</section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      { src: 'plugin/zoom-js/zoom.js', async: true },
+      { src: 'plugin/notes/notes.js', async: true },
+      ]
+    });
+  </script>
+</body>
+</html>
