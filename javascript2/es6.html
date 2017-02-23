@@ -6,6 +6,13 @@
   <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
   <link rel="shortcut icon" type="image/png" href="favicon.png"/>
   <title>ES6 & ES6 Classes</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
 </head>
 <body>
   <div class="reveal">
@@ -149,6 +156,7 @@ add(5,5); //Will work</code></pre>
       <section>
         <section>
           <h1><em>ES6 Classes</em></h1>
+          <a href="http://exploringjs.com/es6/ch_classes.html" class="reference">Ref: ExploringJS - Classes</a>
         </section>
         <section data-background="#2d2d2d">
           <pre><code class="hljs js">//class keyword
@@ -169,7 +177,7 @@ class Person{
         </section>
         <section data-background="#2d2d2d">
           <h3>class methods</h3>
-          <pre><code style="min-height: 600px;" class="hljs js">class Person{
+          <pre><code style="min-height: 500px;" class="hljs js">class Person{
   constructor(name, age){
     this.name = name;
     this.age = age;
@@ -184,7 +192,7 @@ class Person{
         </section>
         <section data-background="#2d2d2d">
           <h3>get & set</h3>
-          <pre class="fragment fade-down"><code style="min-height: 600px;" class="hljs js">class Person{
+          <pre class="fragment fade-down"><code style="min-height: 500px;" class="hljs js">class Person{
   constructor(name, age){
     this.name = name;
     this.age = age;
@@ -235,7 +243,7 @@ var char = {
   race: race
 };</code></pre>
         </section>
-        <section>
+        <section data-background="#2d2d2d">
   <h3>ES6 Object shorthand</h3>
   <pre><code class="hljs js">var name = "Gnurfur";
 var race = "Troll";
@@ -254,6 +262,8 @@ var char = {
   <script>
     Reveal.initialize({
       transition: 'convex',
+      height: '100%',
+      width: '100%',
       controls: true,
       progress: true,
       history: true,
@@ -263,9 +273,7 @@ var char = {
       dependencies: [
       { src: 'lib/js/classList.js',condition: function (){
         return !document.body.classList;}},
-      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
-      { src: 'plugin/zoom-js/zoom.js', async: true },
-      { src: 'plugin/notes/notes.js', async: true },
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
       ]
     });
   </script>

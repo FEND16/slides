@@ -4,15 +4,13 @@
   <link rel="stylesheet" href="css/reveal.css">
   <link rel="stylesheet" href="css/theme/fend.css">
   <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
-  <style>
-    .reveal .reference{
-      font-size: 1rem;
-      color: #fff;
-      position: absolute;
-      bottom: -100;
-      left: -100;
-    }
-  </style>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
   <title>JavaScript 2 - Intro</title>
 </head>
 <body>
