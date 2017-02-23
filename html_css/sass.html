@@ -2,11 +2,17 @@
 <head>
 <!--   <base href="file:///Users/jesperorb/Dropbox/courses/fend16/slides/"> -->
   <base href="https://fend16.github.io/slides/">
-
   <link rel="stylesheet" href="css/reveal.css">
   <link rel="stylesheet" href="css/theme/custom.css">
   <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
   <link rel="stylesheet" href="css/custom.css">
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
 </head>
 <body>
   <div class="reveal">
