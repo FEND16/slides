@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <title>Node, npm &amp; Byggverktyg</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <!-- npm persian red -->
+      <section>
+        <section>
+          <h1>Node, <em>npm</em> &amp; Byggverktyg</h1>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3>Vad är <em>node</em></h3>
+          <blockquote>
+            <em>Node.js®</em> is a JavaScript runtime built on Chrome's V8 JavaScript engine. Node.js uses an <strong>event-driven, non-blocking I/O model</strong>that makes it lightweight and efficient. Node.js' package ecosystem, npm, is the largest ecosystem of open source libraries in the world.
+          </blockquote>
+          <a href="https://nodejs.org/en/" class="reference">Ref: Node.js</a>
+        </section>
+        <section>
+          <h3>Simplified</h3>
+          <blockquote>
+            Node gör vad din webbläsare kan göra med <em>JavaScript</em> fast utan din webbläsare
+          </blockquote>
+          <p class="fragment fade-down">Köra <em>JavaScript</em> från <strong>terminalen</strong></p>
+        </section>
+        <section>
+            <p>Inget visuellt, html/css</p>
+            <p>Bara JavaScript</p>
+            <p class="fragment fade-down">Ingen DOM</p>
+            <p class="fragment fade-down">Ingen <strong>index.html</strong> som kopplar samman våra filer</p>
+        </section>
+        <section>
+          <h3>Inte bara backend</h3>
+          <p><em>Node</em> kan användas för att skapa servrar men det är långt från allt</p>
+          <p class="fragment fade-down"><em>JavaScript</em> är ett språk som alla andra. <strong>npm</strong> är till för att ladda ner och hantera moduler, modulerna behöver dock inte vara ens JavaScript.
+          <p class="fragment fade-down">Vi måste inte heller göra massa backend-grejer, vi kan använda andra verktyg genom npm</p>
+        </section>
+        <section>
+          <h3><strong>Command Line Interface</strong></h3>
+          <p>När ett program har ett grafiskt gränssnitt snackar man om <em>GUI </em> (Graphical User Interface)</p>
+          <p>Vi använder oss utav flera olika program som körs från terminalen: <em>CLI </em> (Command Line Interface)</p>
+        </section>
+        <section data-background="#fff">
+          <img style="max-height: 650px" src="https://i.imgur.com/nsBW2lN.png" />
+        </section>
+        <section>
+          <pre><code class="hljs js">//main.js
+console.log("Hej!");</code></pre>
+          <pre><code class="hljs bash">node main.js
+# Hej!</code></pre>
+        </section>
+        <section>
+          <h3></h3>
+          <p>Vilken version spelar inte så stor roll : <strong>6/7</strong> är senaste</p>
+          <p class="fragment fade-down">Ni kommer få problem oavsett version. Paket som krånglar etc.</p>
+          <p class="fragment fade-down"><strong>Open source ecosystem</strong>: privatpersoner som underhåller en stor del av biblioteken gratis</p>
+        </section>
+        <section>
+          <h3><strong>require();</strong></h3>
+          <p>Istället för att länka samman allt i <strong>index.html</strong> importerar man kod med node-syntax</p>
+          <pre><code class="hljs js">var code = require("code.js");</code></pre>
+          <p class="fragment fade-down">Vi importerar oftast färdiga moduler/paket</p>
+        </section>
+        <section>
+          <h3>Måste vi lära oss node?</h3>
+          <p>Nej, det kan vara bra att kunna grunden men för det mesta använder vi oss av <em>node</em> p.g.a. <em>Node Package Manager</em> för att importera kod till våra projekt</p>
+          <p class="fragment fade-down">Standard för JavaScript-utvecklare att använda detta ekosystem för utveckling.</p>
+        </section>
+        <section>
+          <h3>Exempel på node-server</h3>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">//Minimum to create a node-server
+var http = require("http");
+var server = http.createServer(function(request, response) {
+  response.send('Hello');
+  response.end();
+});
+server.listen(4000);</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">//Minimum to create a node-server
+var http = require("http");
+var server = http.createServer(function(request, response) {
+  //We can also send files and read files
+  response.sendFile('index.html');
+  response.end();
+});
+server.listen(4000);</code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><em>npm</em></h1>
+        </section>
+        <section>
+          <blockquote>npm is the package manager for JavaScript.</blockquote>
+          <p class="fragment fade-down"><em>N</em>ode <em>P</em>ackage <em>M</em>anager</p>
+        </section>
+        <section>
+          <h3>Package/module/library</h3>
+          <p>Färdigpaketerad kod som har en specifik uppgift att utföra</p>
+          <p class="fragment fade-down">Ett paket kan t.ex. vara en funktion.</p>
+          <p class="fragment fade-down">Moduler bygger på andra moduler: <em>dependencies</em></p>
+        </section>
+        <section data-background="#fff">
+          <img src="https://i.imgur.com/Ip47IoS.png" style="max-height: 500px" alt="left-pad">
+          <p>freak scenario</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code style="min-height: 500px" class="hljs js">function leftpad (str, len, ch) {
+  str = String(str);
+  var i = -1;
+  if (!ch && ch !== 0) ch = ' ';
+  len = len - str.length;
+  while (++i < len) {
+    str = ch + str;
+  }
+  return str;
+}</code></pre>
+        </section>
+        <section>
+          <h3>Moduler</h3>
+          <p>node-moduler är verktyg som ska underlätta vårt kodande.</p>
+          <p>Saker som <em>autoprefixing</em>, <em>minification</em> och konvertering av <em>sass</em> kan allt göras via node-moduler.</p>
+          <p class="fragment fade-down">Och allting körs via terminalen, via node</p>
+        </section>
+        <section>
+          <h3><strong>npm init</strong></h3>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Byggverktyg</h1>
+        </section>
+        <section>
+          <h3>Byggverktyg</h3>
+          <p>Verktyg som ska hjälpa oss under utvecklingsprocessen</p>
+          <p>Sass är ett sådant verktyg kan man säga</p>
+          <p class="fragment fade-down">sass filer använd bara under utvecklingen, vi konverterar alltid till <em>css</em></p>
+          <pre class="fragment fade-down"><code class="hljs js">sass sass:css --watch</code></pre>
+        </section>
+        <section>
+          <h3>sass</h3>
+          <p>Hur installerade vid sass?</p>
+          <p>Installerade <strong>ruby</strong> en körmiljö för språket ruby</p>
+          <p class="fragment fade-down">Med ruby medföljer pakethanteraren <em>RubyGems</em></p>
+          <pre class="fragment fade-down"><code class="hljs bash">gem install sass</code></pre>
+        </section>
+        <section>
+          <h3>node-sass</h3>
+          <p>node har en port av sass också</p>
+          <pre><code class="hljs bash">npm install node-sass</code></pre>
+        </section>
+        <section>
+          <h3>Flera verktyg?</h3>
+          <p>Minifera filer t.ex</p>
+          <p>Ladda om webbläsaren vid uppdatering av css/js</p>
+
+        </section>
+        <section>
+          <h3>Om vi ska köra flera saker?</h3>
+          <p>Vi vill konvertera sass, minifera och autoprefixa våra filer</p>
+          <pre class="fragment fade-down"><code class="hljs bash">sass scss:css && minifier main.js main.min.js</code></pre>
+          <p class="fragment fade-down"><em>börjar bli rörigt</em> och tänk om vi ska göra 10 saker till?</p>
+          <p class="fragment fade-down">Alternativt lägga i <strong>npm start</strong></p>
+        </section>
+        <section>
+          <h1>Gulp</h1>
+        </section>
+        <section>
+          <h3>Gulp</h3>
+          <p>Gulp är en <strong>Task Runner</strong> som är skapat för att lösa vårt tidigare problem: automatisera uppgifter.</p>
+          <p>ett <strong>CLI</strong> som installeras via <em>npm</em> och körs genom <em>node</em></p>
+        </section>
+        <section data-background="#fff">
+          <img src="http://www.samuelklam.com/wp-content/uploads/2014/09/samuel-lam-gulp.png" alt="">
+        </section>
+        <section>
+          <img style="background: transparent;" src="https://frontendmasters.com/assets/webpack.png" alt="Webpack">
+          <img style="background: transparent;" src="http://mattbailey.io/images/dist/tumblr_inline_mjrobcZQpo1qz4rgp.png" alt="Grunt">
+          <img style="background: transparent;" src="https://camo.githubusercontent.com/a60ec6a86bf0d6b2c07ce2f39033a81443830f73/687474703a2f2f6272756e63682e696f2f696d616765732f7376672f6272756e63682e737667" alt="Brunch">
+        </section>
+        <section>
+          <h3>Skillnader</h3>
+          <p>Massa skillnader men huvuduppgiften är densamma, paketera dina filer och automatisera.</p>
+          <p class="fragment fade-down">Alla verktyg behöver alltid en <strong>config-fil</strong></p>
+          <p class="fragment fade-down">Vissa verktyg framhäver att de behöver mindre config.</p>
+          <p class="fragment fade-down">Gulp är ett verktyg jag upplever behöver <em>lite config och krånglar sällan på lättare uppgifter.</em></p>
+        </section>
+        <section>
+          <h1>Exempel</h1>
+        </section>
+        <section>
+          <h3>gulp-funktioner</h3>
+          <ul>
+            <li><em>gulp.task()</em>: uppgiften som ska köras</li>
+            <li><em>gulp.watch()</em>: som <strong>--watch</strong> vi kollar efter förändringar</li>
+            <li><em>gulp.src()</em>: våra ursprungliga filer som ska konverteras</li>
+            <li><em>gulp.dest()</em>: var våra färdiga filer ska hamna</li>
+          </ul>
+        </section>
+        <section>
+          <pre><code class="hljs js">gulp</code></pre>
+          <p>Om vi bara skriver <strong>gulp</strong> så kör gulp sin <em>'default'</em>-task.</p>
+          <p class="fragment fade-down">Har vi t.ex. en task som heter <strong>sass</strong> kan vi köra den såhär:</p>
+          <pre class="fragment fade-down"><code class="hljs js">gulp sass</code></pre>
+        </section>
+        <section>
+          <h3>Tasks länkade till varandra</h3>
+          <pre><code class="hljs js">gulp.task('default', ['sass'], ()=>{
+  //sass task runs when this task runs
+}</code></pre>
+        </section>
+        <section>
+          <h3><strong>node_modules</strong></h3>
+          <p>Alla moduler som ditt projekt använder måste vara installerade i <strong>node_modules</strong></p>
+          <pre class="fragment fade-down"><code class="hljs js">npm install   //Install all in package.json</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">npm install -g gulp   //Install globally</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">npm install --save-dev gulp //Install locally</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">npm install --save gulp //Also install locally</code></pre>
+        </section>
+        <section>
+          <h3>GÖR ALLTID</h3>
+          <p><strong>npm init</strong></p>
+          <p><strong>npm install --save-dev package_name</strong></p>
+          <p>Ditt projekt måste ha en <strong>package.json</strong></p>
+          <p>När du installerat en modul ska du ha en mapp som heter <strong>node_modules</strong></p>
+        </section>
+        <section>
+          <h3>Ingen direkt uppgift</h3>
+          <p><strong>06_node.md</strong> innehåller mer info om node/npm och vilka steg man ska ta vid användande av <em>npm</em></p>
+          <p><strong>gulp-boilerplate</strong> -repot innehåller en färdig config som ni kan använda.</p>
+          <p class="fragment fade-down">Se till så att ni har fått det att fungera.</p>
+        </section>
+      </section>
+
+
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '100%',
+      width: '100%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+</html>
