@@ -1,0 +1,233 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <title>DOM & jQuery</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1>JavaScript & jQuery</h1>
+        </section>
+        <section>
+          <h1>jQuery</h1>
+          <em>Write Less, Do More</em>
+        </section>
+        <section>
+          <h3>jQuery</h3>
+          <p>"jQuery är ute"</p>
+          <p>"Noobigt med jQuery"</p>
+          <p class="fragment fade-down">kan stämma, i många fall får jQuery oss att skriva dålig kod för man förlitar sig för mycket på biblioteket.</p>
+        </section>
+        <section>
+          <h3>jQuery</h3>
+          <p>Det är <strong>ok</strong> att använda jQuery</p>
+          <p>Bara du vet varför</p>
+          <p class="fragment fade-down">Det mesta kan enkelt lösas med <em>vanillaJS</em></p>
+          <p class="fragment fade-down">Tänker du: <em>"Oj här måste jag ha DOM-manipulation, bäst att slänga in jQuery"</em> är du fel ute.</p>
+        </section>
+        <section>
+          <h3>jQuery</h3>
+          <p>Har du specifika uppgifter som mycket lättare löses med jQuery än vanillaJS, använd jQuery.</p>
+          <p class="fragment fade-down">Det är inte ett dåligt bibliotek, men det får folk att skriva dålig kod av någon anledning.</p>
+        </section>
+        <section>
+          <h3><em>jQuery</em> är en samling funktioner som är wrappers runt vanliga JavaScript-funktioner.</h3>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code style="min-height: 700px" class="hljs js">function fadeIn(el) {
+  el.style.opacity = 0;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity + (new Date() - last) / 400;
+    last = +new Date();
+
+    if (+el.style.opacity < 1) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+
+  tick();
+}
+fadeIn(el);</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+         <pre><code class="hljs js w50">$(el).fadeIn();</code></pre>
+         <p class="fragment fade-down">Detta är ju dock bara ett <em>Interface</em> för tidigare kod</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><em>Användbara funktioner</em></h1>
+        </section>
+        <section>
+          <h1><em>Selector</em></h1>
+        </section>
+        <section>
+          <h3>Selector shorthand</h3>
+          <pre><code class="hljs js">$('#idSelector');</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">document.getElementById('#idSelector');</code></pre>
+          <p class="fragment fade-down">Mer lik <strong>querySelector</strong> då man kan välja nästlade element</p>
+          <pre class="fragment fade-down"><code class="hljs js">$('#idSelector .classSelector span')</code></pre>
+        </section>
+        <section>
+          <h3>Hitta element</h3>
+          <p>Hitta ett visst element av en viss typ</p>
+          <pre><code class="hljs js">$('.box').find('li')</code></pre>
+          <p class="fragment fade-down">Hitta förälder</p>
+          <pre class="fragment fade-down"><code class="hljs js">$('.box').parent() //Closest parent
+$('.box').parents() //All parents
+$('.box').children() //All children
+</code></pre>
+          <a href="https://api.jquery.com/find/" class="reference">Ref: jQuery API: find</a>
+        </section>
+        <section>
+          <h3>DOM Traversal</h3>
+          <p>All DOM-navigering som du kan tänka på finns som en shorthand i <em>jQuery</em></p>
+          <a style="color:#fff" href="https://api.jquery.com/">jQuery API</a>
+        </section>
+        <section>
+          <h3></h3>
+          <h3><a style="color: #fff" href="http://youmightnotneedjquery.com/"></a>You might not need jQuery</h3>
+        </section>
+        <section>
+          <h3><a style="color: #fff" href="https://github.com/you-dont-need/You-Dont-Need-Javascript"></a>You don't need JavaScript</h3>
+        </section>
+        <section>
+          <h1><em>AJAX</em></h1>
+          <p>Async JavaScript and XML</p>
+        </section>
+        <section>
+          <h3><em>$.ajax()</em></h3>
+          <p>Jag har använt jQuery för att dess wrapper till <strong>XMLHttpRequest</strong> är mycket enklare att använda</p>
+          <p class="fragment fade-down">Förser oss med ett antal <em>shorthand</em>-funktioner</p>
+          <p class="fragment fade-down"><em>$.ajax()</em></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">var ajaxRequest = new XMLHttpRequest();
+        ajaxRequest.onreadystatechange = function(){
+        if (ajaxRequest.readyState == 4 && ajaxRequest.status == 200){
+        console.log(ajaxRequest.responseText);
+      }
+    };
+    ajaxRequest.open('GET', 'http//localhost:3000', true);
+    ajaxRequest.send();</code></pre>
+        </section>
+        <section>
+          <p>Grundutförandet av ajax</p>
+          <pre><code class="hljs js">$.ajax({
+  method: 'GET',
+  url: 'http://localhost:3000',
+  success: (response) => {
+    return response; 
+  }
+})</code></pre>
+        <a href="http://api.jquery.com/jquery.ajax/" class="reference">Ref: jQuery API: $.ajax()</a>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">$.ajax({
+  method: 'GET',
+  url: 'http://localhost:3000',
+  success: (response) => { return response; },
+  error: (error) => { return error };
+})</code></pre>
+<a href="http://api.jquery.com/jquery.ajax/" class="reference">Ref: jQuery API: $.ajax()</a>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code style="min-height: 450px;" class="hljs js">$.ajax({
+  method: 'GET',
+  url: 'http://localhost:3000',
+  //When you send data
+  contentType: 'application/json; charset=utf-8', 
+  dataType: 'json' //What you expect to get
+  success: (response) => { return response; },
+  error: (error) => { return error };
+})</code></pre>
+<a href="http://api.jquery.com/jquery.ajax/" class="reference">Ref: jQuery API: $.ajax()</a>
+        </section>
+        <section>
+          <h3><em>$.ajax()</em> shorthand</h3>
+          <ul>
+            <li><em>$.get()</em>: <strong>method: 'GET'</strong></li>
+            <li><em>$.post()</em>: <strong>method: 'POST'</strong></li>
+            <li class="fragment slide-down"><em>$.load()</em>: använd ofta för att ladda in fragment av sidor dynamiskt, html chunks</li>
+            <li class="fragment slide-down"><em>$.getJSON()</em>: <strong>mehod: 'GET', dataType: 'json'</strong></li>
+          </ul>
+        </section>
+        <section>
+          <h3>callbacks</h3>
+          <p>Samtliga funktioner borde ha en callback</p>
+          <pre class="fragment fade-down"><code class="hljs js">$.get('http://localhost:3000', (response) => response);</code></pre>
+          <p class="fragment fade-down">Samtliga funktioner borde också ha någon sort error-handling</p>
+          <pre class="fragment fade-down"><code class="hljs js">error: (error) => return error;</code></pre>
+        </section>
+        <section>
+          <h3>Alternativ syntax</h3>
+          <pre><code class="hljs js">$.get('http://localhost:3000')
+  .done((response) => response)
+  .fail((error) => error)
+  .always(()=> 'After all this time?')</code></pre>
+  <a href="http://api.jquery.com/jquery.ajax/" class="reference">Ref: jQuery API: $.ajax()</a>
+        </section>
+        <section>
+          <h3>Men vad ska vi hämta för data?</h3>
+          <p class="fragment fade-down"><strong>http://fend16.azurewebsites.net/albums</strong>??? lol ne</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>json-server</h1>
+        </section>
+        <section>
+          <h3>Lokal utvecklingsserver</h3>
+          <p>json-server skapar en databas som sparar informationen i en <strong>.json</strong>-fil</p>
+          <p>Åtkomst via <strong>localhost</strong></p>
+          <p>Använder sig av <em>GET</em>, <em>POST</em>, <em>PATCH</em> oc <em>DELETE</em> som tidigare, ett ReST API.</p>
+        </section>
+        <section>
+          <h3><a style="color: #fff" href="https://github.com/typicode/json-server">https://github.com/typicode/json-server</a></h3>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '100%',
+      width: '100%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+</html>
