@@ -1,0 +1,488 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <title>AJAX, ASYNC & APIS</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1><em>AJAX & ReSt API</em></h1>
+        </section>
+      </section>
+
+
+      <!-- REST API -->
+      <section>
+        <section>
+          <h1><em>json-server</em></h1>
+          <p>Vad är det egentligen?</p>
+        </section>
+        <section>
+          <h3><em>json-server</em></h3>
+          <blockquote>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</blockquote>
+          <p class="fragment fade-down"><strong>ReST API?</strong></p>
+        </section>
+        <section>
+          <blockquote>
+            REST-compliant Web services allow requesting systems to access and manipulate <em>textual representations</em> of <em>Web resources</em> using a uniform and predefined set of stateless operations.
+          </blockquote>
+          <a href="https://en.wikipedia.org/wiki/Representational_state_transfer" class="reference">Ref: Wiki - REST</a>
+        </section>
+        <section>
+          <p>Roy Fielding</p>
+          <p><em>"Architectural Styles and the Design of Network-based Software Architectures"</em></p>
+          <em><a href="https://www.ics.uci.edu/~fielding/pubs/dissertation/top.htm">Dissertation @ UNIVERSITY OF CALIFORNIA</a></em>
+        </section>
+        <section>
+          <p><em>There are six guiding constraints that define a RESTful system</em></p>
+          <p>Web service APIs that adhere to the REST architectural constraints are called RESTful APIs</p>
+          <p>REST är varken en standard eller ett protokoll</p>
+          <a href="http://restfulapi.net/" class="reference">Ref: restfulapi.net</a>
+        </section>
+        <section>
+          <blockquote>
+            In simplest words, in the REST architectural style, data and functionality are considered resources and are accessed using Uniform Resource Identifiers (URIs). 
+          </blockquote>
+          <a href="http://restfulapi.net" class="reference">Ref: restfulapi.net</a>
+        </section>
+        <section>
+          <h3>Stateless</h3>
+          <blockquote>The client–server communication is constrained by no client context being stored on the server between requests.</blockquote>
+          <p class="fragment fade-down">Alla <em>requests</em> sker isolerade från varandra.</p>
+          <p class="fragment fade-down">Servern behöver inte ha någon information från dig: användaren.</p>
+        </section>
+        <section>
+          <h3>Representational</h3>
+          <p>En resurs kan identifieras med en <strong>URL</strong>. Resursen som användaren ser behöver dock inte vara av samma format som lagras på servern.</p>
+          <p class="fragment fade-down">På samma sätt som du hämtar informationen kan du även manipulera informationen och lagra ny information. All metadata för att göra detta har du redan.</p>
+        </section>
+        <section>
+          <blockquote>A REST API should be entered with no prior knowledge beyond the initial URI (bookmark) and set of standardized media types that are appropriate for the intended audience (i.e., expected to be understood by any client that might use the API).</blockquote>
+          <a href="http://restfulapi.net" class="reference">Ref: restfulapi.net</a>
+
+        </section>
+        <section>
+          <p>Vi vet hur vi hämtar alla filmer</p>
+          <pre><code class="hljs http">GET
+http://localhost:3000/movies</code></pre>
+<p class="fragment fade-down">Vi vet också nu hur vi får en film</p>
+<pre class="fragment fade-down"><code class="hljs http">GET
+http://localhost:3000/movies/1</code></pre>
+        </section>
+        <section>
+          <p>Med den informationen vet vi även hur vi skapar och uppdaterar filmer</p>
+          <pre class="fragment fade-down"><code class="hljs http">POST
+http://localhost:3000/movies</code></pre>
+<pre class="fragment fade-down"><code class="hljs http">PATCH
+http//localhost:3000/movies/1</code></pre>
+        </section>
+        <section>
+          <h3><strong>URL</strong> queries</h3>
+        </section>
+        <section>
+            <p>Om APIt är kodat rätt så kan vi använda <strong>URL</strong> queries</p>
+            <img src="https://i.imgur.com/KutFp2q.png" alt="URL">
+            <p class="fragment fade-down">Separeras från resten av URLn med frågetecken <em>?</em></p>
+            <img class="fragment fade-down" src="https://i.imgur.com/oCs3yq2.png" alt="Google search">
+        </section>
+        <section>
+          <pre><code class="hljs http">GET /movies?title=seven
+</code></pre> 
+        <p class="fragment fade-down">queries relaterade till <strong>json-server</strong></p>
+        <pre class="fragment fade-down"><code class="hljs http">GET /movies?_sort=rating&_order=DESC</code></pre>
+        <p class="fragment fade-down">Får tillbaka resultat sorterat på <em>rating</em> och ordnat från <em>hösta till lägsta</em> (om rating inte är en array)</p>
+        </section>
+        <section>
+          <h3><strong>API key</strong></h3>
+          <p>Man behöver oftast en unik nyckel så man inte missbrukar APIt.</p>
+          <p class="fragment fade-down">Nyckeln är en del av query, kan ibland skickas som header.</p>
+          <p class="fragment fade-down"></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs http">https://api.github.com/orgs/FEND16/repos?sort=pushed</code></pre>
+          <p class="fragment fade-down">Hämtar alla repos sorterar efter senast pushad</p>
+          <pre class="fragment fade-down"><code class="hljs http">http://api.openweathermap.org/data/2.5/group?
+appid=b3d5b9f4fc8a&id=2666199</code></pre>
+          <p class="fragment fade-down"><em>ID</em> i det här fallet är det unika idt för staden Uppsala</p>
+          <p class="fragment fade-down"><em>&</em> separerar de olika argumenten</p>
+        </section>
+        <section>
+          <h5>Det finns ingen standard för att strukuturera sitt API men de flesta följer ändå samma <em>design principles</em></h5>
+          <p class="fragment fade-down">Ni borde kunna använda de flesta APIer</p>
+        </section>
+      </section>
+      
+
+      <!-- ASYNC JAVASCRIPT -->
+      <section>
+        <section>
+          <h1><em>Sync vs. Async JavaScript</em></h1>
+        </section>
+        <section>
+            <p>Du står i kö.</p>
+            <p class="fragment fade-down">Din polare bestämmer sig för att springa iväg <br/>och köpa något att äta i kön.</p>
+            <p class="fragment fade-down">Du behåller platsen i kön.</p>
+            <p class="fragment fade-down">Polaren kommer tillbaka med käket och höjer stämningen rejält.</p>
+            <p class="fragment fade-down"><strong>Så funkar asynkront JavaScript</strong></p>
+        </section>
+        <section>
+          <p>men...</p>
+          <p class="fragment fade-down">Du vet inte om du kommer att stå kvar i kön</p>
+          <p class="fragment fade-down">Kön kanske plötsligt rör sig snabbt och du är inne.</p>
+          <p class="fragment fade-down">Polaren kanske chansar ändå</p>
+          <p class="fragment fade-down"><strong>I JavaScript chansar vi inte för då går det garanterat åt helvete</strong></p>
+        </section>
+        <section>
+          <h3><strong>blocking code</strong></h3>
+          <p>Koden läses typ uppifrån och ner</p>
+          <pre class="fragment fade-down"><code class="hljs js">//Can take forever
+for(let i = 0; i < 100000000000000; i++){}</code></pre>
+          <p class="fragment fade-down">Har du en fet loop kommer den att blockera resterande kod</p>
+          <p class="fragment fade-down">Vi kan garantera att kod körs som vi vill men vi får långsammare kod.</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3><em>call stack</em></h3>
+          <pre><code class="hljs js">function foo(){
+  return "Pffft!"; //remove from stack
+}
+function bar(){
+  foo();
+}</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">bar();</code></pre>
+        <div class="fragment fade-down" style="position: absolute; 
+            top: 100; 
+            right: 50; 
+            height: 400px; 
+            width: 300px; 
+            background-color: #eee; 
+            border-radius: 10px;">
+          <p style="color: white; background-color: #555" class="fragment fade-down">call stack</p>
+          <p style="color: #555" class="fragment fade-down">bar();</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+        </div>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3><em>call stack</em></h3>
+          <pre><code class="hljs js">
+//Calls itself
+function foo(){
+  foo(); //Add to stack
+}</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">foo();</code></pre>
+        <div class="fragment fade-down" style="position: absolute; 
+            top: 100; 
+            right: 50; 
+            height: 400px; 
+            width: 300px; 
+            background-color: #eee; 
+            border-radius: 10px;">
+          <p style="color: white; background-color: #555" class="fragment fade-down">call stack</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+          <p style="color: #555" class="fragment fade-down">foo();</p>
+        </div>
+        <div class="fragment fade-left" style="position: absolute; display: flex; justify-content: center; align-items: center; top:0; left: 0; width: 100%; height: 100%; background-color: #2d2d2d">
+          <h1><em>STACK OVERFLOW</em></h1>
+        </div>
+        </section>
+        <section>
+          <h3><strong>non blocking code</strong></h3>
+          <p><em>AJAX</em> & <strong>setTimout()</strong></p>
+          <p class="fragment fade-down">Funktioner eller kodblock som inte blockerar <em>call stack</em></p>
+          <p class="fragment fade-down">I princip placeras dessa funktioner i en annan stack som hanteras av <em>event loop</em></p>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+          <pre><code class="hljs js">//non blocking
+console.log('Starting Sequence!');
+
+setTimeout(function(){
+  console.log('Hello from timeout!');
+}, 250);
+
+console.log('Ending Sequence!');</code></pre>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+          <pre><code class="hljs js">//non blocking
+console.log('Starting Sequence!');
+
+setTimeout(function(){
+  console.log('Hello from timeout!');
+}, 0); //No timeout, 0 milliseconds!
+
+console.log('Ending Sequence!');</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+        <p class="fragment fade-down">Vad kommer att skrivas ut?</p>
+          <pre><code style="min-height: 450px" class="hljs js">
+//loop 6 times
+for(var i = 1; i <= 5; i++) {
+    //Increase the timeout for each loop
+    //and print the value
+    setTimeout(function() {
+      console.log(i);
+    },i);
+}</code></pre>  
+        <pre class="fragment fade-down"><code class="hljs js">6 6 6 6 6 6  //¯\_(ツ)_/¯</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">for(var i = 1; i <= 5; i++) {
+    (function(i) {
+        setTimeout(function(){
+         console.log(i); 
+      }, i);
+    })(i);
+}</code></pre>
+  <pre class="fragment fade-down"><code class="hljs js">//¯\_(ツ)_/¯</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+        <p>Eller strunta i att skapa funktioner i loopar</p>
+          <pre><code class="hljs js">function setDelay(i) {
+  setTimeout(function(){
+    console.log(i);
+  }, i);
+}</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">for (var i = 0; i <= 5; ++i) {
+  setDelay(i);
+}</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">for(let i = 0; i <=5; i++){
+  setTimeout(function(){
+    console.log(i);
+  },i)
+}</code></pre>
+        <p class="fragment fade-down">let skapar <em>block scope</em> och då behålls värdet för varje iteration och ökas</p>
+        </section>
+        <section data-background-image="http://i.imgur.com/7dn74Nj.gif">
+          
+        </section>
+        <section>
+          <div style="float: left; background-color: white; height: 400px; width: 300px; border-radius: 10px;">
+            <strong>Call stack</strong>
+            <p style="color: #555">foo();</p>
+            <p style="color: #555">bar();</p>
+          </div>
+          <div style="float: right; background-color: white; height: 400px; width: 300px; border-radius: 10px;">
+            <strong>Event loop</strong>
+            <p style="color: #555">setTimeout();</p>
+            <p style="color: #555">setTimeout();</p>
+            <p style="color: #555">setTimeout();</p>
+            <p style="color: #555">setTimeout();</p>     
+          </div>
+          <p class="fragment fade-down">Event loopen kollar först om call stack är tom eller inte</p>
+          <p class="fragment fade-down">Händelserna i högra kolumnen pushas i det här fallet efter att loopen har kört klart då <em>i == 6</em></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">setTimeout(function(){
+  console.log('Hello from timeout!');
+}, 0); //No timeout, 0 milliseconds!</code></pre>
+<p class="fragment fade-down">Oberoende av tid som sätts så kommer koden att</br/> först hanteras av <em>event loop</em> sedan läggas till i <em>call stack</em></p>
+<p class="fragment fade-down"><em>Async alltid</em></p>
+        </section>
+        <section>
+          <p><em style="padding: 1rem;"><a href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">Philip Roberts: What the heck is the event loop anyway</a></em></p>
+          <p><em style="padding: 1rem;"><a style="color: #555" href="https://www.youtube.com/watch?v=8aGhZQkoFbQ">https://www.youtube.com/watch?v=8aGhZQkoFbQ</a></em></p>
+        </section>
+        <section>
+          <h3><em>Detta gäller alla AJAX requests</em></h3>
+        </section>
+      </section>
+        
+
+       <!-- PROMISES --> 
+      <section>
+        <section>
+          <h1><em>Promises</em></h1>
+        </section>
+        <section>
+          <blockquote><strong>fetch()</strong> allows you to make network requests similar to <strong>XMLHttpRequest</strong>. The main difference is that the Fetch API uses <em>Promises</em>, which enables a simpler and cleaner API, avoiding callback hell and having to remember the complex API of XMLHttpRequest.</blockquote>
+          <a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch" class="reference">Ref: Google Dev: 
+Introduction to fetch()</a>
+        </section>
+
+        <section data-background-image="https://media.giphy.com/media/tVWChhzgWdTzO/giphy.gif">
+          
+        </section>
+        <section>
+          <blockquote>
+            The Promise object is used for <em>asynchronous</em> computations. A Promise represents a value which <strong>may be available now, or in the future, or never.</strong>
+          </blockquote>
+          <p class="fragment fade-down">Wrappar vårt värde i ett <em>Promise object</em></p>
+          <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="reference">Ref: MDN - Promises</a>
+        </section>
+        <section>
+          <ul>
+            <li><em>pending</em>: initial state, not fulfilled or rejected.</li>
+            <li><em>fulfilled</em>: meaning that the operation completed successfully.</li>
+           <li><em>rejected</em>: meaning that the operation failed.</li>    
+          </ul>
+          <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="reference">Ref: MDN - Promises</a>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+          <pre><code class="hljs js">//Create new promise that will resolve after 250ms
+new Promise(function(resolve, reject){
+  //Make async "request"
+  setTimeout(function(){
+        //Resolve promise after 250ms
+        resolve("Success!");
+    }, 250);
+}</code></pre>
+        <p class="fragment fade-down"><em>async</em> men fortf. inget AJAX inblandat</p>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+        <pre><code class="hljs js">//Create new promise that will reject after 250ms
+new Promise(function(resolve, reject){
+  setTimeout(function(){
+        //reject promise after 250ms
+        reject("Rejection your onion");
+  }, 250);
+}</code></pre>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+          <pre><code style="min-height: 500px" class="hljs js">var promise = new Promise(function(resolve, reject) {
+  // do async stuff, ajax?
+
+  if (status == 200) {
+    resolve(response);
+  }
+  else {
+    reject(Error("So error! So much!"));
+  }
+});</code></pre>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+          <pre><code class="hljs js">promise.then(function(response){
+  console.log(response)
+  }, function(error){
+    console.log(error);
+}</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>fetch()</h3>
+          <p>fetch returnerar ett promise object</p>
+          <pre><code class="hljs js">fetch('get.com').then(res => res.json());</code></pre>
+          <p class="fragment fade-down"><em>"thenable"</em> om vi ska använda värdet måste vi plocka värdet från objektet</p>
+          <pre class="fragment fade-down"><code class="hljs js">var p = fetch('get.com').then(res => res.json());</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">p.then(data => console.log(data));</code></pre>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">$.ajax({
+  url: "get.com",
+  success: (response) => {response},
+  error: (err) => {error}
+})</code></pre>
+<p class="fragment fade-down">Hanterar både lyckad request samt misslyckad</p>
+        </section>
+        <section data-background="#2d2d2d">
+        <p>Alternativ error-hantering</p>
+          <pre><code class="hljs js">$.ajax("get.com")
+    .done(function() {
+        console.log("OKELDOKELI");
+    }).fail(function() {
+        console.log("WRONG");
+    });</code></pre>
+        </section>
+        <section>
+        <p>Error handling är rätt lik <em>jQuery</em></p>
+        <pre><code class="hljs js">fetch('get.com')
+  .then(res => res.json())
+  .catch(error => error);</code></pre>
+        <p class="fragment fade-down">Om <em>.then()</em> inte lyckas så går koden vidare till <em>.catch()</em></p>
+        </section>
+        <section>
+          <h3>Läs mer</h3>
+          <p><em style="padding: 1rem"><a href="https://www.tjvantoll.com/2015/09/13/fetch-and-errors/">https://www.tjvantoll.com/2015/09/13/fetch-and-errors/</a></em></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <h3>Promise.all()</h3>
+          <pre><code class="hljs js">//AJAX then convert to json
+var a = fetch('get.com/1').then(res => res.json());</code></pre>
+          <pre><code class="hljs js">var a = fetch('get.com/2').then(res => res.json());</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">//Resolve all promises at once
+Promise.all([a,b]).then(data => console.log(data);</code></pre>
+        </section>
+        <section>
+          <h3>Läs mer</h3>
+          <p><em><a href="https://ponyfoo.com/articles/es6-promises-in-depth">PonyFoo: Promises in Depth</a></em></p>
+          <p><em><a href="https://davidwalsh.name/promises">David Walsh: Promises</a></em></p>
+          <p><em><a href="https://bevacqua.github.io/promisees/">Promisees: Promise Visualisation</a></em></p>
+          <p><em><a href="http://exploringjs.com/es6/ch_promises.html">ExploringJS - Promises</a></em></p>
+          <p><em><a href="https://github.com/mdn/js-examples/blob/master/promises-test/index.html">MDN example: XMLHttpRequest with Promise</a></em></p>
+        </section>
+        <section>
+          <h3>The next big thing: async/await</h3>
+          <h3><em><a href="http://thecodebarbarian.com/80-20-guide-to-async-await-in-node.js.html">Code Barbarian: Guide to async/await</a></em></h3>
+          <h3><em><a href="https://www.youtube.com/watch?v=PvZdTZ1Nl5o">Youtube: Chrome Dev Summit (12 min in)</a></em></h3>
+          <h3><em><a href="https://ponyfoo.com/articles/understanding-javascript-async-await">PonyFoo: Async/await</a></em></h3>
+          
+        </section>
+        <section data-background="#2d2d2d">
+            <pre><code class="hljs js">async load() {
+            let response = await fetch('get.com');
+            return await response.text();}</code></pre>
+            <pre class="fragment fade-down"><code class="hljs js">load().then(data => console.log(data));</code></pre>
+            <p class="fragment fade-down">Heal funktionen returnerar ett <em>Promise</em></p>
+          </section>
+      </section>
+      <section>
+        <section>
+          <h1><em>Inlämningsuppgiften</em></h1>
+        </section>
+        <section>
+          <h3>Arbetsprocess</h3>
+          <ul>
+            <li class="fragment fade-down">Ha ett syfte, kan din applikation lösa något problem du har?</li>
+            <li class="fragment fade-down">Vilka APIer ska jag använda för att lösa problemet?</li>
+            <li class="fragment fade-down">Sätt upp en plan: grundläggande funktionalitet</li>
+            <li class="fragment fade-down">Skriv upp en lista på vad applikationen ska kunna göra</li>
+            <li class="fragment fade-down">Lägg upp en enklare wireframe</li>
+            <li class="fragment fade-down">Skriv upp allting kring arbetet eftersom det ska sedan presenteras, dels i <strong>README</strong> och för mig</li>
+          </ul>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '100%',
+      width: '100%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+      ]
+    });
+  </script>
+</body>
+</html>
