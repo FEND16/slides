@@ -1,0 +1,515 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/fend.css">
+  <link rel="stylesheet" href="lib/css/tomorrow-night-eighties.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <title>JavaScript</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section data-transition="zoom">
+          <h1><em>JavaScript</em></h1>
+          <p><strong>Eller: hur jag lärde mig massa konstiga termer och blev hipp</strong></p>
+          <em>Eller: korvstoppning</em>
+        </section>
+        <section data-background-image="https://www.ypulse.com/uploads/default/WhiteGuyBlinkingMAIN.gif" data-transition="zoom">
+          <p><em>Class Inheritance</em></p>
+          <p><em>Prototypal Inheritance</em></p>
+          <p><em>Pseudo-classical Inheritance</em></p>
+          <p><em>Delegation</em></p>
+          <p><em>Composition</em></p>
+          <p><em>Constructor</em></p>
+          <p><em>ES6 class</em></p>
+        </section>
+        <section data-background-image="https://media.tenor.co/images/fb3f2d1e814190100a4ae401b1660d5b/tenor.gif" data-transition="zoom">
+          <p><em>Design patterns</em></p>
+          <p><em>Module</em></p>
+          <p><em>Revealing Module</em></p>
+          <p><em>Factory</em></p>
+          <p><em>Prototype</em></p>
+          <p><em>Object.assign({})</em></p>
+          <p><em>Object.create({})</em></p>
+          <p><em>new</em></p>
+        </section>
+        <section data-background-image="http://i.imgur.com/LsItP.gif" data-transition="zoom">
+          <p><em>RESTful</em></p>
+          <p><em>Separation of Concern</em></p>
+          <p><em>DRY</em></p>
+          <p><em>Single Responsibility Principle</em></p>
+          <p><em>Async event loop</em></p>
+          <p><em>Call stack</em></p>
+        </section>
+        <section data-background-image="http://i.imgur.com/0GEgv.gif">
+          <p><em>Imperative</em></p>
+          <p><em>Declarative</em></p>
+          <p><em>Functional</em></p>
+          <p><em>Object oriented</em></p>
+          <p><em>Procedural</em></p>
+        </section>
+        <section data-background-image="http://www.reactiongifs.com/r/2013/10/tim-and-eric-mind-blown.gif">
+          <p><em>node</em></p>
+          <p><em>npm</em></p>
+          <p><em>gulp</em></p>
+          <p><em>webpack</em></p>
+          <p><em>yarn</em></p>
+          <p><em>bower</em></p>
+        </section>
+        <section>
+          <p class="fragment fade-down">Intervjumaterial?</p>
+          <p class="fragment fade-down">Områden att fördjupa sig i</p>
+        </section>
+        <section>
+          <p>Utgår ifrån:</p>
+          <p><em style="padding: 1rem"><a href="https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95#.2e1pscshy">10 interview questions every JavaScript Developer Should Know  </a></em></p>
+          <p>Heavly opinionated</p>
+          <p class="fragment fade-down">Snubben vill ju såklart kränga böcker och kurser</p>
+        </section>
+        <section>
+          <h3>Table of content</h3>
+         <p> <em><a href="https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95#.2e1pscshy">10 Interview questions</a></em></p>
+          <p><em><a href="https://www.youtube.com/watch?v=wfMtDGfHWpA">Funfunfunctions - Composition > Inheritance @ YouTube</a></em><p>
+          <p><em><a href="http://www.datchley.name/understanding-prototypes-delegation-composition/">Dave Atchley - Understanding Prototypes, Delegation & Composition</a></em></p>
+          <p><em><a href="https://en.wikipedia.org/wiki/Comparison_of_programming_paradigms">Wiki: Comparison of Programming Paradigms</a></em> </p>
+          <p><em><a href="https://medium.freecodecamp.com/making-sense-of-front-end-build-tools-3a1b3a87043b#.6sphj73gr">Making Sense of Front end build tools</a></em></p>
+          <p><em><a href="http://todomvc.com/">Todomvc.com</a></em></p>
+          <p><em><a href="https://github.com/tastejs/todomvc/tree/gh-pages/examples/vanilla-es6">Vanilla MVC Implementation</a></em></p>
+        </section>
+      </section>
+
+      <!--Programming Paradigms -->
+      <section>
+        <section>
+          <h1><em>Programming Paradigms</em></h1>
+        </section>
+        <section>
+          <blockquote>
+            <em>Programming paradigms</em> are a way to classify programming languages according to the style of computer programming
+          </blockquote>
+          <a href="https://en.wikipedia.org/wiki/Programming_paradigm" class="reference">Ref: Wiki - Programming Paradigm</a>
+        </section>
+        <section>
+          <p><strong>Imperative</strong> programming</p>
+        </section>
+        <section>
+          <p><strong>Imperativ</strong> programmering fokuserar på <em>HUR</em> programmeringen sker.</p>
+          <p class="fragment fade-down">Vi definierar exakt vad som ska hända och när det ska hända.</p>
+          <a href="https://en.wikipedia.org/wiki/Imperative_programming" class="reference">Ref: Wiki - Imperative</a>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">sum = 0;
+for(let i = 0; array.length; i++){
+  sum += array[i];
+}
+console.log(sum)</code></pre>
+        <p class="fragment fade-down">Vi säger exakt vilka steg som ska tas för att loopa igenom arrayen.</p>
+        <p class="fragment fade-down"><em>Ta värde på index i, lägg till det i sum etc.</em></p>
+        </section>
+        <section>
+          <p><strong>Declarative</strong> programming</p>
+        </section>
+        <section>
+          <p><strong>Deklarativ</strong> programmering fokuserar på <em>VAD</em> koden ska göra.</p>
+          <p class="fragment fade-down">Vi beskriver övergripande vad som ska hända, men inte specifikt hur programmet ska göra det.</p>
+          <a href="https://en.wikipedia.org/wiki/Declarative_programming" class="reference">Ref: Wiki - Declarative Programming</a>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">array.map(movie => movie.title);</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js">array.reduce((p,c) => p + c);</code></pre>
+          <p class="fragment fade-down">Fungerar som en loop, men hur den egentligen loopar vet vi inte. Vi säger bara <em>vad</em> vi ska göra.</p>
+        </section>
+        <section>
+          <p><strong>Functional</strong> programming</p>
+        </section>
+        <section data-transition="none">
+          <blockquote>
+          Functional programming (often abbreviated FP) is the process of building software by <em>composing pure functions, avoiding shared state, mutable data, and side-effects.</em> Functional programming is declarative rather than imperative, and application state flows through pure functions
+        </blockquote>
+        <a href="https://medium.com/javascript-scene/master-the-javascript-interview-what-is-functional-programming-7f218c68b3a0#.ijxsqkkkg" class="reference">Ref: What is Functional Programming</a>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+          <pre><code class="hljs js">function calculate(a,b){
+  return a + b;
+}</code></pre>
+        <p class="fragment fade-down">Gör inget annat än att ta in två värden, beräkna och skicka ut ett nytt skapat värde.</p>
+        <p class="fragment fade-down">Inga ändringar utanför funktionens scope, inga sidoeffekter. Vi muterar heller inte data som skickas in.</p>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+        
+          <pre><code class="hljs js">var globalArray = [];
+
+function calculate(a,b){
+  var c = a + b;
+  //Side-effect, manipulate data outside of scope
+  globalArray.push(c);
+  return c;
+}</code></pre>
+        <p class="fragment fade-down">Inte längre en ren funktion.</p>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+        
+          <pre><code class="hljs js">function calculate(a,b){
+  var c = a + b;
+  //Side-effect
+  $('#id').html(c);
+
+  return c;
+}</code></pre>
+        <p class="fragment fade-down">Inte längre en ren funktion.</p>
+        </section>
+        <section>
+          <p><strong>Object Oriented</strong> programming</p>
+        </section>
+        <section>
+          <blockquote>Object-oriented programming (OOP) is a programming paradigm <em>based on the concept of "objects"</em>, which may contain data, in the form of fields, often known as attributes; and code, in the form of procedures, often known as methods.</blockquote>
+        </section>
+        <section>
+          <p>Oftast när vi ser nyckelordet <em>Class</em> har vi ett Object Oriented Language</p>
+          <p class="fragment fade-down">Instansierar objekt baserade på klasser. En majoritet av de stora språken har detta upplägg.</p>
+          <p class="fragment fade-down">Och JavaScript halvt.</p>
+        </section>
+        <section>
+          <h3>Och JavaScript är vadå?</h3>
+          <p class="fragment fade-down">Javascript kan skrivas funktionellt, deklarativt, imperativt samt objektorienterat.</p>
+          <p class="fragment fade-down">Det ena paradigment utesluter inte det andra.</p>
+          <p class="fragment fade-down">Funktionella språk: Haskell, Lisp, F.</p>
+          <p class="fragment fade-down">Objektorienterade:  C#, Java, PHP</p>
+        </section>
+        <section>
+          <h3><em><a href="https://en.wikipedia.org/wiki/Comparison_of_programming_paradigms">Wiki: Comparison of Programming Paradigms</a></em></h3>
+        </section>
+      </section>
+
+      <!-- Inheritance -->
+      <section>
+        <section>
+          <h1><em>Inheritance</em></h1>
+          <p><em>composition</em> & <em>delegation</em></p>
+        </section>
+        <section>
+          <h3><em>Inheritance</em></h3>
+          <p>Man brukar övergripande prata om <em>arv</em></p>
+          <p class="fragment fade-down">Objekt ärver egenskaper från andra objekt.</p>
+          <p class="fragment fade-down">Jag fastnar ofta i att jag tycker OOP-tänket är lättare eftersom jag började med ett OOP-språk. Men JavaScript är inte OOP i grunden.</p>
+          <a href="http://adripofjavascript.com/blog/drips/basic-inheritance-with-javascript-constructors.html" class="reference">Basic Inheritance in JavaScript</a>
+        </section>
+        <section>
+          <p><em>Class Inheritance</em>: A class is like a blueprint — a description of the object to be created. Classes inherit from classes and create subclass relationships: hierarchical class taxonomies.</p>
+          <p class="fragment fade-down"> <em>Prototypal Inheritance</em>: A prototype is a working object instance. Objects inherit directly from other objects.</p>
+          <a href="https://medium.com/javascript-scene/master-the-javascript-interview-what-s-the-difference-between-class-prototypal-inheritance-e4cd0a7562e9#.jwuna3m47" class="reference"> What’s the Difference Between Class & Prototypal Inheritance?</a>
+        </section>
+        <section>
+          <p><em>Class Inheritance:</em> Här har du en ritning på ett hus, skapa det här huset utifrån ritningen</p>
+          <p class="fragment fade-down"><em>Prototypal Inheritance:</em> Här har du ett hus, skapa ett nästan likadant hus baserat på det här huset.</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <em>ES6 Class</em>
+          <pre><code class="hljs js">class Animal{
+  constructor(){}
+}</code></pre>  
+          <pre><code class="hljs js">class Cat extends Animal{
+  constructor(){}
+}</code></pre>
+      <p class="fragment fade-down">I OOP-språk så skapar vi instanser av en klass, objekt som läggs i minnet när det skapas.</p>
+      <p class="fragment fade-down">I JavaScript skapar vi egentligen inte instanser. <em>Detta imiterar bara OOP.</em></p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">function Animal(){}</code></pre>
+          <pre><code class="hljs js">function Cat(){}</code></pre>
+          <pre><code class="hljs js">Cat.prototype = new Animal();</code></pre>
+          <p class="fragment fade-down">Enligt många så imiterar vi här OOP och dess klass-struktur men vi implementerar strukturen <em>med hjälp av Prototyper</em></p>
+          <p class="fragment fade-down">Big nono ¯\_(ツ)_/¯</p>
+        </section>
+        <section>
+          <h3>Varför inte OOP?</h3>
+          <p class="fragment fade-down">Skapar hierarkier som är svåra att omstrukturera om koden måste ändras</p>
+          <p class="fragment fade-down">Hierarkierna är tight kopplade, de blir beroende av varandra.</p>
+          <p class="fragment fade-down">Lätt att en klass får för många ansvarsområden. Svårt att strukturera vad klassen ska göra och inte göra.</p>
+          <p class="fragment fade-down"><em>Skapar en struktur som  språket inte är uppbyggt av.</em></p>
+          <a href="https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95#.2e1pscshy" class="reference">Ref: Eric Elliott</a>
+        </section>
+        <section data-background="white">
+          <img src="https://i.imgur.com/mUn3D2G.png" style="max-height: 600px" alt="">
+        </section>
+        <section>
+          <h1><em>Delegation & Composition</em></h1>
+        </section>
+        <section>
+          <p class="fragment fade-down"><em>Delegation</em> - when you access a property on your object, if it's not directly defined on it, javascript will search the prototype chain and delegate that behavior to the first object it finds that defines that property.</p>
+          <a href="http://www.datchley.name/understanding-prototypes-delegation-composition/" class="reference">Dave Atchley - Understanding Prototypes, Delegation & Composition</a>
+        </section>
+        <section data-background="#2d2d2d">
+        <p>Kort sagt: <em>Prototype chain</em></p>
+          <pre><code class="hljs js">function Foo(){}
+Foo.prototype.x = "x";</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">function Bar(){}
+Bar.prototype = new Foo();</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">Bar.x === 'x' //Has the prop</code></pre>
+        <p class="fragment fade-down">Vi kopplar egenskaperna från <em>Foo</em> till <em>Bar</em></p>
+        </section>
+        <section>
+          <h3><em>Inheritance</em></h3>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">class Animal{
+  constructor(){}
+}</code></pre>  
+          <pre><code class="hljs js">class Cat extends Animal{
+  constructor(){}
+}</code></pre>
+        <p class="fragment fade-down">Svårt att förutse vilka egenskaper varje superklass ska ha. Vad som ska vara gemensamt.</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <p>Pseudo-classical Inheritance</p>
+          <pre><code class="hljs js">function Animal(){}</code></pre>
+          <pre><code class="hljs js">function Cat(){}</code></pre>
+          <pre><code class="hljs js">Cat.prototype = new Animal();</code></pre>
+        </section>
+        <section>
+          <p><em><a href="https://www.youtube.com/watch?v=wfMtDGfHWpA">Funfunfunctions - Composition > Inheritance @ YouTube</a></em></p>
+        </section>
+        <section>
+          <h3><em>Composition</em></h3>
+        </section>
+        <section>
+          <p>Inheritance skapar <strong>is-a</strong>: Cat is-a(n) Animal</p>
+          <p>Composition skapar <em>has-a</em>: Cat has-a tail</p>
+          <blockquote class="fragment fade-down">In other words, use <em>can-do</em>, <em>has-a</em>, or <em>uses-a</em> relationships instead of <strong>is-a </strong>relationships.</blockquote>
+          <a href="https://medium.com/javascript-scene/10-interview-questions-every-javascript-developer-should-know-6fa6bdf5ad95#.2e1pscshy" class="reference">Ref: Eric Elliott</a>
+        </section>
+      </section>
+
+      <!-- Design Principles -->
+      <section>
+        <section>
+          <h1><em>Design Principles</em></h1>
+        </section>    
+        <section>
+          <h3>DRY</h3>
+          <p><em>Don't Repeat Yourself</em></p>
+          <p>Skapa kod som kan återanvändas.</p>
+          <p class="fragment fade-down">Var lat, programmerare ska vara lata. På ett bra sätt.</p>
+          <p class="fragment fade-down">Upprepa dig så lite som möjligt.</p>
+          <a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" class="reference">Ref: Wiki - DRY</a>
+        </section>
+        <section>
+          <h3>Single Responsibility Principle</h3>
+          <p><em>Every function you write should do exactly one thing. It should have one clearly defined goal.</em></p>
+          <a href="https://en.wikipedia.org/wiki/Single_responsibility_principle" class="reference">Ref: Wiki - SRP</a>
+        </section>
+        <section>
+          <h3>SRP</h3>
+          <p>Vad som definieras som <em>one thing</em> är en tolkningsfråga.</p>
+          <pre><code class="hljs js">function calculateTax(money){
+  return money * 0.3;
+}</code></pre>
+        <p class="fragment fade-down">En ren funktion som gör just en grej</p>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+        <pre><code class="hljs js">function appendHtml(data){
+  let el = document.getElementById('list');
+  let html = '';
+  for(let thing in data){
+    html += `&lt;li&gt; ${thing.name} &lt;li&gt`;
+  }
+  list.innerHTML = html;
+}</code></pre>
+        <p class="fragment fade-down">Gör fortfarande bara en grej</p>
+        <p class="fragment fade-down">Uppdaterar UI:t</p>
+        </section>
+        <section data-background="#2d2d2d" data-transition="none">
+          <pre><code style="min-height: 500px" class="hljs js">function appendHtml(data){
+  let el = document.getElementById('list');
+  let html = '';
+  for(let thing in data){
+    html += `&lt;li&gt; ${thing.name} &lt;li&gt`;
+  }
+  list.innerHTML = html;
+  //ANOTHER THING???
+  globalVariable = thing.id; 
+}</code></pre>
+        </section>
+        <section>
+          <h3><em>Separation of Concerns</em></h3>
+          <p>Vad är en concern?</p>
+          <p><em>Business logic</em> är en viss concern</p>
+          <p class="fragment fade-down">Business logic == koden bakom</p>
+          <p class="fragment fade-down"><em>UI/Interface</em> är en concern</p>
+
+          <a href="https://en.wikipedia.org/wiki/Separation_of_concerns" class="reference">Ref: Wiki - SOC</a>
+        </section>
+        <section>
+          <h3>Principle of Least Privilege</h3>
+          <blockquote>For example, a user account for the sole purpose of creating backups does not need to install software: hence, it has rights only to run backup and backup-related applications.</blockquote>
+          <p class="fragment fade-down">Varför ska en funktion ha tillgång till en variabel som den inte behöver? (Undvik global scope)</p>
+          <a href="https://en.wikipedia.org/wiki/Principle_of_least_privilege" class="reference">Ref: Wiki - Principle of Least Privilege</a>
+        </section>
+        <section data-background="#2d2d2d">
+        <pre><code class="hljs js">//Does code outside of Module need 
+//access to 'Shh'?
+const Module = (function(){
+  var private = "Shh";
+  return {
+    private: private
+  }
+})();</code></pre>  
+        </section>
+        <section>
+          <h3>När ska jag använda vad?</h3>
+          <p>Nästan alla designprinciper går in i varandra.</p>
+          <p class="fragment fade-down">Jobbar man utifrån <em>Separation of Concerns</em> och <em>Single Responsibility</em> får man oftast <strong>DRY</strong> kod.</p>
+          <p class="fragment fade-down">Jobbar man funktionellt så borde vissa designprinciper komma typ <em>automatiskt</em></p>
+        </section>
+      </section>
+
+      <!-- tools -->
+      <section>
+        <section>
+          <h1><em>Tools you fools</em></h1>
+        </section>
+        <section>
+          <h3><em><a href="https://medium.freecodecamp.com/making-sense-of-front-end-build-tools-3a1b3a87043b#.6sphj73gr">Making sense of front end build tools @ Medium</a></em></h3>
+        </section>
+        <section>
+          <h3>Build Tools</h3>
+          <p><em>Task Runners: Gulp, Grunt etc.</em></p>
+          <p><strong>Module bundler: Webpack, systemjs</strong></p>
+        </section>
+        <section>
+          <h3>Build Tools</h3>
+          <ul>
+            <li>Automatisera</li>
+            <li>Minifera</li>
+            <li>Transpilera (Omvandla kod)</li>
+            <li>Linta kod (kolla efter fel)</li>
+            <li>Döpa om och flytta filer</li>
+            <li>Ladda om efter ändringar</li>
+          </ul>
+          <p class="fragment fade-down">Oberoende av verktyg syftar alla på att lösa dessa problem.</p>
+        </section>
+        <section data-background="#2d2d2d">
+          <pre><code class="hljs js">//export.js
+export const sum = ( a, b ) => a+b;</code></pre>
+<pre class="fragment fade-down"><code class="hljs js">//main.js
+import {sum} from './export.js';</code></pre>
+        <p class="fragment fade-down">Måste skötas med <em>Browserify</em></p>
+        <p class="fragment fade-down"><em>Detta är webpacks grej</em></p>
+        </section>
+        <section>
+          <p>Oavsett verktyg är målet</p>
+          <p class="fragment fade-down">Automatisera utvecklingsprocessen</p>
+          <p class="fragment fade-down"><strong>&</strong></p>
+          <p class="fragment fade-down">Göra vår kod produktionsfärdig</p>
+          <p class="fragment fade-down">Inget är det bästa, välj något som du förstår och är bekväm med.</p>
+        </section>
+        <section>
+          <ul>
+            <li><strong>dist (public)</strong></li>
+            <li><strong>src</strong></li>
+            <li><strong>index.html</strong></li>
+            <li><strong>.gitignore</strong></li>
+          </ul>
+          <p class="fragment fade-down">Våra filer i <strong>src</strong> ska slutligen konverteras till produktionsfärdig kod i <strong>dist</strong></p>
+        </section>
+        <section>
+          <h3><em>Package Managers</em></h3>
+          <p><strong>npm:</strong> följer med node. Uppgift att installera dessa verktyg.</p>
+          <p class="fragment fade-down"><em>Yarn:</em> samma som npm fast snabbare.</p>
+          <p class="fragment fade-down"><em>Bower:</em> Pakethanterare för frontend-paket.</p>
+          <p class="fragment fade-down"><em>Yeoman:</em> Scaffolding. Skapa strukturer för projekt. Lite som att klona ner en boilerplate från GitHub.</p>
+        </section>
+        <section>
+          <p><em>npm löser de flesta av dina problem. Allt annat är bara fluff.</em></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><em>What's next?</em></h1>
+        </section>
+        <section>
+          <ul style="line-height: 2">
+            <li class="fragment fade-down"><strong style="padding: 1rem;">Prototypes</strong></li>
+            <li class="fragment fade-down"><strong style="padding: 1rem;">Context</strong></li>
+            <li class="fragment fade-down"><strong style="padding: 1rem;">Async Patterns</strong></li>
+            <li class="fragment fade-down"><strong style="padding: 1rem;">Scope</strong></li>
+            <li class="fragment fade-down"><strong style="padding: 1rem;">ES6 => beyond</strong></li>
+            <li class="fragment fade-down"><em style="padding: 1rem;">Performance</em></li>
+          </ul>
+        </section>
+        <section>
+          <h1><em>Frameworks</em></h1>
+        </section>
+        <section>
+          <h3>Problem med vanilla</h3>
+          <p>Omständig DOM-hantering</p>
+          <p>Omständig data-binding</p>
+          <p>Implementera <em>MV*</em>?</p>
+        </section>
+        <section data-background="white">
+          <h3><em>MV*-ramverk</em></h3>
+          <p class="fragment fade-down">MVW - Model-View-Whatever</p>
+          <img style="border-radius: 10px; box-shadow: 0 0 50px rgba(0,0,0, 0.2)" src="http://programminghelp.com/wp-content/uploads/2013/10/mvc_diagram.png" alt="MVC-pattern">
+          <p class="fragment fade-down">Separation of Concerns</p>
+        </section>
+        <section>
+          <p>"Skilj på de logiska funktionerna från DOM-manipulationen"</p>
+          <p class="fragment fade-down"><em>Skilj model från view</em></p>
+          <p class="fragment fade-down">Skilj logiken (model) från det vi ser utåt (view)</p>
+        </section>
+        <section>
+          <div style="float: left;"><img src="http://i.imgur.com/wKkmfZt.png" alt="Controller"></div>
+          <p>Controllern är inte alltid helt separerad. I er Movie Database kallar DOM-funktionerna på de funktioner som manipulerar arrayen. <em>View</em> kallar på <em>model</em>, ingen  explicit controller.</p>
+          <p class="fragment fade-down">Controller kan i många fall "skippas"</p>
+        </section>
+        <section>
+          <p>React är enbart <em>View</em></p>
+          <p>Vue är <em>MVVM</em>: Model-View-ViewModel</p>
+          <p>Angular är <em>MVVM</em>: Model-View-Whatever</p>
+          <p class="fragment fade-down">Vanilla är ingenting, du kan skapa MV*-mönster men det är upp till dig.</p>
+          <p class="fragment fade-down">Samma med jQuery, bara ett bibliotek. Du kan dock skapa ditt eget MV*-mönster med jQuery.</p>
+        </section>
+        <section>
+          <h3><em><a href="http://todomvc.com/">TODOMVC.COM</a></em></h3>
+          <p>En todolista skapad i de flesta ramverk som finns med tillhörande källkod. Exempel på hur man kan göra.</p>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '100%',
+      width: '100%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+      });
+    </script>
+  </body>
+  </html>
