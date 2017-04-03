@@ -1,0 +1,245 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <meta charset="utf-8">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <title>CMS, PHP &amp; MySQL</title>
+  <style>
+    .reveal p{
+      border-bottom: 1px solid #c2b9b7;
+      padding-bottom: 1rem;
+    }
+    .reveal ul{
+      line-height: 2;
+    }
+    .reveal blockquote{
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1><strong>CMS, PHP &amp; MySQL</strong></h1>
+        </section>
+      </section>
+      <section>
+          <h1>Reda ut lite begrepp</h1>
+          <em>CMS, PHP &amp; MySQL</em>
+      </section>
+      <section>
+        <section>
+          <h1>PHP</h1>
+        </section>
+        <section>
+          <h3>Ursprungligen</h3>
+          <ul>
+            <li class="fragment slide-down">Personal</li>
+            <li class="fragment slide-down">Home</li>
+            <li class="fragment slide-down">Page</li>
+          </ul>
+          <p class="fragment fade-down">June 8, 1995</p>
+        </section>
+        <section>
+          <blockquote>"I don’t know how to stop it, there was never any intent to write a programming language […] I have absolutely no idea how to write a programming language, I just kept adding the next logical step on the way."</blockquote>
+          <em> - Rasmus Lerdorf</em>
+        </section>
+        <section>
+          <img src="https://www.wearedevelopers.org/wp-content/uploads/2017/03/5165138896_d7a5b74062_b.jpg" alt="Rasmus Lerdorf">
+        </section>
+        <section>
+          <blockquote>JavaScript was created in 10 days</blockquote>
+          <p>För att kunna ge ett övertag åt <em>Netscape</em></p>
+          <img src="https://sayanything.areavoices.com/files/2014/04/brendan-eich-mozilla.jpg" alt="Brendan Eich">
+        </section>
+        <section>
+          <p>JavaScript och PHP vann inte på kvalité utan på efterfrågan och tillgänglighet.</p>
+          <p class="fragment fade-down">Det är därför det finns så många arga nördar.</p>
+        </section>
+        <section>
+          <h3>PHP</h3>
+          <ul>
+            <li class="fragment slide-down"><em>PHP</em></li>
+            <li class="fragment slide-down">Hypertext</li>
+            <li class="fragment slide-down">Processor</li>
+          </ul>
+          <p class="fragment fade-down"><strong>Backronym</strong>: recursive acronym</p>
+        </section>
+        <section>
+          <img src="https://media.tenor.co/images/d37cba0defc71e856dbb1331998ada7b/raw" alt="But Why Gif">
+        </section>
+        <section>
+          <p>PHP is a <em>server-side</em> scripting language designed primarily for web development but also used as a general-purpose programming language. </p>
+        </section>
+        <section>
+          <h3>Server-side</h3>
+          <p class="fragment fade-down">JavaScript är enbart <strong>client-side</strong> om man inte kör node.</p>
+          <p class="fragment fade-down">PHP är även server-side <strong>(backend)</strong> vilket betyder att vi programmerar vad servern levererar och kommunicerar med databasen.</p>
+        </section>
+        <section>
+          <h5>Coola programmeringssnubbars slagpåse</h5>
+          <img src="http://i.imgur.com/jAl801Q.jpg" alt="You have heard of me?">
+        </section>
+        <section>
+          <h3>Jag rullar, de hatar</h3>
+          <p>Många noobs som skriver dålig kod som börjar cirkulera</p>
+          <p>Det är inte längre frontend, säkerhetsriskerna är större.</p>
+          <img class="fragment fade-down" src="http://core0.staticworld.net/images/article/2014/03/shutterstock_121773877-100249347-large.jpg" alt="Freeze!">
+        </section>
+        <section>
+          <img src="https://i.imgur.com/UD3y4yN.png" alt="SO Developer Survey">
+          <a href="http://stackoverflow.com/insights/survey/2017#most-popular-technologies" class="reference">Ref: SO Developer Survey 2017</a>
+        </section>
+        <section>
+          <img src="https://i.imgur.com/QKI4zzi.png" alt="SO Developer Survey">
+          <a href="http://stackoverflow.com/insights/survey/2017#most-popular-technologies" class="reference">Ref: SO Popular Tags </a>
+        </section>
+        <section>
+        <img src="https://i.imgur.com/X8BNBMY.png" alt="Most Popular">
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;header class=&quot;card-header&quot;&gt;
+  &lt;h3 class=&quot;title&quot;&gt;
+    &lt;?= $row['title'] ?&gt;
+  &lt;/h3&gt;
+  &lt;p class=&quot;tag&quot;&gt;
+    &lt;?= $row['likes'] ?&gt;
+  &lt;/p&gt;
+&lt;/header&gt;</code></pre>
+        <p class="fragment fade-down">Frontend-delen, det lätta</p>
+        </section>
+        <section>
+          <h3>PHP</h3>
+          <p>Vi lära oss ett nytt programmeringsspråk som är backend</p>
+          <p><strong>Syntaxen är dock lik JavaScript</strong></p>
+          <p class="fragment fade-down">När man kör backend måste man ha någonstans att lagra all information. Vi behöver en <em>databas</em></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>SQL / MySQL</h1>
+        </section>
+        <section>
+          <h3><em>Structured Query Language</em></h3>
+          <p>Ett språk för att hantera och kommunicera med ett RDBMS<br/> <em>( Relational Database Management System)</em></p>
+          <p class="fragment fade-down">MySQL är ett RDBMS</p>
+        </section>
+        <section>
+          <img src="https://i.imgur.com/vtjpn66.png" alt="Top Databases">
+          <a href="http://stackoverflow.com/insights/survey/2017#technology-databases" class="reference">Ref: SO Developer Survey 2017</a>
+        </section>
+        <section>
+          <p><strong>SQL</strong> är också ett nytt språk. </br>Språket behövs för att kommunicera med databasen <em>MySQL.</em></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><strong>Content Management System</strong></h1>
+        </section>
+        <section>
+          <p>System för att hantera innehåll</p>
+          <p class="fragment fade-down">Specifikt riktat mot mindre tekniska grupper</p>
+          <p class="fragment fade-down">Eller bara om man vill ha en enklare lösning</p>
+        </section>
+        <section>
+          <h2>Wordpress</h2>
+          <em>Världens största CMS*</em>
+          <a href="https://w3techs.com/technologies/history_overview/content_management" class="reference">*Ref: Content Management Market Share</a>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Kursens upplägg</h1>
+        </section>
+        <section>
+          <ul>
+            <li class="fragment slide-down">Grunder i Wordpress/Drupal</li>
+            <li class="fragment slide-down">Grunder i PHP</li>
+            <li class="fragment slide-down">Grunder i MySQL</li>
+            <li class="fragment slide-down">Grundläggande Objektorienterad PHP</li>
+            <li class="fragment slide-down">Fördjupning inom Wordpress</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Examination</h3>
+          <ul>
+            <li class="fragment slide-down"><em>Jämföra 2 CMS</em></li>
+            <li class="fragment slide-down"><strong>Grupp: Skapa en blogg med login/användare.</strong></li>
+            <li class="fragment slide-down"><em>Skapa en mer avancerad sida med Wordpress</em></li>
+          </ul>
+        </section>
+        <section>
+          <h2><em>Låt oss se över kursplanen</em></h2>
+        </section>
+        <section data-background="#010101" data-background-video="images/zelda.webm">
+        </section>
+        <section>
+          <h4>Tolka kursplanen</h4>
+          <strong>Grupper om 3</strong>
+          <p><em>Diskutera de olika punkterna i kursplanen</em></p>
+          <p><strong>Hur skulle ni tolka varje punkt?</strong></p>
+          <p><strong>Är ni oense om någon punkt?</strong></p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>MAMP/WAMP</h1>
+          <em>Pre-packaged dev development environment</em>
+        </section>
+        <section>
+        <ul>
+          <li><strong>M</strong>ac <strong>A</strong>pache <strong>M</strong>ySQL <strong>P</strong>HP</li>
+          <li class="fragment fade-down"><em>W</em>indows <em>A</em>pache <em>M</em>ySQL <em>P</em>HP</li>
+          <li class="fragment fade-down">MAMP kan även installeras på Windows, <em>wtf</em></li>
+        </ul>
+      </section>
+      <section>
+        <p><strong>PHP</strong> måste tolkas på samma sätt som vi behöver node eller en webbläsare för att tolka JavaScript</p>
+        <p class="fragment fade-down">Vår server måste kunna köra PHP.</p>
+      </section>
+      <section>    
+        <h2>Låt oss se över <em>MAMP</em></h2>
+      </section>
+      </section>
+    </div>
+  </div>
+
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '100%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        {src: 'plugin/line-numbers/line-numbers.js'}
+        ]
+      });
+    </script>
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </body>
+  </html>
