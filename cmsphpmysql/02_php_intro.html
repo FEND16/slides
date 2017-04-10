@@ -1,0 +1,424 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style>
+    #php{
+      font-size: 10rem;
+    }
+    #p{
+      display: inline-block; 
+      transition: all 300ms ease;
+    }
+    .rotate{
+      display: inline-block;
+      transition: all 300ms ease;
+      transform: rotate(30deg);
+      cursor: pointer;
+    }
+    .rotate:before{
+      position: absolute;
+      right: 100px;
+      top: 50%;
+      content: "UUUHHHHHRRRRRRRRRRRRRRRRRUUUUUUUHHHHHHH!";
+      font-size: 2rem;
+      background-color: #90708c;
+      color: #eadfdf;
+      padding: 0.5rem;
+    }
+    .reveal ul{
+      line-height: 2;
+    }
+    .reveal blockquote{
+      line-height: 1.5;
+    }
+    .reveal li em{
+      padding: 0.6rem;
+    }
+    .reveal .slides section .fragment.highlight-green.visible{
+      color: #fff;
+      background-color: #395c6b;
+      padding: .2rem;
+    }
+  </style>
+  <title>PHP Intro</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1><strong>PHP Intro</strong></h1>
+          <em>PHP Hypertext Processor</em>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>Vad är <strong>PHP</strong>?</h1>
+        </section>
+        <section>
+          <h1 id="php"><span id="p">P</span>HP</h1>
+          <a href="http://7php.com/elephpant/#gtgt_You_are_the_original_designer_of_the_elePHPant_logo_Everyone_ask_how_you_created_it_but_you_answered_it_already_in_your_movie" class="reference">Ref: 7php - Why Elephant?</a>
+          <img class="fragment fade-down" src="https://raw.githubusercontent.com/php-earth/php-resources-assets/master/images/community/elephpant.png" alt="PHP Elephant">
+          <script>
+            document.getElementById('php').addEventListener('mouseover', function(){
+              document.getElementById('p').classList.add('rotate');
+            });
+            document.getElementById('php').addEventListener('mouseout', function(){
+              document.getElementById('p').classList.remove('rotate');
+            });
+          </script>
+        </section>
+        <section>
+          <pre><code style="min-height: 450px;" class="hljs line-numbers" data-trim data-noescape>&lt;!doctype html&gt;
+&lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;index.php&lt;/title&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+  
+  &lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </section>
+        <section>
+          <ul>
+            <li>Server-side Scripting</li>
+            <li class="fragment fade-down">All purpose: vi kan skriva t.ex. <strong>CLI</strong>-program</li>
+            <li class="fragment fade-down"><strong>PHP</strong> är inte servern, PHP körs PÅ servern.</li>
+          </ul>
+        </section>
+        <section>
+          <ul>
+            <li><em>Apache/NGINX</em> är programmet som levererar våra <strong>PHP</strong>-filer</li>
+            <li class="fragment fade-down">Våra <strong>PHP</strong>-filer tolkas på servern</li>
+            <li class="fragment fade-down">Servern levererar <strong>HTML, CSS & JS</strong></li>
+            <li class="fragment fade-down"><strong>PHP</strong> är INTE det användaren ser men det som servern tolkar</li>
+          </ul>
+        </section>
+        <section>
+          <h3>&lt;?php ?&gt;</h3>
+          <pre class="fragment fade-down"><code class="hljs line-numbers" data-trim data-noescape>&lt;h1&gt;This is PHP!&lt;/h1&gt;</code></pre>
+
+          <pre class="fragment fade-down"><code class="hljs line-numbers" data-trim data-noescape>&lt;?php
+ echo '&lt;h1&gt;This is also PHP!&lt;/h1&gt;'
+?&gt;</code></pre>
+          <pre class="fragment fade-down"><code class="hljs line-numbers" data-trim data-noescape>&lt;h1&gt; &lt;?php echo &quot;This is also PHP!&quot; ?&gt; &lt;/h1&gt;</code></pre>
+        </section>
+        <section>
+          <p>Allting utanför <em> &lt;?php ?&gt;</em> tolkas som <strong>HTML</strong></p>
+          <p>Allting innanför <em>&lt;?php ?&gt;</em> tolkas som <strong>PHP</strong></p>
+        </section>
+        <section>
+          <h3>Exempelkod</h3>
+        </section>
+        <section>
+          <h3>Måste jag...?</h3>
+          <p>Om din fil innehåller <strong>PHP</strong> behöver du inte en sluttagg</p>
+          <p class="fragment fade-down">Om din fil innehåller både <strong>PHP</strong> och <em>HTML</em> måste du använda sluttagg</p>
+          <p class="fragment fade-down">Du behöver inte skriva ut <em>php</em> </p>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;? ?&gt; == &lt;?php ?&gt;</code></pre>
+          <p class="fragment fade-down">Men det är att föredra, failsafe.</p>
+          <p class="fragment fade-down"><em>Använd alltid semikolon;</em></p>
+        </section>
+      </section>
+
+      <!-- SYNTAX -->
+      <section>
+        <section>
+          <h1><strong>Syntax & Funktionalitet</strong></h1>
+        </section>
+        <section>
+          <h1><em>Variabler</em></h1>
+        </section>
+        <section>
+          <h3>Dynamiskt typat</h3>
+          <p>Liknande JavaScript har vi bara en typ av variabel <code><em>var</em></code></p>
+          <p class="fragment fade-down">Vi behöver dock inte skriva <code><em>var</em></code> men vi måste skriva <code><strong>$</strong></code></p>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$name = &#039;Jesper&#039;;
+$money = 30;
+echo $name;
+echo $money;</code></pre>
+        </section>
+        <section>
+          <h3><em>Casting</em></h3>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$money = &#039;30&#039;;         //type: string
+$cash = (int)$money;   //type: int</code></pre>
+        </section>
+        <section>
+          <h4><em>Casting</em></h4>
+          <ul>
+            <li><em><code>(int), (integer)</code></em>    - cast to integer</li>
+            <li class="fragment fade-down"><code><em>(bool), (boolean)</em></code> - cast to boolean</li>
+            <li class="fragment fade-down"><em><code>(float), (double), (real)</code></em> - cast to float</li>
+            <li class="fragment fade-down"><em><code>(string)</code> </em>- cast to string</li>
+            <li class="fragment fade-down"><em><code>(array)</code></em> - cast to array</li>
+            <li class="fragment fade-down"><em><code>(object)</code></em> - cast to object</li>
+            <li class="fragment fade-down"><em><code>(unset)</code></em> cast to NULL</li>
+          </ul>
+          <a href="http://php.net/manual/en/language.types.type-juggling.php" class="reference">Ref: PHP.net - Type Juggling</a>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$foo = 1 + &quot;Whaddup10&quot;;     // $foo is 1 (int)
+$foo = 1 + &quot;10Waddups&quot;;     // $foo is 11 (int)
+$foo = 1 + &quot;10.5Waddups&quot;;   // $foo is 11.5 (float)
+$foo = &quot;10.5Waddups&quot; + 1;   // $foo is 11.5 (float)</code></pre>
+        <p>Strängar castas till float/int <strong>om första karaktären är en siffra</strong> annars ignoreras strängen.</p>
+        <a href="http://php.net/manual/en/language.types.string.php#language.types.string.conversion" class="reference">Ref: PHP.net: String conversion</a>
+        </section>
+        <section>
+          <p>It's all the same to me</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$foo = 10;            // $foo is an integer
+$str = &quot;$foo&quot;;        // $str is a string
+$fst = (string) $foo; // $fst is also a string</code></pre>
+        </section>
+        <section>
+          <h3><em>String Concatenation</em></h3>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$first = &#039;Jesper&#039;;
+$last = &#039;Orb&#039;;
+$full = $first <span class="fragment highlight-green">.</span> $last;
+$fullWithBraces = "{$first} {$last}";</code></pre>
+        <p class="fragment fade-down">Strängar sätts ihop med <em>.</em> istället för <strong>+</strong> som i JS</p>
+        </section>
+        <section>
+          <h3><em>“‘′″'"QUOTES?!"'″′’”</em></h3>
+          <p>Single & double quotes matter</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$first = "Jesper";
+$last = "Orb";
+$full = "$first $last";                  //It works
+$fullWithDouble = &quot;{$first} {$last}&quot;;    //It works
+$fullWithSingle = &#039;{$first} {$last}&#039;;    //Does not work</code></pre>
+        </section>
+      </section>
+
+      <!-- Debugging -->
+      <section>
+        <section>
+          <h1>🐛 <strong>Debugging</strong> 🐛</h1>
+        </section>
+        <section>
+          <p><strong>JavaScript</strong>: <code>console.log();</code></p>
+          <p class="fragment fade-down"><em>PHP</em>:  <code>var_dump();</code></p>
+          <p class="fragment fade-down">Om inget syns, lägg till detta i början på filen</p>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);</code></pre>
+        <a href="http://stackoverflow.com/questions/1053424/how-do-i-get-php-errors-to-display" class="reference">Ref: SO - How To Display Errors</a>
+        </section>
+        <section>
+        <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$name = &#039;Jesper&#039;;
+var_dump($name); //Jesper</code></pre>
+<p class="fragment fade-down">Man kan också döda hela processen</p>
+<pre class="fragment fade-left"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$name = &#039;Jesper&#039;;
+die(var_dump($name)); //Jesper</code></pre>
+<p class="fragment fade-down">All kod slutar köras efter <code><em style="padding: .5rem; background-color: #222; color: #fff">die();</em></code></p>
+        </section>
+        <section>
+          <p class="fragment fade-down">Ibland jobbar man med mycket data.</p>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$huge = 100000000000000;
+die(var_dump($huge)); //I just took a huge dump and died :O</code></pre>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><strong>Arrays</strong></h1>
+          <p>En del skillnader, samma tänk</p>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$array = array();  //Empty array
+$array2 = array("first index", "second index");  //With values</code></pre>
+        <a href="http://php.net/manual/en/language.types.array.php" class="reference">Ref: PHP.net - Arrays</a>
+        </section>
+        <section>
+          <h3>Efter <strong>PHP 5.4</strong></h3>
+          <p>Vi använder troligtvis <strong>PHP 7.0/7.1</strong></p>
+          <p class="fragment fade-down">Lite som med <em>ES6</em>, oftast OK att använda men kan ställa till på äldre servrar.</p>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$array = []; //Empty array
+$array2 = ["first index", "second index"]; //With values</code></pre>
+          <a href="http://php.net/manual/en/language.types.array.php" class="reference">Ref: PHP.net - Arrays</a>
+        </section>
+        <section>
+          <h3><a href="http://php.net/manual/en/ref.array.php">PHP.net - Array Functions</a></h3>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$array = array("koala", "elephant");
+array_push($array, "sloth");  // array_push(array, item);</code></pre>
+<pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$array = ["koala", "elephant"];
+$array[] = "sloth";</code></pre>
+        </section>
+        <section>
+          <h3><em>Associative Arrays</em></h3>
+          <p>PHPs svar på JS Object</p>
+        </section>
+        <section>
+          <h4><em>Key/value</em></h4>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$assoc = array(
+  "key" => "value"
+);</code></pre>
+<pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$person = array(
+  "name" => "Jesper",
+  "age" => "Infinite"
+);</code></pre>
+        <p class="fragment fade-down">Separeras med <strong>=></strong> istället för <em>:</em></p>
+        <a href="http://php.net/manual/en/language.types.array.php" class="reference">Ref: Arrays</a>
+        </section>
+      </section>
+
+      <!-- Conditionals -->
+      <section>
+        <section>
+          <h1><strong>Conditionals</strong></h1>
+          <em>if/elseif/else/switch/while/dowhile/for</em>
+        </section>
+        <section>
+          <h3><em>Inget nytt egentligen</em></h3>
+          <p>Programmering som programmering</p>
+          <p><a href="http://php.net/manual/en/language.control-structures.php">PHP.net: Control Structures</a></p>
+        </section>
+        <section>
+          <h3><strong>foreach</strong></h3>
+          <p>Väl använd for-loop</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$animals = array("Sloth", "Panda");
+foreach($animals as $animal){
+  echo $animal;
+}</code></pre>
+        </section>
+        <section>
+          <h3><strong>foreach associative</strong></h3>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$panda = array(
+  "name" => "Panda",
+  "weight" => "3000"
+);
+foreach($panda as $key => $value){
+  echo $key . $value;
+}</code></pre>
+        <p class="fragment fade-down">Vi kan använda oss utav både <em>key</em> och <em>value</em> om vi vill.</p>
+        </section>
+        <section>
+          <h3>Praktisk tillämpning i kod</h3>
+          <p>samt <em>Alternative syntax</em></p>
+        </section>
+      </section>
+      
+      <!-- functions -->
+      <section>
+        <section>
+          <h1>
+            <em>Functions</em>
+          </h1>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+function foo(){
+  echo "Foo!";
+}</code></pre>
+        </section>
+        <section>
+          <h3><strong>return</strong> vs. <em>echo</em></h3>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+function foo(){
+  echo "Foo!";  //public broadcasting
+}</code></pre>
+<pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+function foo(){
+  return "Foo!";  //just returns
+}</code></pre>
+        <p class="fragment fade-down"><em>echo</em> SKRIKER UT DET. <strong>return</strong> returnerar bara tyst.</p>
+        </section>
+        <section>
+          <h3><strong>Scope</strong></h3>
+        </section>
+        <section>
+          <p>PHP utgår alltid ifrån att variablerna är lokala till scopet.</p>
+          <p class="fragment fade-down"><strong>Vi har bara function scope</strong></p>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>let foo = 42;
+function bar(){
+  console.log(foo); //42
+}</code></pre>
+        <p class="fragment fade-down">Allting i det yttre scopet finns i det inre</p>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$foo = 42;
+function bar(){
+  echo $foo;   //No, nein, nothing
+}</code></pre>  
+        <p class="fragment fade-down">Variabler finns enbart i det scope de är deklarerade i.</p>
+        </section>
+                <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$foo = 42;
+function bar(){
+  global $foo;
+  echo $foo;  //42
+}</code></pre>  
+        <p class="fragment fade-down">Alternativt referera till den globala variabeln. <em>Oftast en dålig idé.</em></p>
+        </section>
+      </section>
+      <section>
+        <h3><strong>Övningar på GitHub</strong></h3>
+        <p>Göra sig bekväm med språket</p>
+      </section>
+
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '100%',
+      width: '100%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
