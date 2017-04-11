@@ -1,0 +1,251 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style>
+    .reveal ul{
+      line-height: 2;
+    }
+    .reveal blockquote{
+      line-height: 1.5;
+    }
+    .reveal li em{
+      padding: 0.6rem;
+    }
+    .reveal .slides section .fragment.highlight-green.visible{
+      color: #fff;
+     border: 2px dotted  #e34c26;
+      padding: .2rem;
+    }
+  </style>
+  <title>PHP Intro 2</title>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- SLIDES START HERE -->
+      <section>
+        <section>
+          <h1><strong>PHP</strong></h1>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1>Recap-ish</h1>
+        </section>
+        <section>
+          <p>Allting utanför <em> &lt;?php ?&gt;</em> tolkas som <strong>HTML</strong></p>
+          <p>Allting innanför <em>&lt;?php ?&gt;</em> tolkas som <strong>PHP</strong></p>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;? ?&gt; == &lt;?php ?&gt;</code></pre>
+          <p class="fragment fade-down">Varning: detta kan vara avstängt på många servrar - <code><em style="padding: 0.5rem;">short_open_tag</em></code></p>
+        </section>
+        <section>
+          <p>Single & double quotes matter</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$first = "Jesper";
+$last = "Orb";
+$full = "$first $last";                  //It works
+$fullWithDouble = &quot;{$first} {$last}&quot;;    //It works
+$fullWithSingle = &#039;{$first} {$last}&#039;;    //Does not work</code></pre>
+        </section>
+        <section>
+          <h3><em>Constants</em></h3>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+define('PI', 3.14159265359);</code></pre>
+        <p class="fragment fade-down">Konstanter borde ha stora bokstäver</p>
+        </section>
+          <section>
+          <h4><em>Key/value</em></h4>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$assoc = array(
+  "key" => "value"
+);</code></pre>
+<pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$person = array(
+  "name" => "Jesper",
+  "age" => "Infinite"
+);</code></pre>
+        <p class="fragment fade-down">Separeras med <strong>=></strong> istället för <em>:</em></p>
+        <a href="http://php.net/manual/en/language.types.array.php" class="reference">Ref: Arrays</a>
+        </section>
+        <section>
+          <h3><strong>foreach associative</strong></h3>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$panda = array(
+  "name" => "Panda",
+  "weight" => "3000"
+);
+foreach($panda as $key => $value){
+  echo $key . $value;
+}</code></pre>
+        </section>
+          <section data-transition="none">
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$foo = 42;
+function bar(){
+  echo $foo;   //NOOO
+}</code></pre>  
+        <p class="fragment fade-down">Variabler finns enbart i det scope de är deklarerade i.</p>
+        </section>
+          <section data-transition="none">
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$foo = 42;
+function bar(<span class="fragment highlight-green">$foo</span>){
+  echo $foo; 
+}</code></pre>  
+        <p class="fragment fade-down">Alltid en bättre idé att skicka vidare variabler.</p>
+        </section>
+        <section>
+          <p>Vi kan skicka med fler argument än parametrar</p>
+          <p class="fragment fade-down">Vi ska skicka med lika många argument som vi har parametrar</p>
+          <p class="fragment fade-down">Alla funktioner ska egentligen skrivas i <strong>camel_case</strong></p>
+          <p class="fragment fade-down">Förutom metoder som är <strong>camelCase</strong></p>
+        </section>
+        <section>
+          <h3><em>Closure/Anonymous Functions</em></h3>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$name = 'Jesper';
+
+$say = function ($name){
+  echo $name;
+};
+$say($name);</code></pre>
+        <p class="fragment fade-down">Får INTE variabler från det yttre scopet som i JS</p>
+        <p class="fragment fade-down">Funktioner inuti fuktioner är inte lika vanligt i PHP</p>
+        </section>
+        <section>
+          <p>Typ closure</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$name = 'Jesper';
+
+$say = function () <span class="fragment highlight-green">use ($name)</span>{
+  echo $name;
+};
+$say();</code></pre>
+        </section>
+        <section>
+          <h3><em>Use case</em></h3>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>//usort is like Array.prototype.sort()
+$array = usort($array, <span class="fragment highlight-green">'comparator'</span>);
+
+function <span class="fragment highlight-green">comparator</span>(){
+  return a - b;
+}</code></pre>
+        <p class="fragment fade-down">Callback function</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><em>Coding Conventions</em></h1>
+        </section>
+        <section>
+          <ul>
+            <li><a href="http://www.phptherightway.com/">PHP The Right Way</a></li>
+            <li><a href="https://phpbestpractices.org/">PHP Best Practices</a></li>
+            <li><a href="http://www.php-fig.org/">PHP-FIG</a></li>
+          </ul>
+        </section>
+
+      </section>
+
+      <!--- Include / Require -->
+
+      <section>
+        <section>
+          <h1><code><em>Include</em></code>/ <code><strong>require</strong></code></h1>
+        </section>
+        <section>
+          <p>Vi har bara <em>function scope</em></p>
+          <p>Alla våra sidor tolkas inte under samma <strong>global scope</strong></p>
+          <p class="fragment fade-down">Vi måste inkludera eller kräva filer</p>
+        </section>
+        <section>
+          <p><code>code.php</code></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$name = "Jesper";</code></pre>
+
+          <p><code>index.php</code></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+include 'code.php';
+echo $name;</code></pre>
+        </section>
+        <section>
+          <p>Sökvägarna borde utgå från <em>root</em>: <strong>/</strong></p>
+          <p class="fragment fade-down">Generell vill man gå uppåt från root och inte backa som:</p>
+          <pre class="fragment fade-down"><code class="hljs php">include '../../code.php';</code></pre>
+          <p class="fragment fade-down">MAMP/WAMP/XAMPP borde vara inställt på detta från början <br />men <em>shit is hard</em> så man vet aldrig.</p>
+        </section>
+        <section>
+          <p><em>Absoluta</em> sökvägar är generellt inte bra</p>
+          <p class="fragment fade-down">Vad servern ska köras kan ändras och därmed slutar de att fungera</p>
+          <pre class="fragment fade-down"><code class="hljs bash">file:///Users/jesperorb/php/css/main.css</code></pre>
+          <pre class="fragment fade-down"><code class="hljs bash">css/main.css</code></pre>
+        </section>
+        <section>
+          <blockquote>require is identical to include except upon failure it will also produce a fatal <strong>E_COMPILE_ERROR</strong> level error. In other words, it will halt the script whereas include only emits a warning <em>(E_WARNING)</em> which allows the script to continue.</blockquote>
+        </section>
+        <section>
+          <h3><strong><code>require_once</code></strong> / <strong><code>include_once</code></strong></h3>
+          <p>Säkerställer att koden enbart inkluderas en gång.</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>include_once 'code.php';</code></pre>
+        </section>
+        <section>
+          <p>Om man inkluderar samma kod flera gånger får man error</p>
+          <p><em>include_once</em> kollar först upp så att filen inte har inkluderats redan</p>
+        </section>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><em>Dagens övning</em></h3>
+          <ul>
+            <li>Strukturerar upp en hemsida</li>
+            <li>Jämför med en annan grupp i klassen</li>
+            <li>Pusha upp er lösning till GitHub</li>
+          </ul>
+          <h4><a href="https://github.com/FEND16/nobel-prize-list">Nobel Prize List</a></h4>
+        </section>
+      </section>
+
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '100%',
+      width: '100%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
