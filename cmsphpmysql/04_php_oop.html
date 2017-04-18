@@ -1,0 +1,276 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>Object Oriented PHP</title>
+  <script>
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><strong>Object Oriented PHP</strong></h1>
+        </section>
+      </section>
+      
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h1><em>Objects</em></h1>
+        </section>
+        <section>
+          <h3><em>JS: Objects linked to other objects</em></h3>
+          <h3><strong>PHP: Objects instantiated from classes</strong></h3>
+        </section>
+        <section>
+          <h3><em>Varför?</em></h3>
+          <p class="fragment fade-down">Struktur</p>
+          <p class="fragment fade-down">Modularitet</p>
+          <img class="fragment fade-down" src="https://media.giphy.com/media/dlCHE6WxIpwli/giphy.gif" alt="Elephantys!">
+        </section>
+        <section>
+          <p class="fragment fade-down">I JavaScript skapar vi objekt utifrån andra objekt</p>
+          <pre class="fragment fade-down" ><code class="hljs js" data-trim data-noescape>let elephant = {};</code></pre>
+          <pre class="fragment fade-down"><code class="hljs js" data-trim data-noescape>let elephant = Object.create({});</code></pre>
+          <p class="fragment fade-down">Allting är alltid kopplat till <em>Object</em></p>
+        </section>
+        <section>
+          <p class="fragment fade-down">I PHP skapar vi objekt utifrån <strong><code>classes</code></strong></p>
+          <p class="fragment fade-down">Liknar ES6-classes</p>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+             
+}</code></pre>
+          </section>
+          <section>
+            <h3>Objects</h3>
+          <blockquote>When talking about objects, you refer to variables belonging to these objects as properties (or attributes or fields), and functions are called methods.</blockquote>
+          </section>
+          <section>
+            <h3><em>Class Method</em></h3>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+  function speak(){
+    echo "ERRRRUUUUH!!!!";
+  }
+}</code></pre>
+          </section>
+          <section>
+            <h3>Instantiering</h3>
+            <p>Vi måste skapa ett objekt för att kunna använda metoderna i klassen</p>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$hathi = new Elephant; //new keyword
+$hathi->speak();  //ERRRRUUUUH!!!!</code></pre>
+          <p class="fragment fade-down"><strong>-></strong> används för att komma åt egenskaper och metoder i objekt</p>
+          </section>
+          <section>
+            <pre ><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+  public $name = 'Hathi';
+  function speak(){
+    echo "ERRRRUUUUH!!!!";
+  }
+}</code></pre>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>$hathi = new Elephant;
+$hathi->name;</code></pre>
+          </section>
+          <section>
+            <h3><em>Constructor</em></h3>
+            <pre><code  style="min-height: 500px" class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+  public $name; //public property
+
+  public function __construct($name){
+      $this->name = $name; //JS: this.name = name;
+  }
+}
+</code></pre>
+          <p class="fragment fade-down">Man måste inte ha <em>public</em> på konstruktorn</p>
+          </section>
+          <section>
+            <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+$hathi = new Elephant('Hathi');
+$hathi->name; //Hathi</code></pre>
+          </section>
+        </section>
+
+        <!-- PRIVATE, PROTECTED, PUBLIC -->
+        <section>
+          <section>
+            <h1><strong>Private, Protected, Public</strong></h1>
+          </section>
+          <section>
+            <h3>Privilegier</h3>
+            <p class="fragment fade-down">I PHP har vi olika nyckelord för åtkomst.</p>
+            <p class="fragment fade-down"><em>Principle of Least Privilege</em></p>
+          </section>
+          <section>
+          <h3><em>Encapsulation</em></h3>
+          <p>Inkapsling</p>
+          <p class="fragment fade-down">Lägger samman sådant som hör ihop till samma objekt, minskar antalet globala variabler etc.</p>
+          <p class="fragment fade-down"><em>Information hiding</em>: vi gömmer så mycket som möjligt, koden ska inte veta för mycket.</p>
+        </section>
+          <section data-transition="convex none">
+            <pre><code style="min-height: 500px" class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+  public $name; //public property
+
+  public function __construct($name){
+      $this->name = $name; //Always public
+  }
+}</code></pre>
+          <p class="fragment fade-down">Kan kommas åt hur som helst, helgalet</p>
+          </section>
+          <section data-transition="none convex">
+            <pre><code  style="min-height: 500px" class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+  private $name; //private property
+
+  public function __construct($name){
+      $this->name = $name; //Always public
+  }
+}</code></pre>
+          <p class="fragment fade-down">Kan endast kommas åt från <em>inuti</em> klassen</p>
+          </section>
+          <section>
+            <p>Men vi måste komma åt <em><code>$name</code></em></p>
+            <p class="fragment fade-down">Oftast har man <strong>getter/setter</strong></p>
+            <p class="fragment fade-down">Funktioner som hämtar värden åt en</p>
+          </section>
+          <section>
+          <pre><code  style="min-height: 530px" class="hljs php line-numbers" data-trim data-noescape>class Elephant
+{
+  private $name; //private property
+
+  public function __construct($name){
+      $this->name = $name; //Always public
+  }
+  public function getName(){
+    return $this->name; //Only returns name
+  }
+}</code></pre>
+          </section>
+          <section>
+            <pre><code style="min-height:530px; " class="hljs php line-numbers" data-trim data-noescape>//...
+private $name;
+public function getName(){
+    return $this->name; //Only returns name
+}
+public function setName($name){
+  if($name == ''){
+    return 'No empty name!';
+  }
+  $this->name = $name;
+} </code></pre>
+          <p class="fragment fade-down">Vi bestämmer vem som kan komma åt värdena och hur värden kan sättas</p>
+          </section>
+          <section>
+            <ul>
+              <li><strong>private</strong>: bara egna klassen kan komma åt</li>
+              <li><strong>public</strong>: alla kan komma åt </li>
+              <li><strong>protected</strong>: klassen och alla klasser som <em>ärver</em> av klassen kan komma åt (återkommer till den imorgon)</li>
+            </ul>
+          </section>
+        </section>
+
+        <!--STATIC -->
+        <section>
+          <section>
+            <h1><strong>Static</strong></h1>
+          </section>
+          <section>
+            <p>En metod kan vara bunden till klassen och inte till objektet.</p>
+            <p class="fragment fade-down">Metoden kan användas <em>utan att instatiera ett objekt</em></p>
+          </section>
+          <section>
+            <p>"Statiska" metoder i JavaScript</p>
+            <pre><code class="hljs js line-numbers" data-trim data-noescape>function Foo() {}; //constuctor
+Foo.speak = function() { //Not bound to object
+  console.log('Foooo!'); 
+};</code></pre>
+          <pre class="fragmen fade-down"><code class="hljs js line-numbers" data-trim data-noescape>Foo.prototype.speak = function() { //Bound to object
+  console.log('Foooo!'); //can reference 'this'
+};</code></pre>
+          </section>
+          <section>
+              <h3><strong>static</strong> keyword</h3>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+  static function speak()
+  {
+    echo "ERRUUH!";
+  }
+}</code></pre>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+Elephant::speak(); //'ERRUUH!'</code></pre> 
+          <p class="fragment fade-down">Kan tala utan instans</p>
+          </section>
+          <section>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+class Elephant
+{
+  static public $name = "Hathi";
+}</code></pre>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>&lt;?php
+Elephant::$name; //'Hathi'</code></pre>
+<p class="fragment fade-down">Kan ha ett namn utan instans</p>
+          </section>
+        </section>
+        
+
+        </section>
+        <section>
+          <section>
+            <h3>Imorgon: <strong>Inheritance</strong></h3>
+            <h3>Idag: <strong>OOP Övningar</strong></h3>
+          </section>
+        </section>
+
+      </div>
+    </div>
+    <!-- reveal.js scripts -->
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        {src: 'plugin/line-numbers/line-numbers.js'}
+        ]
+      });
+    </script>
+  </body>
+  </html>
