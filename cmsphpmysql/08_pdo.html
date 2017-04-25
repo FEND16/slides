@@ -1,0 +1,147 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>PHP Data Object</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><strong>PDO</strong></h1>
+          <p><em>PHP Data Object</em></p>
+        </section>
+        <section>
+          <p class="fragment fade-down">PHP Hypertext Processor Data Object</p>
+          <p class="fragment fade-down">PHP Hypertext Processor Hypertext Processor Data Object</p>
+          <p class="fragment fade-down">PHP Hypertext processor Hypertext Processor Hypertext Processor Data Object</p>
+          <p class="fragment fade-down">PHP Hypertext Processor Hypertext processor Hypertext Processor Hypertext Processor Data Object</p>
+          <p class="fragment fade-down">PHP Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Data Object</p>
+          <p class="fragment fade-down">PHP Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Data Object</p>
+          <p class="fragment fade-down">PHP Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Hypertext Processor Data Object</p>
+        </section>
+      </section>
+      
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h1><strong>PDO + SQL</strong></h1>
+        </section>
+        <section>
+          <p><em>PDO</em> är numera det rätta sättet att <br/>säkert koppla till databaser via PHP</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>mysql_connect(); //the old ways</code></pre>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>mysqli_connect(); //the old ways</code></pre>
+          <p class="fragment fade-down">Mer osäkra kopplingar, <em>PDO</em> gör mycket arbete åt oss</p>
+        </section>
+        <section>
+          <img src="http://i.imgur.com/yRG9VCw.png" alt="Decrap">
+        </section>
+        <section>
+          <p><em>PDO</em> behöver: Database source, username, password, (options)</p>
+          <p class="fragment fade-down">Options är optional, vi kan skippa det men kan behövas senare.</p>
+          <a class="fragment fade-down" href="http://localhost:8888/MAMP">http://localhost:8888/MAMP/</a>
+        </section>
+        <section>
+          <p>Vi instansierar ett nytt <strong>PDO-object</strong></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$pdo = new PDO(
+"mysql:host=localhost;dbname=products;charset=utf8",
+"root",
+"root"
+);</code></pre>
+        <p class="fragment fade-down">Spara instansen!</p>
+        </section>
+        <section>
+          <p><em>Vanliga fel</em></p>
+          <p>Rätt adress= (localhost  eller 127.0.0.1)</p>
+          <p>Testa ange portnummer</p>
+          <p>Rätt lösen och användarnamn?</p>
+          <p>Har du angett charset? (charset ska vara  <em><code>'utf8'</code></em>)</p>
+        </section>
+        <section>
+          <p>Lägg till i början av filen</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);</code></pre>
+        </section>
+        <section>
+          <p><em>PDO-objektet</em> är som ett vanligt objekt</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$myObj->myFunction();</code></pre>
+          <p class="fragment fade-down">Vi har dock inbyggda funktioner som t.ex. <code><strong>prepare()</strong></code></p>
+        </section>
+        <section>
+          <p><em>Prepare</em></p>
+          <p>Med <em><code>prepare</code></em> skriver vi våra <strong>SQL</strong>-statements</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$statement = $pdo->prepare("SELECT * FROM pc");</code></pre>
+        </section>
+        <section>
+          <p>När vi har förberett ett statement måste vi utföra det</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$statement->execute();</code></pre>
+          <p class="fragment fade-down"><code><em>$statement</em></code> kommer nu att innehålla de hämtade raderna och vi kan loopa igenom dem.</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1>
+            <strong>Superglobals</strong>
+          </h1>
+        </section>
+        <section>
+          <p>I PHP har vi såkallade <em>Superglobals</em></p>
+          <p>Dessa används främst för att hämta information vid <strong>GET</strong> och <strong>POST</strong></p>
+          <p class="fragment fade-down">Varje request innehåller som vi tidigare vet mer data än enbart URLen</p>
+          <p></p>
+        </section>
+        <section>
+          <p>Testa att <code><em>var_dump</em></code> dessa i er index.php</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$_POST
+$_GET
+$_SERVER</code></pre>
+        </section>
+        <section>
+          <p>Med <code><em>$_POST</em></code> och <code><em>$_GET</em></code> kan vi hämta data som skickas vid varje request</p>
+          <p class="fragment fade-down">Kom ihåg <strong>HTTP: CRUD</strong></p>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
