@@ -1,0 +1,251 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>PHP Data Object</title>
+  <script>
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+<style>
+.reveal section img {
+  background-color: transparent;
+  box-shadow: none;
+}
+</style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><strong>PDO</strong></h1>
+          <p><em>PHP Data Object</em></p>
+        </section>
+      </section>
+      
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h1><strong><code>prepare / execute</code></strong></h1>
+        </section>
+        <section>
+          <h1>KOLLA ALLA "STRÄNGAR" OCH SEMIKOLON;</h1>
+        </section>
+        <section>
+          <h1>KOLLA RÄTT TABELLNAMN OCH DATABASNAMN</h1>
+        </section>
+        <section>
+          <p><em>PDO</em></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$pdo = new PDO($dsn, $user, $pass, $options);</code></pre>
+          
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$pdo = new PDO(
+  "mysql:host=localhost;dbname=products;charset=utf8",
+  "root",
+  "root",
+  $options
+);</code></pre>
+        </section>
+        <section>
+          <p><em>that's so fetch!</em></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$statement = $pdo->prepare("SELECT * FROM pc");
+  $statement->execute();
+  $data = $statement->fetchAll(PDO::FETCH_ASSOC);
+  foreach ($data as $row){
+  echo &quot;&lt;li&gt;&quot; . $row[&#039;model&#039;] . &quot;&lt;/li&gt;&quot;;
+}</code></pre>
+        </section>
+      </section>
+
+        <!-- SESSION -->
+        <section>
+          <section>
+            <h1><strong>$_SESSION</strong></h1>
+          </section>
+          <section>
+            <h1>Superglobal $_SESSION</h1>
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/05/Superman_S_symbol.svg/1280px-Superman_S_symbol.svg.png" alt="Super Session">
+          </section>
+          <section>
+            <h3><em>Superglobals</em></h3>
+            <ul>
+              <li>$GLOBALS</li>
+                <li>$_SERVER</li>
+                <li><span class="fragment highlight-red">$_GET</span></li>
+                <li><span class="fragment highlight-red">$_POST</span></li>
+                <li>$_FILES</li>
+                <li>$_COOKIE</li>
+                <li><span class="fragment highlight-red">$_SESSION</span></li>
+                <li>$_REQUEST</li>
+                <li>$_ENV</li>
+            </ul>
+          </section>
+          <section>
+            <p><strong><em>$_GET</em></strong> för att få URL-query</p>
+            <pre><code class="hljs http line-numbers" data-trim data-noescape>https://mysite.com?name=jesper&ok=whatev</code></pre>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>var_dump($_GET) // { name: jesper, ok: whatev }</code></pre>
+          </section>
+          <section>
+            <p><strong><em>$_POST</em></strong> för att hämta data från <code>forms</code> </p>
+            <pre><code class="hljs html line-numbers" data-trim data-noescape>&lt;form action=&quot;post.php&quot; method=&quot;POST&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;name&quot;&gt;
+  &lt;input type=&quot;text&quot; name=&quot;ok&quot;&gt;
+  &lt;input type=&quot;submit&quot;&gt;
+&lt;/form&gt;</code></pre>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>var_dump($_POST) // { name: jesper, ok: whatev }</code></pre>
+            <p class="fragment fade-down"><code>form action, form method och name är viktiga</code></p>
+          </section>
+          <section>
+            <h3><em><code>$_SESSION</code></em></h3>
+            <p>I sessionsvariabeln kan vi lagra information som ska vara under en längre tid</p>
+            <p class="fragment fade-down">En session håller data när du går till en annan sida.</p>
+            <p class="fragment fade-down">Lagras på servern och i browsern men inte i databasen.</p>
+            <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>$_SESSION['name'] = "Jesper";</code></pre>
+          </section>
+          <section>
+            <p>Varje gång du ska köra en session måste du se till så att sessionen är startad</p>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>session_start();</code></pre>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>session_destroy();</code></pre>
+            <p class="fragment fade-down">En session kan t.ex. vara <strong>en inloggning</strong></p>
+          </section>
+          <section>
+            <p class="fragment fade-down">Vi ska inte starta sessionen om den redan är startad. </p>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}</code></pre>
+          <p class="fragment fade-down"><em>Lägg <code>session_start()</code></em> längst upp i dokumentet</p>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1><strong>Login / Logout</strong></h1>
+          </section>
+          <section>
+            <p><code>$_SESSION</code> används främst i kombination med login / logout men man kan lagra vad som helst i arrayen</p>
+            <p class="fragment fade-down">Vi vet hur vi kan lagra en användare/vad som helst i SQL</p>
+            <pre class="fragment fade-down"><code class="hljs sql line-numbers" data-trim data-noescape>INSERT INTO users (username, password)
+VALUES (zero_cool, strongpass2000)</code></pre>
+          </section>
+          <section>
+            <p>Vad är felet? 🤡</p>
+            <pre><code class="hljs sql line-numbers" data-trim data-noescape>INSER INTO users (username, password)
+VALUES (zero_cool, strongpass2000)</code></pre>
+<p class="fragment fade-down">Tips: <em>säkerhet</em></p>
+          </section>
+          <section>
+            <p>Vi måste kryptera våra lösenord</p>
+            <p class="fragment fade-down">Det är inbyggt 🤖</p>
+            <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>password_hash("strongpass2000", PASSWORD_DEFAULT)</code></pre>
+          </section>
+          <section>
+            <p>Men vi måste kunna "okryptera" vårt lösenord</p>
+            <p class="fragment fade-down">Det är inbyggt 🤖</p>
+            <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>$hash = password_hash("strongpass2000", PASSWORD_DEFAULT)</code></pre>
+            <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>if (password_verify('strongpass2000', $hash)) { 
+    echo "Yes! It's YOU!"; 
+} else { 
+    echo "Liar"; 
+} </code></pre>
+          </section>
+
+        </section>
+        <!-- IMPROVMENTS -->
+      <section>
+        <section>
+          <h1><em>Improvements!</em></h1>
+        </section>
+        <section>
+          <img src="http://i.imgur.com/f0AoMPG.gif" alt="Pile">
+          <p class="fragment fade-down">Allting kan delas upp i funktioner och klasser.</p>
+        </section>
+        <section>
+          <h3><em>First step!</em></h3>
+          <p>Includes! requires!</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>include 'Database.php';
+require 'myCoolFunctions.php';</code></pre>
+          <p class="fragment fade-down">Lägg logiken i separata filer</p>
+        </section>
+        <section>
+          <pre><code style="min-height: 350px;"class="hljs php line-numbers" data-trim data-noescape>function print_pc($data){
+  $list = "&lt;ul&gt;";
+  foreach ($data as $row){
+    $list .= &quot;&lt;li&gt;&quot; . $row[&#039;model&#039;] . &quot;&lt;/li&gt;&quot;;
+  }
+  $list .= "&lt;/ul&gt;";
+  return $list;
+}</code></pre>
+        <pre><code class="hljs php line-numbers" data-trim data-noescape>$data = $statement->fetchAll(PDO::FETCH_ASSOC);
+echo print_pc();</code></pre>
+      </section>
+      <section>
+        <h3><em>Classes</em></h3>
+      </section>
+      <section>
+        <pre><code class="hljs php line-numbers" data-trim data-noescape>class Animal
+{
+  private $name;
+  public function __construct($name)
+  {
+    $this->name = $name;
+  }
+}</code></pre>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>class Dog extends Animal
+{
+  //I am almost the same as Animal!
+}</code></pre>
+          </section>
+          <section>
+            <img src="http://i.imgur.com/nhCj6gz.png" alt="I Am Developer">
+          </section>
+          <section> 
+          <p>Ni behöver kanske inte arv men ni behöver strukturera enligt klasser.</p>
+          <p class="fragment fade-down">Allting som du kan göra som enskild funktion eller proceduell kod kan läggas i en klass.</p>
+          </section>
+          <section>
+            <p>Allting som berör användare kan få en egen klass</p>
+            <pre><code class="hljs php line-numbers" data-trim data-noescape>class Users
+{
+  public function login(){}
+}</code></pre>
+          </section>
+        </section>
+
+      </div>
+    </div>
+    <!-- reveal.js scripts -->
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+    <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+        {src: 'plugin/line-numbers/line-numbers.js'}
+        ]
+      });
+    </script>
+  </body>
+  </html>
