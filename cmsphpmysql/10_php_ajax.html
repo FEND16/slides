@@ -1,0 +1,175 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>PHP + AJAX == ❤️</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style>
+    .reveal strong{
+      font-weight: normal;
+    }
+    .reveal strong, .reveal em {
+      padding: .5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><strong>PHP + AJAX == ❤️ ??? </strong></h1>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><strong><code>try / catch</code></strong></h1>
+        </section>
+        <section>
+          <p>För enklare error-hantering, bara visa meddelandet</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>$pdo->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );</code></pre>
+        <p class="fragment fade-down">Samma som vi gör med <em>options</em>-argumentet när vi skapar vår PDO</p>
+        </section>
+        <section>
+          <p>För mer errorhantering gällande <code><em>PDO</em></code></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>try{
+  $pdo = new PDO(/**/);
+}catch(PDOException $error){
+  echo $error->getMessage();
+}</code></pre>
+        </section>
+      </section>
+      
+      <!-- AJAX -->
+
+      <section>
+        <section>
+          <h1><strong>AJAX</strong></h1>
+        </section>
+        <section>
+          <p>Dynamisk uppdatering av innehåll</p>
+          <p class="fragment fade-down">Det vi egentligen gör:</p>
+          <p class="fragment fade-down"><em>Hämtar en annan sida och appendar dess innehåll</em></p>
+        </section>
+        <section>
+          <strong>fetch</strong>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>fetch('https://localhost/myApi')
+  .then(data => data.json())
+  .then(json => console.log(json));</code></pre>
+        <p class="fragment fade-down">Sidan är kanske egentligen <code>localhost:80/myApi.json</code></p>
+        <p class="fragment fade-down">Servern har sagt till att innehållet ska levereras som <code>JSON</code></p>
+        <p class="fragment fade-down"><code><em>data.json()</em></code> konverterar innehållet till läslig JSON</p>
+        </section>
+        <section>
+          <p>I <code>PHP</code> har vi arrayer som måste konverteras</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>json_encode($phpArray); //JSON.stringify() kinda
+json_decode($jsonObject); //JSON.parse() kinda</code></pre>
+          <p class="fragment fade-down"><code><em>JSON</em></code> är bara en sträng och kan därför echo ut.</p>
+          <p class="fragment fade-down"><em>echo</em> är bara för strängar</p>
+        </section>
+        <section>
+          <p>Eftersom vi <code><em>echoar</em></code> ut en sträng är det sidans <strong><code>body</code></strong></p>
+          <p class="fragment fade-down"><code>HEADERS</code> - <code>BODY</code></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>//hello.php
+&lt;?php
+echo 'Hello!'; //body of 'hello.php'</code></pre>
+        </section>
+        <section>
+          <p>Vi kan hämta sidan med <code><em>ajax</em></code></p>
+          <p class="fragment fade-down"><code>.text()</code> om det är något annat än JSON</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>fetch('hello.php')
+  .then(data => data.text())
+  .then(text => console.log(text));</code></pre>
+        </section>
+        <section>
+          <h3><em>POST</em></h3>
+        </section>
+        <section>
+          <p>Att skicka formulär fungerar typ på samma sätt</p>
+          <p class="fragment fade-down">Men oftast echoar vi inte ut något när vi postar.</p>
+          <pre class="fragment fade-down"><code class="hljs js line-numbers" data-trim data-noescape>fetch('post.php', 
+{
+  method: 'POST',
+  body: ?????
+})</code></pre>
+        <p class="fragment fade-down">Vad skickar vi med och i vilket format?</p>
+        </section>
+        <section>
+          <p><em>FormData</em></p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>//jQuery 
+let formData = $('#myForm').serialize();</code></pre>
+          <p class="fragment fade-down">Plockar alla input och gör till key/value <em>-></em> "name"="value"</p>
+        </section>
+        <section>
+          <blockquote>The <code><strong>.serialize()</strong></code> method creates a text string in standard URL-encoded notation.</blockquote>
+          <pre class="fragment fade-down"><code class="hljs line-numbers" data-trim data-noescape>application/x-www-form-urlencoded</code></pre>
+          <p class="fragment fade-down">==</p>
+          <pre class="fragment fade-down"><code class="hljs line-numbers" data-trim data-noescape>post.php?key1=value1&key2=value2</code></pre>
+        </section>
+        <section>
+          <p>Man kan sätta <code><em>'Content-type'</em></code> själv</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>header('Content-type: application/json');
+header('Content-type: application/x-www-form-urlencoded');</code></pre>
+          <p class="fragment fade-down">Jag använde tidigare en annan header</p>
+          <pre class="fragment fade-down"><code class="hljs php line-numbers" data-trim data-noescape>header('Location: /')</code></pre>
+          <p class="fragment fade-down">Koden ovan redirectar till <code>root</code></p>
+        </section>
+        <section>
+          <p>Om du vill göra ett eget API kanske?</p>
+          <p><strong>Enable Cross Origin Resource Sharing</strong></p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape> &lt;?php
+ header("Access-Control-Allow-Origin: *");</code></pre>
+        <p class="fragment fade-down">Tillåter att alla domäner kan hämta data från vår server</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <p><strong>Kom ihåg</strong></p>
+          <p class="fragment fade-down">Strängar och semikolon</p>
+          <p class="fragment fade-down">Adress, port och databasnamn</p>
+          <pre class="fragment fade-down"><code class="hljs js line-numbers" data-trim data-noescape>form.addEventListener('submit', (event) => {
+  <span class="fragment highlight-red">event.preventDefault();</span>
+});</code></pre>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
