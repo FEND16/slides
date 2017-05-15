@@ -1,0 +1,172 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>Wordpress</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><strong>Wordpress</strong></h1>
+        </section>
+        <section>
+          <img src="https://fthmb.tqn.com/iBddb7seyQ6xCBxrtDb68m4zdJY=/768x0/filters:no_upscale()/about/GutenbergGI-565b77815f9b5835e46dc18a.jpg">
+          <p>Vem uppfann tryckpressen?</p>
+          <p class="fragment bubble">oh shit it's php</p>
+          <p class="fragment bubble2">time to bail</p>
+          <style type="text/css">
+            .bubble{
+              position: absolute;
+              border-radius: 10px;
+              font-size: 10px;
+              top: 90;
+              right: 400;
+              background: teal;
+            }
+            .bubble2{
+              position: absolute;
+              border-radius: 10px;
+              font-size: 10px;
+              top: 90;
+              left: 350;
+              background: teal;
+            }
+          </style>
+        </section>
+        <section>
+          <img src="https://www.techtricksworld.com/wp-content/uploads/2016/02/charles.jpg">
+          <p>Vem skapade den första datorn?</p>
+        </section>
+        <section>
+          <img src="https://www.biography.com/.image/t_share/MTE4MDAzNDEwODQwOTQ2MTkw/ada-lovelace-20825279-1-402.jpg">
+          <p>Vem var den första programmeraren?</p>
+        </section>
+      </section>
+      
+      <!-- Wordpress -->
+
+      <section>
+        <section>
+          <h1><strong>Wordpress djupdyk</strong></h1>
+          <p>Det står i kursplanen</p>
+        </section>
+        <section>
+          <p>Nu kan vi PHP typ, skriv semikolon och frågetecken tills errormeddelanden försvinner.</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>&lt;p&gt;&lt;?= $row[&#039;postId&#039;] ?&gt;&lt;/p&gt;</code></pre>
+        </section>
+        <section>
+          <p><em>Laravel</em> är ett riktigt bra ramverk om man vill fördjupa sig.</p>
+          <img src="https://i.imgur.com/xnPkORp.png" alt="Laravel">
+        </section>
+        <section>
+          <p>Men nu kan vi bättre förstå grejen med Wordpress.</p>
+          <p class="fragment fade-down">Eftersom Wordpress är byggt på <em>PHP</em> & <strong>MySQL</strong></p>
+        </section>
+        <section>
+          <p>Först hade vi <em>Child Themes</em></p>
+          <pre><code class="hljs css line-numbers" data-trim data-noescape>/*
+ Theme Name:   Twenty Seventeen Child
+ Description:  A Cool Child
+ Author:       Jesper Orb
+ Template:     twentyseventeen
+*/</code></pre>
+        <p class="fragment fade-down">Vi behöver <code><em>functions.php</em></code> samt <code><strong>style.css</strong></code></p>
+        </section>
+        <section>
+          <p><a href="https://codex.wordpress.org/Child_Themes">https://codex.wordpress.org/Child_Themes</a></p>
+          <p class="fragment fade-down">Vi slipper modifiera ett färdigt tema</p>
+          <p class="fragment fade-down">Om temat uppdateras försvinner inte våra ändringar.</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h3><em>Templates</em></h3>
+          <p><strong>+ plugins</strong></p>
+        </section>
+        <section>
+          <p>Inget mer än <em><code>php</code></em>-filer med kommentarer i början</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>/*
+  Template Name: My template
+*/</code></pre>
+        </section>
+        <section>
+          <img src="https://i.imgur.com/j0A5Uqq.png" alt="Template">
+          <p>Dyker upp automatiskt om man har en template-fil med föregående kommentar i början.</p>
+        </section>
+        <section>
+          <h3><em>Plugins</em></h3>
+        </section>
+        <section>
+          <p>Samma som emd templates: kommentar i början</p>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>/*
+  Plugin Name: My Plugin
+*/</code></pre>
+        <p class="fragment fade-down">Borde dyka upp i Pluginlistan</p>
+        </section>
+        <section>
+          <pre><code class="hljs php line-numbers" data-trim data-noescape>/*
+  Plugin Name: My Plugin
+  Description: A simple plugin
+  Author: Jesper Orb
+  Version: 1.0
+  Author URI: https://jesperorb.com
+*/</code></pre>
+        <p class="fragment fade-down">Alla andra fält är optional men kan vara bra att ha med.</p>
+        </section>
+        <section>
+          <p>Allting som sedan skrivs i din plugin kan sedan användas över hela sidan.</p>
+          <p class="fragment fade-down">Alla templates du skapar kan sedan användas för alla sorters sidor.</p>
+        </section>
+        <section>
+          <h5><a href="https://codex.wordpress.org/Function_Reference">https://codex.wordpress.org/Function_Reference</a></h5>
+          <p>Allting man kan göra finns i <em>Codex</em></p>
+        </section>
+        <section>
+          <h3><em>Nu</em></h3>
+          <p>Skapa en hemsida med Templates</p>
+          <p>Presentera hemsidan i eftermiddag</p>
+          <p><strong style="font-weight: normal; padding: .5rem;">Presentera: vilka ändringar i vilka filer ni var tvungna att göra och hur ni gjorde det</strong></p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
