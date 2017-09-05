@@ -1,0 +1,161 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>Forms in React</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><em>Forms in React</em></h1>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>handleSubmit = (e) => {
+  if(e.keyCode === 13){
+    const newNames = [...this.state.names];
+    newNames.push(this.state.name);
+    this.setState({ names: newNames, name: '' });
+  }
+}</code></pre>
+        </section>
+        <section>
+          <p class="fragment fade-down"><em>Controlled Component</em></p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>onChange = e => {
+  this.setState({ inputValue : e.target.value })
+}</code></pre>
+        <pre><code class="hljs js line-numbers" data-trim data-noescape>&lt;input 
+  type=&quot;text&quot; 
+  onChange={this.onChange}
+  value={this.state.value} /&gt;</code></pre>
+        </section>
+        <section>
+          <p><em>Controlled Component</em></p>
+          <p class="fragment fade-down">I princip alla inputfält vi skrivit hitills</p>
+          <p class="fragment fade-down">Värdet och uppdateringen sker via Reacts flöde</p>
+          <p class="fragment fade-down">Inte direkt via DOMen som vi gjort i VanillaJS</p>
+        </section>
+        <section>
+          <p><em>Uncontrolled Component</em></p>
+          <p>När du inte har använder det flöde vi använt</p>
+          <p class="fragment fade-down">React har inte kontroll på elementet, och kan inte fungera "som det ska".</p>
+          <pre class="fragment fade-down"><code class="hljs js line-numbers" data-trim data-noescape>const input= document.getElementById('myInput').value;</code></pre>
+        </section>
+        <section>
+          <p><strong>refs</strong></p>
+          <p><em>Refs</em> kan också användas för detta</p>
+          <p class="fragment fade-down">Mindre "reactigt", svårare att hantera</p>
+          <p class="fragment fade-down">Vissa företag har styleguide: "Inga refs någonsin"</p>
+          <p class="fragment fade-down"><em>Om man verkligen inte pallar state</em></p>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>&lt;input
+  ref={node =&gt; {this.input = node;}}
+  type="text" /&gt;</code></pre>
+        <p class="fragment fade-down">Sparar hela noden i <code>this.input</code></p>
+        </section>
+        <section>
+          
+        </section>
+      </section>
+      
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h><code><em>input</em></code></h1>
+        </section>
+        <section>
+          <p><em><code>&lt;input type=&quot;text&quot; /&gt;</code></em></p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>&lt;input 
+  type=&quot;text&quot; 
+  value={this.state.value} 
+  onChange={this.onChange} /&gt;</code></pre>
+        </section>
+        <section>
+          <p><em><code>&lt;input type=&quot;checkbox&quot; /&gt;</code></em></p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>&lt;input 
+  type=&quot;checkbox&quot; 
+  checked={this.state.checked} 
+  onChange={this.onChange} /&gt;</code></pre>
+      <pre><code class="hljs js line-numbers" data-trim data-noescape>onChange = e => {
+  this.setState({ checked: e.target.checked});
+}</code></pre>
+        </section>
+        <section>
+          <p><em><code>&lt;select&gt;&lt;/select&gt;</code></em></p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>&lt;select value={this.state.value} 
+        onChange={this.onChange}&gt;
+  &lt;option value=&quot;Steffe!&quot;&gt; Steffe &lt;/option&gt;
+  &lt;option value=&quot;Inte Steffe!&quot;&gt; Inte Steffe! &lt;/option&gt;
+&lt;/select&gt;</code></pre>
+        </section>
+        <section>
+          <p>Man behöver inte alltid lyssna på <code><strong>keyCode/key</strong></code> såklart 😬</p>
+          <p class="fragment fade-down"><em><code>&lt;form&gt;&lt;/form&gt;</code></em></p>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>&lt;form onSubmit={this.onSubmit}&gt;
+  &lt;input 
+      type=&quot;text&quot; 
+      name=&quot;value&quot; 
+      value={this.state.value} 
+      onChange={this.onChange}/&gt;
+&lt;/form&gt;</code></pre>
+        <p class="fragment fade-down">Observera, formuläret sköter inte inputfältet, formuläret sköter bara vad som händer vid enter/submit</p>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>onSubmit = (e) => {
+  e.preventDefault();
+  console.log(this.state.value); //loggar vadsom
+} </code></pre>
+        <p>Här måste vi stoppa formuläret från att skickas iväg</p>
+        </section>
+        <section>
+          <p>Nu: implementera en <code><em>LoginForm</em></code> tillsammans</p>
+          <p>Eftermiddag: Utöka gårdagens kod samt loginformuläret</p>
+          <p class="fragment fade-down">Ingen genomgång i eftermiddag</p>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

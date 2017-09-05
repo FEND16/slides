@@ -1,0 +1,168 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>Props</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h1><strong>Props</strong></h1>
+        </section>
+        <section>
+            <blockquote>
+              Conceptually, components are like JavaScript functions. They accept inputs (called "props") and return React elements describing what should appear on the screen.
+            </blockquote>
+        </section>
+        <section>
+          <p>Alla komponenter har tillgång till <code>props</code></p>
+          <p><code>props</code> kommer att bli din bästa vän</p>
+          <p class="fragment fade-down">Alla värden som skickas ner blir till props</p>
+          <pre class="fragment fade-down"><code class="hljs js line-numbers" data-trim data-noescape>this.props</code></pre>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>//App.js
+render(){
+  return(
+    &lt;div&gt;
+      &lt;Header propName=&quot;propValue&quot; /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>  
+        <p class="fragment fade-down">Liknande som att man sätter ett attribut på ett HTML-element</p>
+        <p class="fragment fade-down">Här skickar vi vidare värdet <code><em>propValue</em></code> för att användas i Header</p>
+        </section>
+        <section>
+          <p>Det vi döper vår prop till är vad den kommer heta i vår komponent</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>//Header.js
+render(){
+  return(
+      &lt;h1&gt; { this.props.propName === &quot;propValue&quot; } &lt;h1/&gt;
+  );
+}</code></pre>
+        <p class="fragment fade-down">Blir tillgängligt via <code><em>this.props</em></code></p>
+        </section>
+        <section>
+          <p><strong>Spread props</strong></p>
+        </section>       
+        <section>
+            <p>Vi kan skicka ner värdena en för sig:</p>
+            <p class="fragment fade-down">Vi kan även använda JSX-spread</p>
+            <p class="fragment fade-down">Fungerar "typ" som ES6-spread</p>
+        </section>
+        <section data-transition="none">
+          <pre><code style="min-height: 470px" class="hljs js line-numbers" data-trim data-noescape>render(){
+  let obj = {
+    prop1: "value1",
+    prop2: "value2"
+  }
+  return(
+    &lt;div&gt;
+      &lt;List {...obj} /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </section>
+        <section data-transition="none">
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>render(){
+  return(
+    &lt;div&gt;
+      &lt;List prop1=&quot;value1&quot; prop2=&quot;value&quot; /&gt;
+    &lt;/div&gt;
+  );
+}</code></pre>
+        </section>
+      </section>
+      <section>
+        <section>
+        <p><strong>Conditional Rendering</strong></p>
+      </section>
+      <section>  
+        <p class="fragment fade-down">Oftast vill man rendera olika innehåll baserat på olika värden</p>
+        <p class="fragment fade-down"><strong>Hur?</strong> <code>IF/ELSE</code></p>
+        <p class="fragment fade-down">Innan <code><em>return</em></code> kan vi göra beräkningar</p>
+      </section>
+      <section>
+<pre><code style="min-height: 470px" class="hljs js line-numbers" data-trim data-noescape>render(){
+  if(???){
+    //Do stuff, return element?
+  }
+  return(
+    &lt;div&gt;
+      
+    &lt;/div&gt;
+  );
+}</code></pre>
+      </section>
+      <section>
+        <pre><code style="min-height: 470px" class="hljs js line-numbers" data-trim data-noescape>render(){
+  if(false){
+    return null
+  }else{
+    return(
+      &lt;div&gt;
+        Hello!
+      &lt;/div&gt;
+    );
+  }
+  }</code></pre>
+              </section>
+      <section>
+        <p><em>Ternary Operator</em></p>
+        <pre><code style="min-height: 400px" class="hljs js line-numbers" data-trim data-noescape>render(){
+  let text = this.props.text ? this.props.text : 'Default';
+  return(
+    &lt;div&gt;
+      { text }
+    &lt;/div&gt;
+  );
+}</code></pre>
+      </section>
+      </section>
+      <section>
+        <p><em>Användbara grejer</em></p>
+        <p class="fragment fade-down">ES6 Destructuring</p>
+        <p class="fragment fade-down">ES6 Spread and Rest syntax</p>
+        <p class="fragment fade-down">Ternary Operator</p>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>React</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal .intro-text{
+      color: #555;
+      text-shadow: 10px 10px 0 #c594c5;
+    }
+    .reveal em{
+      padding: .5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1 class="intro-text">React</h1>
+          <pre style="width: 50%; text-align:center;"><code  class="hljs js line-numbers" data-trim data-noescape>import React from 'react';</code></pre>
+        </section>
+      </section>
+      
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h3><em>A JavaScript library <br/> for building user interfaces</em></h3>
+          <p>- Facebook</p>
+        </section>
+        <section>
+          <ul>
+            <li>Skapat av Facebook för att skapa snabba gränssnitt</li>
+            <li class="fragment slide-down">Enbart <em>VIEW</em>, bryr sig bara om grässnittet.</li>
+            <li class="fragment slide-down">Inte mycket inbyggt: litet men kraftfullt API  </li>
+          </ul>
+        </section>
+        <section>
+          <img src="https://i.stack.imgur.com/dQukP.png" alt="MVC" />
+          <p class="fragment fade-down">Mycket är REN JS, inga konstiga abstraktioner</p>
+          <p class="fragment fade-down">Vi får heller inte så mycket gratis</p>
+        </section>
+        <section>
+          <p><strong>Virtual DOM</strong></p>
+          <p class="fragment fade-down">DOM-uppdateringar är långsamma och kostsamma</p>
+          <p class="fragment fade-down">React har en avancerad algoritm som istället bestämmer om och vad som ska uppdateras</p>
+          <p class="fragment fade-down">Mindre och färre uppdatering, snabbare gränssnitt.</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><code><em>React Components</em></code></h1>
+        </section>
+        <section>
+          <p>React byggs upp av komponenter som antingen är ES6-classes eller funktioner</p>
+          <pre><code style="min-height: 430px" class="hljs js line-numbers" data-trim data-noescape>class App extends React.Component{
+  render(){
+    return(
+      &lt;div&gt;
+        &lt;h1&gt;Hej!&lt;/h1&gt;
+      &lt;/div&gt;
+    );
+  }
+}</code></pre>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>render(){
+  return(
+    &lt;div&gt;
+      &lt;h1&gt;Hej!&lt;/h1&gt; //JSX!
+    &lt;/div&gt;
+  );
+}</code></pre>
+        <p class="fragment fade-down">Metod som returnerar <code><em>HTML?</em></code></p>
+        <p class="fragment fade-down">NEJ! <code><strong>JSX</strong></code>: JavaScript förklätt till HTML</p>
+        </section>
+        <section>
+          <p><strong>Viktigt</strong></p>
+          <p class="fragment fade-down">Funktioner som måste returnera något</p>
+          <p class="fragment fade-down"> Components must return a single root element.</p>
+          <p class="fragment fade-down">Stor bokstav på Komponenter</p>
+        </section>
+        <section>
+          <p><strong>JSX</strong></p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>return(
+    &lt;div&gt;
+    &lt;/div&gt;
+);</code></pre>
+        <p class="fragment fade-down">Vad som egentligen händer</p>
+        <pre class="fragment fade-down"><code class="hljs js line-numbers" data-trim data-noescape>React.createElement(
+  'div',  //type of element
+  null    //no children :( so alone
+);</code></pre>
+        <p class="fragment fade-down">Funktion som returnerar <em>HTML</em></p>
+        </section>
+        <section>
+          <h3><em>Kodexempel</em></h3>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,342 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>React + Async</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><em>React + Async</em></h1>
+        </section>
+      </section>
+
+      
+      <!-- Promises -->
+
+      <section>
+        <section>
+          <h1><strong>Promises</strong></h1>
+        </section>
+        <section>
+          <blockquote>
+            The Promise object is used for asynchronous computations. A Promise represents a value which <strong>may be available now, <br/> or in the future, <br/> or never.</strong>
+          </blockquote>
+          <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="reference">Ref: MDN - Promises</a>
+        </section>
+        <section>    
+          <img src="https://media.giphy.com/media/l3q2K5jinAlChoCLS/giphy.gif" alt="What?" style="min-height: 450px">
+        </section>
+        <section>
+          <blockquote><strong>fetch()</strong> allows you to make network requests similar to <strong>XMLHttpRequest</strong>. The main difference is that the Fetch API uses <em>Promises</em>, which enables a simpler and cleaner API, avoiding callback hell and having to remember the complex API of XMLHttpRequest.</blockquote>
+          <a href="https://developers.google.com/web/updates/2015/03/introduction-to-fetch" class="reference">Ref: Google Dev: 
+Introduction to fetch()</a>
+        </section>
+        <section>
+          <p>Ett Promise har 3 states</p>
+          <ul>
+            <li><em>pending</em>: initial state, not fulfilled or rejected.</li>
+            <li><em>fulfilled</em>: meaning that the operation completed successfully.</li>
+           <li><em>rejected</em>: meaning that the operation failed.</li>
+          </ul>
+          <a href="https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise" class="reference">Ref: MDN - Promises</a>
+        </section>
+        <section>
+          <pre><code style="min-height: 450px" class="hljs js line-numbers" data-trim data-noescape>$.ajax({
+  url: "https://url-example.com",
+  success: function(response){
+    console.log(response);
+  },
+  error: function(err) {
+    console.log(error);
+  }
+})</code></pre>
+<p class="fragment fade-down">Hanterar både lyckad request samt misslyckad</p>
+        </section>
+        <section>
+        <p>Alternativ syntax</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>$.get("https://url-example.com")
+    .done(function() {
+        console.log("OKELDOKELI");
+    })
+    .fail(function() {
+        console.log("WRONG! JUST WRONG!");
+    });</code></pre>
+        <p class="fragment fade-down"><code>.done</code> och <code>.fail</code> "lyssnar" på vad som händer med vår AJAX-request</p>
+        </section>
+        <section>
+          <p> <strong>Promises</strong> är <code><em>thenable</em></code> </p>
+          <p class="fragment fade-down">Den moderna tidens <em>callback</em></p>
+          <p> 
+        </section>
+        <section>
+          <p>Ett Promise följs alltid av ett <code><em>.then</em></code></p>
+          <pre><code class="hljs js">fetch('https://get.com') //a promise!
+  .then(function() {
+    console.log('OKELIDOKELI');
+  });</code></pre>
+        <p class="fragment fade-down"><code><em>then</em></code> tar alltid en funktion som argument</p>
+        </section>
+        <section>
+          <pre><code class="hljs js">fetch('https://get.com') //a promise!
+  .then(function() {
+    console.log('OKELIDOKELI');
+  })
+  .catch(function(){
+    console.log('Oh no..')
+  });</code></pre>
+        <p class="fragment fade-down">Det är bra att alltid fånga upp error med <code><em>.catch()</em></code></p>
+        </section>
+        <section>
+          <p>Det som returneras från fetch är alltid ett promise</p>
+          <p class="fragment fade-down">Vi måste plocka ut vår JSON</p>
+          <p class="fragment fade-down"><code><em>JSON.parse()</em></code> eller den kortare <code><em>.json()</em></code></p>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>fetch("https://example.com")        //Promise
+  .then(response => response.json())  //Promise
+  .then(data => console.log(data));   //json to process</code></pre>
+        <p class="fragment fade-down"><code><em>return</em></code> här är implicit med arrow function, vi behöver inte skriva ut det</p>
+        </section>
+        <section>
+          <p>Fat version</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>fetch("https://example.com")
+  .then(function(response){
+    return response.json()
+  })
+  .then(function(data){ 
+    console.log(data)
+  });</code></pre>
+        <p class="fragment fade-down">data är det som returneras från första <code><em>.then()</em></code></p>
+        </section>
+      </section>
+
+      <section>
+         <section>
+           <h1><strong>Och i React?</strong></h1>
+         </section>
+         <section>
+           <p>Informationen som hämtas och applikationen ska uppdateras när hämtningen är klar</p>
+           <p class="fragment fade-down">Ändringar i <strong>state</strong> triggar <em>alltid</em> en uppdatering på sidan</p>
+           <p class="fragment fade-down">State blir vår förvaring, vår låda att lägga alla variabler i.</p>
+         </section>
+         <section data-transition="none">
+           <pre><code style="min-height: 600px" class="hljs js line-numbers" data-trim data-noescape>const Module = function(){
+  let state = {
+    data: []    //"global" state
+  }
+
+
+
+
+
+
+
+}</code></pre>
+         </section>
+         <section data-transition="none">
+           <pre><code style="min-height: 600px" class="hljs js line-numbers" data-trim data-noescape>const Module = function(){
+  let state = {
+    data: []    //"global" state
+  }
+  const getDataFromApi = function(){
+    
+
+
+
+
+  }
+}</code></pre>
+         </section>
+         <section data-transition="none">
+           <pre><code style="min-height: 600px" class="hljs js line-numbers" data-trim data-noescape>const Module = function(){
+  let state = {
+    data: []    //"global" state
+  }
+  const getDataFromApi = function(){
+    fetch("https://example.com")
+    .then(response => response.json())
+    .then(json => {
+      
+    })
+  }
+}</code></pre>
+         </section>
+         <section data-transition="none">
+           <pre><code style="min-height: 600px" class="hljs js line-numbers" data-trim data-noescape>const Module = function(){
+  let state = {
+    data: []    //"global" state
+  }
+  const getDataFromApi = function(){
+    fetch("https://example.com")
+    .then(response => response.json())
+    .then(json => {
+      state.data = json;  //set global state
+    })
+  }
+}</code></pre>
+         </section>
+         
+        <section data-transition="none">
+           <pre><code style="min-height: 600px" class="hljs js line-numbers" data-trim data-noescape>class App extends Component {
+  state = {
+    data: [] //"global state"
+  }
+
+
+
+
+
+
+
+}</code></pre>
+         </section>
+         <section data-transition="none">
+           <pre><code style="min-height: 600px" class="hljs js line-numbers" data-trim data-noescape>class App extends Component {
+  state = {
+    data: [] //"global state"
+  }
+  getDataFromApi(){
+    fetch("https://example.com")
+    .then(response => response.json())
+    .then(json => {
+
+    })
+  }
+}</code></pre>
+         </section>
+         <section data-transition="none">
+           <pre><code style="min-height: 600px" class="hljs js line-numbers" data-trim data-noescape>class App extends Component {
+  state = {
+    data: [] //"global state"
+  }
+  getDataFromApi(){
+    fetch("https://example.com")
+    .then(response => response.json())
+    .then(json => {
+      this.setState({data : json});  //set global state
+    })
+  }
+}</code></pre>
+         </section>
+         <section>
+           <p>Utifrån state får vi sedan rendera ut vårt innehåll</p>
+           <pre class="fragment fade-down"><code style="min-height: 520px" class="hljs js line-numbers" data-trim data-noescape>//App.js
+render(){
+  const list = this.state.data.map(item => 
+    &lt;li&gt; { item.name } &lt;/li&gt;
+  );
+  return (
+    &lt;div&gt;
+      { list }
+    &lt;/div&gt;
+  )
+}</code></pre>
+         </section>
+       </section>
+      
+      <!-- Component Lifecycle -->
+      <section> 
+        <section>
+          <h1><strong>Component Lifecycle</strong></h1>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>import React, { Component } from 'react';
+class App extends Component{}</code></pre>
+        <p class="fragment fade-down"><code><em>Component</em></code> har mycket mer än bara <code><em>render()</em></code></p>
+        <p class="fragment fade-down">Det MESTA kommer du inte behöva använda. Men det finns där.</p>
+        </section>
+        <section>
+          <p>Ett antal funktioner kallas på automatiskt</p>
+          <p class="fragment fade-down">Behöver vi inte funktionen, skriv inte ut!</p>
+          <p class="fragment fade-down">Mest användbara är <code><em>componentDidMount()</em></code></p>
+        </section>
+        <section>
+          <img style="min-height: 550px; background: none;" src="http://i.imgur.com/fa5UbJM.png" alt="Component Lifecycle">
+        </section>
+        <section>
+          <p>Det vi behöver:</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>componentDidMount(){}</code></pre>
+          <p class="fragment fade-down">En såkallad <strong>Lifecycle method</strong></p>
+          <p class="fragment fade-down">En komponent monteras, renderas, uppdateras och när den inte ska finnas längre: avmonteras.</p>
+          <p class="fragment fade-down">Den har en livscykel, den lever och dör som allt annat</p>
+          <p class="fragment fade-down">Det finns speciella funktioner som körs på olika delar av livsspannet</p>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>componentDidMount(){
+  fetch("https://example.com")
+  .then(response => response.json())
+  .then(data => {
+    this.setState({ items: data });
+  });
+}</code></pre>
+        <p class="fragment fade-down">JSON måste plockas ut ur vårt response som är ett promise.</p>
+      </section>
+        <section>
+          <pre><code style="max-height: 470px"class="hljs js line-numbers" data-trim data-noescape>class App extends Component {
+  state = { 
+
+  }
+  componentDidMount(){
+  }
+  render(){
+  
+  } 
+}</code></pre>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>class App extends Component {
+  state = { }
+  componentDidMount(){ }
+  myOwnSuperMethod = () => { }
+  render(){ } 
+}</code></pre>
+        <p class="fragment fade-down">Observera pilarna på den egna funktionen men inte på de inbyggda</p> 
+        </section>
+        <section>
+          <p>Om vi hämtar informationen i <code>componentDidMount()</code> sker koden automatiskt och vi vet att komponenten finns</p>
+          <p class="fragment fade-down">Så kalla inte på föregående kod i konstruktorn, det kan gå fel och är onödigt p.ga. orsaker. 🤖</p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
