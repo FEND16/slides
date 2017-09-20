@@ -1,0 +1,275 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Firebase Rules">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Firebase Rules 🔥</title>
+  <script type="text/javascript">
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .token.operator{background:none;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+    <section>
+         <section data-background-size="600px" data-background="http://www.boutikdo.com/wp-content/uploads/2017/08/New-Firebase-Logo-50-With-Additional-Example-Of-Logos-with-Firebase-Logo.jpg">
+          <h3 style="margin: 10rem 0 0 16rem; color: #757575">Rules</h3>
+         </section>
+    </section>
+      
+    <section>
+      <section>
+        <p>Vi måste <strong>ALLTID</strong> validera både i frontend samt backend</p>
+        <p class="fragment fade-down">I gränsnittet för att ge feedback till användaren</p>
+        <p class="fragment fade-down">I databasen så att inte felaktig information lagras</p>
+      </section>
+      <section>
+        <p><em>Public</em></p>
+        <pre><code class="language-json">{
+  "rules": {
+    ".read": "true",
+    ".write": "true"
+  }
+}</code></pre>
+      <p>Vem som helst får skriva och läsa från hela vår database</p>
+      </section>
+      <section>
+        <p><em>Private</em></p>
+        <pre><code class="language-json">{
+  "rules": {
+    ".read": "false",
+    ".write": "false"
+  }
+}</code></pre>
+      <p>Ingen får skriva och läsa från hela vår database</p>
+      </section>
+      <section>
+        <p><em>Default</em></p>
+        <pre><code class="language-json">{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}</code></pre>
+      <p>Inloggade användare får skriva till hela databasen</p>
+      </section>
+      <section>
+        <pre><code class="language-json">{
+  "rules": {
+    "users" : {
+      ".read" : "auth != null",
+      ".write" : "auth != null"
+    },
+    "todos": {
+      ".read" : "true",
+      ".write" : "auth != null"
+    }
+  }
+}</code></pre>
+      <p>Inloggade får skriva/läsa till <code><em>users</em></code></p>
+      <p>Alla får läsa men inte skriva till <code><em>todos</em></code></p>
+      <p></p>
+      </section>
+      <section>
+        <p><em>User</em></p>
+        <pre><code class="language-json">{
+  "rules": {
+    "users": {
+      "$uid": {
+        ".write": "$uid === auth.uid"
+      }
+    }
+  }
+}</code></pre>
+        <p class="fragment fade-down"><code><em>$uid</em></code> syftar på <strong>key</strong></p>
+        <p class="fragment fade-down"><code><em>auth.uid</em></code> syftar alltid på den inloggade användaren</p>
+      </section>
+      <section>
+        <p><em>read/write cascade</em> <br />om en förälder har det så har barnen det</p>
+        <p><strong>Men ett barn kan inte skriva över sin förälders rättigheter</strong> </p>
+        <p class="fragment fade-down">Finns <code><em>true</em></code> på föräldern så spelar det ingen roll om barnet har <code><em>false</em></code></p>
+      </section>
+      <section>
+        <p><em>4 regler</em></p>
+        <ul style="line-height: 2">
+          <li><code><strong>.read </strong></code></li>
+          <li><code><strong>.write </strong></code></li>
+          <li><code><strong>.validate </strong></code></li>
+          <li><code><strong>.indexOn </strong></code></li>
+        </ul>
+      </section>
+      <section>
+        <p><code><em>.indexOn</em></code></p>
+        <p>För snabbare sökning används <strong>indexering</strong></p>
+        <p class="fragment fade-down">Indexera det du söker mest på</p>
+        <p class="fragment fade-down">Hjälper firebase att ta fram informationen snabbare</p>
+      </section>
+      <section>
+        <pre><code class="language-json">{
+  "todos" : {
+    ".indexOn" : "createdAt"
+  }
+}</code></pre>
+      <p class="fragment fade-down">Säg åt databasen vilka egenskaper du oftast kommer att sortera på</p>
+      <p class="fragment fade-down">Gäller t.ex. <code><em>.orderByChild()</em></code></p>
+      </section>
+      <section>
+        <p><em>Simulator finns under</em></p>
+        <p><strong><code>/Database/Rules</code></strong></p>
+      </section>
+    </section>
+
+    <section>
+      <section>
+        <h1><code><strong>".validate"</strong></code></h1>
+      </section>
+      <section>
+        <p>Speciella variabler i "rules"</p>
+        <ul>
+          <li><code><em>$</em></code>
+            <ul>
+              <li>key</li>
+              <li>uid</li>
+              <li>postId</li>
+            </ul>
+            
+          </li>
+          <li><code><em>auth</em></code>
+            <ul>
+              <li>All information om nuvarande användare</li>
+            </ul></li>   
+        </ul>
+      </section>
+      <section>
+        <p>Speciella variabler i "rules"</p>
+        <ul>
+          <li><code><em>data</em></code>
+            <ul>
+              <li>Existerande data</li>
+            </ul></li>
+          <li><code><em>newData</em></code>
+            <ul>
+              <li>Inkommande data</li>
+            </ul></li>
+          <li><code><em>now</em></code>
+            <ul>
+              <li>Tiden just nu</li>
+            </ul></li>
+        </ul>
+      </section>
+      <section>
+        <pre><code class="language-json">{
+  "rules": {
+    "tweets": {
+      "content": {
+        ".validate": "newData.val().length <= 140"
+      }
+    }
+  }
+}</code></pre>
+      <p class="fragment fade-down">Värdet skrivs bara om den nya datans längd är <= 140</p>
+      </section>
+      <section>
+        <pre><code class="language-json">{
+  "rules": {
+    "tweets": {
+      "content": {
+        ".validate": "newData.val().length <= 140
+                      && newData.val().isString()"
+      }
+    }
+  }
+}</code></pre>
+      <p class="fragment fade-down">Värdet skrivs bara om den nya datans längd är <= 140 och är en sträng</p>
+      </section>
+      <section>
+        <pre><code class="language-json">{
+  "rules": {
+    "tweets": {
+      ".read" : "true",
+      ".write" : "auth != null"
+      "content": {
+        ".validate": "newData.val().length <= 140
+                      && newData.val().isString()"
+      }
+    }
+  }
+}</code></pre>
+      </section>
+      <section>
+        <pre><code class="language-json">{
+  "rules": {
+    "tweets": {
+      "$tweetId" : {
+        ".write": "data.child(auth.uid).exists()"
+        "content": {
+          ".validate": "newData.val().length <= 140
+                        && newData.val().isString()"
+        }
+      }
+    }
+  }
+}</code></pre>
+      <p>Om tweeten har ett barn som är mitt användarID får användaren skrivaccess</p>
+      </section>
+      <section>
+        <pre><code class="language-json">{
+  "rules": {
+    "tweets": {
+      "$tweetId" : {
+        ".validate": "newData.hasChildren(['content']])"
+      }
+  }
+} </code></pre>
+      <p class="fragment fade-down">tweeten måste ha ett innehåll</p>
+      </section>
+    </section>
+
+    <section>
+      <h3><em>Läs mer</em></h3>
+      <a href="https://firebase.google.com/docs/database/security/">https://firebase.google.com/docs/database/security/</a>
+    </section>
+
+        
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'fade',
+      height: '90%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      {src : 'lib/prismjs/prism.js'},
+      {src : 'js/print.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

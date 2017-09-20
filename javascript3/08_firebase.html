@@ -1,0 +1,210 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Firebase">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Firebase  🔥</title>
+  <script type="text/javascript">
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .token.operator{background:none;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+         <section data-background-size="600px" data-background="http://www.boutikdo.com/wp-content/uploads/2017/08/New-Firebase-Logo-50-With-Additional-Example-Of-Logos-with-Firebase-Logo.jpg">
+         </section>
+       </section>
+       <section>
+         <section>
+           <p>Firebase är en såkallad <em>Backend as a Service</em></p>
+           <p>Vi behöver inte bry oss om hanteringen av databasen</p>
+           <p class="fragment fade-down">Databasen blir som ett API vi kallar på</p>
+           <p class="fragment fade-down">Istället för att behöva sätta upp en MySQL-databas t.ex.</p>
+         </section>
+         <section>
+          <p>MySQL är en <em>relationell databas</em>: <strong>tabeller</strong></p>
+          <p class="fragment fade-down">Firebase är <em>noSQL</em>: <strong>objekt</strong></p>
+          <p class="fragment fade-down">Vi kommer att jobba med en JSON-struktur</p>
+         </section>
+         <section>
+           <pre><code class="language-json">todos: {
+  todo1: {
+    title: "Learn Firebase",
+    completed: false
+  }
+}</code>
+         </section>
+         <section>
+           </pre>
+        <pre><code class="language-json">todos: {
+  todo1: {
+    title: "Learn Firebase",
+    completed: false
+  },
+  todo2: {
+    title: "Learn React",
+    completed: false
+  }
+}
+</code></pre>
+         </section>
+         <section>
+           <p>Det betyder att vi behöver gräva ibland</p>
+           <pre><code class="language-js">todos: {
+  todo1: {
+    title: "Learn Firebase",
+    completed: false
+  }
+}
+
+console.log(todos.todo1.completed);</code></pre>
+        <p class="fragment fade-down">Firebase underlättar dock detta för oss</p>
+         </section>
+         <section>
+           <blockquote>Store and sync data between users and devices in realtime using a cloud-hosted, noSQL database</blockquote>
+           <p class="fragment fade-down">Vi är i molnet 🌤, betyder bara att det är någon annan stackars jobb att få det att fungera ÅT oss 🤔</p>
+         </section>
+         <section>
+           <p>Alltid samma sak oavsett: <em>CRUD</em></p>
+           <p class="fragment fade-down"><strong>CREATE</strong> <strong>READ</strong> <strong>UPDATE</strong> <strong>DELETE</strong></p>
+           <p class="fragment fade-down">Bara ett annat API för att göra det</p>
+         </section>
+         <section>
+          <ul>
+            <li>Gå till <a href="https://firebase.google.com/">https://firebase.google.com/</a></li>
+            <li>Registrera konto på Firebase</li>
+            <li>Tryck på <em>Get Started</em></li>
+            <li>Tryck på <em>Create new Project</em></li>
+            <li>Döp projektet och välj "Sweden" i dropdown</li>
+            <li><strong>Nu har du en databas!</strong></li>
+            </ul>
+         </section>
+       </section>
+       <section>
+         <section>
+           <h1><strong>READ / WRITE</strong></h1>
+         </section>
+         <section>
+           <p>Allting baserar sig på HTTP(S): <em>GET</em> / <em>POST</em></p>
+           <p class="fragment fade-down">Firebase har sitt egna API för detta</p>
+           <p class="fragment fade-down">Firebase använder sig mest av <strong>Listeners</strong></p>
+            <p class="fragment fade-down">Istället för att lyssna efter <em><code>onClick</code></em> t.ex. så lyssnar Firebase på uppdateringar i databasen</p>
+         </section>
+         <section>
+           <p>Firebase lyssnar till referenser till olika objekt</p>
+           <pre><code class="language-js">firebase.database().ref("posts")</code></pre>
+           <pre><code class="language-js">firebase.database().ref("users")</code></pre>
+           <pre><code class="language-js">firebase.database().ref("comments")</code></pre>
+           <p class="fragment fade-down">Istället för tabeller har vi objekt, samt referenser till dessa objekt</p>
+         </section>
+         <section>
+            <p>Ska vi komma åt ett speciellt värde med <em>ID</em>:</p>
+           <pre><code class="language-js">firebase.database().ref("movie/id")</code></pre>
+           <p class="fragment fade-down">Har det värdet flera värden?</p>
+           <pre class="fragment fade-down"><code class="language-js">firebase.database().ref("movie/id/imdbRating")</code></pre>
+           <p class="fragment fade-down">Ännu mer nästlat??</p>
+           <pre class="fragment fade-down"><code class="language-js">firebase.database().ref("movie/id/genres/action")</code></pre>
+           <p class="fragment fade-down">Allting är <strong>key/value</strong>-objekt</p>
+          </section>
+          <section>
+            <p>För att faktiskt skriva och hämta data så har vi följande API</p>
+            <pre><code class="language-js">firebase.database()
+  .ref("messages")
+  .push("HELLO FROM SLIDES")</code></pre>
+            <p class="fragment fade-down">Ovan lagrar meddelandet i samlingen<code><em>"messages"</em></code> med <strong>ett unikt ID</strong></p>
+          </section>
+          <section>
+            <p>Manipulera data, skriva och ta bort</p>
+            <pre><code class="language-js">.push() //POST
+.set() //UPDATE
+.remove() //DELETE
+</code></pre>
+          <p class="fragment fade-down">Läsa data</p>
+          <pre class="fragment fade-down"><code class="language-js">.on() //GET but REALTIME, GETS REAL!
+.once() //TRADITIONAL GET</code></pre>
+          </section>
+          <section>
+            <p><code><em>on</em></code> & <code><em>.once()</em></code> har callbacks</p>
+            <pre><code class="language-js">firebase.database().ref("messages")
+  .on('value', function(snapshot){
+    console.log(snapshot.val());
+});</code></pre>
+          <p class="fragment fade-down">Vi måste plocka ut våra värden med <code><em>.val()</em></code></p>
+          </section>
+          <section>
+            <p><code><em>.on</em></code> returnerar en <strong>"snapshot"</strong>, en bild av hur vår databas ser ut för tillfället.</p>
+            <p class="fragment fade-down">Den är typ som ett promise, dv.s. massa metadata, vi måste plocka ut värdena med:
+            <pre class="fragment fade-down"><code class="language-js">snapshot.val()</code></pre> </p>
+            <p class="fragment fade-down">Snapshot måste inte heta snapshot</p>
+          </section>
+          <section>
+            <pre><code class="language-js">firebase.database().ref("messages")
+  .once('value', function(snapshot){
+    console.log(snapshot.val());
+});</code></pre>
+          <p class="fragment fade-down"><code><em>.once()</em></code> är mer som en klassisk FETCH</p>
+          </section>
+
+          <section>
+            <p>Många funktioner returnerar även ett promise</p>
+            <pre><code class="language-js">firebase.database().ref("messages")
+  .once('value')
+  .then(snapshot => { 
+    console.log(snapshot.val());
+  });</code></pre>
+          <p class="fragment fade-down">T.ex. <code><strong>.set()</strong></code> och <code><strong>.push()</strong></code></p>
+          </section>
+          <section>
+            <h3><strong>Kodexempel</strong></h3>
+            <p>Hämta och skicka data till databasen</p>
+          </section>
+          <section>
+            <p><em>Eftermiddagen:</em></p>
+            <p>Övning: Implementera TODO med firebase</p>
+            <p>(Leka med WebVR? 🤑)</p>
+          </section>
+       </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'fade',
+      height: '90%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      {src : 'lib/prismjs/prism.js'},
+      {src : 'js/print.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,220 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/php.css">
+  <link rel="stylesheet" href="lib/css/tomorrow.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta charset="utf-8">
+  <title>Composition</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h3><strong>Komposition & Reacts flöde</strong></h3>
+        </section>
+      </section>
+      
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h1><em>Saker vi måste kunna</em></h1>
+        </section>
+        <section>
+          <ul>
+            <li>Skapa <code><em>class</em></code> samt <code><em>function</em></code> komponenter</li>
+            <li class="fragment slide-down">Lyfta upp <code><em>state</em></code> och skicka ner det</li>
+            <li class="fragment slide-down">Skapa arrayer av komponenter: <code><em>map/filter</em></code></li>
+            <li class="fragment slide-down"><code><em>Controlled Components</em></code></li>
+            <li class="fragment slide-down">Skicka <code><em>state</em></code> upp 🤔</li>
+          </ul>
+        </section>
+      </section>
+
+
+      <section>
+        <section>
+          <h1><em>Lyft upp state</em></h1>
+        </section>
+        <section data-background="#2f1f2e">
+          <img src="https://i.imgur.com/MjdXCya.png">
+          <a class="reference" href="https://www.robinwieruch.de/learn-react-before-using-redux/">8 Things to Learn in React before using Redux</a>
+        </section>
+        <section data-background="#2f1f2e">
+          <img src="https://i.imgur.com/ytDuB8Z.png">
+          <p style="position: absolute; right: 30; top: 30" class="fragment fade-left">B kan inte komma åt state från C</p>
+          <p style="position: absolute; right: 30; top: 80" class="fragment fade-left">Isf måste C först skicka till A</p>
+          <a class="reference" href="https://www.robinwieruch.de/learn-react-before-using-redux/">8 Things to Learn in React before using Redux</a>
+        </section>
+        <section data-transition="none">
+          <p>Men om vi måste skicka upp från en komponent</p>
+          <pre><code style="min-height: 520px" class="hljs js line-numbers" data-trim data-noescape>function Card(props){
+  return( 
+      &lt;div key={props.id}&gt; 
+        { props.title} 
+        &lt;button 
+          onClick={props.onClick}&gt; 
+          Rate 10
+        &lt;/button&gt;
+      &lt;/div&gt;
+  );
+}</code></pre>
+        </section>
+           <section data-transition="none">
+          <p>Skicka som argument</p>
+          <pre><code style="min-height: 520px" class="hljs js line-numbers" data-trim data-noescape>function Card(props){
+  return( 
+      &lt;div key={props.id}&gt; 
+        { props.title} 
+        &lt;button 
+          onClick={() => props.onClick(props.title)}&gt; 
+          Rate Title
+        &lt;/button&gt;
+      &lt;/div&gt;
+  );
+}</code></pre>
+        </section>
+        <section>
+          <p>I föregående fall vill vi gärna skicka upp värdet</p>
+          <ul>
+            <li>Komponenten kan fortsätta vara stateless</li>
+            <li class="fragment fade-down">Värdet som skickas upp använd för att ändra state men tillhör inte själv state</li>
+          </ul>
+        </section>
+        <section data-transition="none">
+          <pre><code style="min-height: 560px" class="hljs js line-numbers" data-trim data-noescape>function Card(props){
+  function localClick(title){
+    //Do more stuff, then call props.onClick
+    props.onClick(title)
+  }
+  return( 
+    &lt;button 
+      onClick={localClick(props.title)}&gt; 
+      Rate Title
+    &lt;/button&gt;
+  );
+}</code></pre>
+        </section>
+        
+      </section>
+      <section>
+        <section>
+          <h1><em>Composition</em></h1>
+        </section>
+        <section>
+          <p>Med klasser ärver vi</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>class App extends Component{
+  //I can do everything React.Component can do
+}</code></pre>
+        <p class="fragment fade-down">Detta är dock ändå gången vi ska använda arv i React</p>
+        <p class="fragment fade-down">Resten ska göras med <code><em>component/function composition</em></code></p>
+        </section>
+        <section>
+          <p>Istället för <em>is-a</em> så får vi <strong>has a</strong></p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>function Navbar(props){
+  return(
+    &lt;nav&gt;
+      &lt;NavbarItem title=&quot;Home&quot;/&gt;
+      &lt;NavbarItem title=&quot;About&quot;s/&gt;
+    &lt;/nav&gt;
+  );
+}</code></pre>
+        </section>
+        <section>
+          <p>När vi använder React (och andra ramverk) så har vi två populära ord:</p>
+          <ul>
+            <li class="fragment slide-down"><code><em>Higher Order Component (HOC)</em></code></li>
+          <blockquote class="fragment slide-down">a higher-order component is a function that takes a component and returns a new component.</blockquote>
+            <li class="fragment slide-down"><code><em>Higher Order Function</em></code></li>
+          </ul>
+          <blockquote class="fragment slide-down">A function which takes a function as an argument and/or returns a function. </blockquote>
+        </section>
+        <section>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>import Button from './Button';
+import makePrimary from &#039;./makePrimary&#039;;
+
+function LoginForm(props){
+  const PrimaryButton = makePrimary(Button);
+  return (&lt;PrimaryButton title=&quot;Click me!&quot;/&gt;); 
+}</code></pre>
+          <p class="fragment fade-down">En funktion som tar en existerande komponent och returnerar en ny komponent med nya egenskaper</p>
+        </section>
+        <section data-transition="none">
+          <p>Vi har flera olika sätt att komponera</p>
+          <pre><code style="font-size: 1.7rem" class="hljs js line-numbers" data-trim data-noescape>function Button(props){
+
+  return( 
+      &lt;button onClick={props.onClick} className={buttonType}&gt; 
+        {props.title}
+      &lt;/button&gt;)
+  );
+}
+</code></pre>
+        </section>
+        <section data-transition="none">
+          <p>Vi har flera olika sätt att komponera</p>
+          <pre><code style="font-size: 1.7rem" class="hljs js line-numbers" data-trim data-noescape>function Button(props){
+  const buttonType = props.primary ? &quot;btn btn-primary&quot; : &quot;btn&quot;;
+  return( 
+      &lt;button onClick={props.onClick} className={buttonType}&gt; 
+        {props.title}
+      &lt;/button&gt;)
+  );
+}
+</code></pre>
+        </section>
+         <section data-transition="none">
+          <p>Vi har flera olika sätt att komponera</p>
+          <pre><code style="font-size: 1.7rem" class="hljs js line-numbers" data-trim data-noescape>function Button(props){
+  const buttonType = props.primary ? &quot;btn btn-primary&quot; : &quot;btn&quot;;
+  return( 
+      &lt;button onClick={props.onClick} className={buttonType}&gt; 
+        {props.title}
+      &lt;/button&gt;)
+  );
+}
+&lt;Button primary /&gt;</code></pre>
+        </section>
+
+      </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '90%',
+      width: '90%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      {src: 'plugin/line-numbers/line-numbers.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

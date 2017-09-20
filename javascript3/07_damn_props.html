@@ -1,0 +1,205 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+
+  <meta name="description" content="Props">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Props, props, props!</title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- INTRO SLIDE -->
+      <section>
+        <section>
+          <h1><strong>Handling Props</strong></h1>
+        </section>
+        <section>
+          <img src="https://i.imgur.com/W0B2qKL.png" alt="Everybody get props">
+        </section>
+        <section>
+          <p>Skicka ner via enskilda <code>props</code></p>
+          <pre class="line-numbers" data-line="1"><code class="language-jsx">&lt;Button 
+  type=&quot;primary&quot; 
+  title=&quot;Login&quot; 
+  isVisible={true} /&gt;</code></pre>
+        </section>
+        <section>
+          <p>Vi kan skicka vidare objekt via <code><em>spread</em></code> </p>
+          <pre><code class="language-js">const obj = { 
+  id: 1249
+  title: "The Title of This Thing"
+}
+&lt;Card {...obj} /&gt; //props.id, props.title </code></pre>
+          <pre class="fragment fade-down"><code class="language-jsx">function Card(props){
+  return &lt;div key={props.id}&gt; {props.title} &lt;/div&gt;
+}</code></pre>
+
+        </section>
+        <section>
+          <p>Vi kan undersöka våra props i <em>React DevTools</em></p>
+          <img src="https://i.imgur.com/1NDDby2.png" alt="React DevTools">
+          <p class="fragment fade-down">Samt vårt <code><strong>state</strong></code></p>
+        </section>
+        <section>
+          <p>Det mesta ska skötas via <em><code>props</code></em> ändå</p>
+          <p class="fragment fade-down">För att upptäcka fel med våra props så kan vi förstärka vår applikation med <strong>Typechecking</strong></p>
+
+        </section>
+      </section>
+      
+      <!-- CONTENT -->
+
+      <section>
+        <section>
+          <h1><em>Typechecking</em></h1>
+        </section>
+        <section>
+          <p>JavaScript är ett dynamiskt typat språk</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>const a = 5;
+let b = "What type?"
+var c = true;</code></pre>
+          <p class="fragment fade-down">Vi har olika typer men JavaScript utvärdera detta vid <em>runtime</em></p>
+          <p class="fragment fade-down">Många andra språk är statiskt typade</p>
+          <pre class="fragment fade-down"><code class="hljs c# line-numbers" data-trim data-noescape>int a = 5;
+string b = "What type?";
+bool c = true;</code></pre>
+        </section>
+        <section>
+          <p>Det är vanligt att man vill förstärka vår applikation med att berätta för våra komponenter vilka värden som skickas ner.</p>
+          <p class="fragment fade-down">Typechecking - kolla vilka typer vår data är</p>
+          <p class="fragment fade-down">Detta gör vi med paketet <code><em>prop-types</em></code></p>
+          <pre class="fragment fade-down"><code class="hljs bash line-numbers" data-trim data-noescape>npm install --save prop-types</code></pre>
+        </section>
+        <section>
+          <pre><code style="min-height: 450px" class="hljs js line-numbers" data-trim data-noescape>import PropTypes from 'prop-types';
+
+function Text(props){
+  return &lt;h1&gt; {props.text} &lt;/h1&gt;
+}
+
+Text.propTypes = {
+  text: PropTypes.string
+}</code></pre>
+        </section>
+        <section>
+          <pre><code class="hljs javascript line-numbers" data-trim data-noescape>Text.contextTypes = {
+  optionalArray: PropTypes.array,
+  optionalBool: PropTypes.bool,
+  optionalFunc: PropTypes.func,
+  optionalNumber: PropTypes.number,
+  optionalObject: PropTypes.object,
+  optionalString: PropTypes.string,
+};</code></pre>
+        </section>
+        <section>
+          <p>Allting är optional om vi inte lägger dit <code><em>.isRequired</em></code> </p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>Text.contextTypes = {
+  requiredArray: PropTypes.array.isRequired,
+  requiredBool: PropTypes.bool.isRequired,
+};</code></pre>
+        </section>
+        <section>
+          <p>Använd <code><em>PROPTYPES</em></code></p>
+          <p class="fragment fade-down">Kan hjälpa dig undvika massa errors!</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><strong>Context</strong></h1>
+        </section>
+        <section>
+          <p><code><em>props</em> och <strong>state</strong></code></p>
+          <img style="background: none; box-shadow: none;" src="https://static.comicvine.com/uploads/original/11121/111214918/4600057-3074612143-mario.png">
+        </section>
+        <section>
+          <p><code><em>refs</em> och <strong>context</strong></code></p>
+          <img style="background: none; box-shadow: none;" src="https://www.mariowiki.com/images/thumb/3/36/Wario_and_Waluigi_Artwork_-_Mario_Party_7.png/388px-Wario_and_Waluigi_Artwork_-_Mario_Party_7.png" alt="waluigi wario">
+        </section>
+        <section>
+          <p>context är superglobal och kan användas för att skicka information långt ner i vår applikationsstruktur</p>
+          <p class="fragment fade-down">Både <code><em>refs</em></code> och <code><strong>context</strong></code> ska användas så lite som möjligt.</p>
+          <p class="fragment fade-down"><code><strong>React Router</strong></code>: standardbiblioteket för routing i React använder context</p>
+        </section>
+        <section>
+          <p>Definiera vilka värden som ska returneras</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>class App extends Component {
+  //Inbyggd funktion i Component
+  getChildContext() {
+    return { contextString: "I'm in context!" };
+  }
+}</code></pre>
+
+          <pre class="fragment fade-down"><code class="hljs js line-numbers" data-trim data-noescape>App.childContextTypes = {
+  contextString: PropTypes.string //samt vilken typ
+};</code></pre>
+        </section>
+        <section>
+          <p>Kommer åt <code>context</code> via <code><em>this.context</em></code> i underkomponenter</p>
+          <pre><code style="min-height: 440px" class="hljs js line-numbers" data-trim data-noescape>class Text extends Component {
+  render(){
+    return &lt;h1&gt;{ this.context.contextString } &lt;/h1&gt;
+  }
+}
+
+Button.contextTypes = {
+  contextString: PropTypes.string
+};</code></pre>
+        </section>
+        <section>
+          <p>Stateless</p>
+          <pre><code class="hljs js line-numbers" data-trim data-noescape>function Text(props, context){
+  return &lt;h1&gt; { context.contextString } &lt;/h1&gt;
+}
+
+Text.contextTypes = {
+  contextString: PropTypes.string
+};</code></pre>
+        </section>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'convex',
+      height: '90%',
+      width: '85%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      // { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+      // {src: 'plugin/line-numbers/line-numbers.js'},
+      {src : 'lib/prismjs/prism.js', async: true}
+      ]
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,198 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Firebase">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Firebase  🔥</title>
+  <script type="text/javascript">
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .token.operator{background:none;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+         <section data-background-size="600px" data-background="http://www.boutikdo.com/wp-content/uploads/2017/08/New-Firebase-Logo-50-With-Additional-Example-Of-Logos-with-Firebase-Logo.jpg">
+         </section>
+       </section>
+        <section>
+         <section>
+           <p>Firebase lyssnar till referenser till olika objekt</p>
+           <pre><code class="language-js">firebase.database().ref("posts")</code></pre>
+           <pre><code class="language-js">firebase.database().ref("users")</code></pre>
+           <pre><code class="language-js">firebase.database().ref("comments")</code></pre>
+           <p class="fragment fade-down">Istället för tabeller har vi objekt, samt referenser till dessa objekt</p>
+         </section>
+         <section>
+            <p><code><em>.on('value')</em></code> lyssnar på våra förändringar i DB</p>
+            <pre><code class="language-js">firebase.database().ref("messages")
+  .on('value', function(snapshot){
+    console.log(snapshot.val());
+});</code></pre>
+          <p class="fragment fade-down">Vi måste plocka ut våra värden med <code><em>.val()</em></code></p>
+          </section>
+          <section>
+            <pre><code class="language-js">firebase.database().ref("messages")
+  .on('value', function(snapshot){
+    console.log(snapshot.key);
+});</code></pre>
+          <p class="fragment fade-down">Vi kan även komma åt nyckeln med <code><em>snapshot.key</em></code></p>
+          <p class="fragment fade-down">Observera att key inte är en funktion</p>
+          </section>
+          <section>
+            <pre><code class="language-js">//Add value
+firebase.database().ref("todos").push(stuffToPush);
+//Remove value
+firebase.database().ref("refToRemove").remove();
+//Update value
+firebase.database().ref("refToChange").set(true);</code></pre>
+          </section>
+        </section>
+        <section>
+          <section>
+            <h1><strong>More listeners 🔥</strong></h1>
+          </section>
+          <section>
+            <p><code><em>.on('value')</em></code> hämtar ALLT i referensen varje gång</p>
+            <p class="fragment fade-down">Vi kan lyssna på andra <strong>events</strong> än value</p>
+          </section>
+          <section>
+            <p><code><strong>"child_added"</strong></code></p>
+            <pre><code class="language-js">firebase.database().ref("todos")
+  .on("child_added", (snapshot) => {
+    console.log(snapshot.val());
+});</code></pre>
+          <p class="fragment fade-down">Returnerar ENBART det som har lagts till</p>
+          </section>
+          <section>
+            <p><code><strong>"child_removed"</strong></code></p>
+            <pre><code class="language-js">firebase.database().ref("todos")
+  .on("child_removed", (snapshot) => {
+    console.log(snapshot.val());
+});</code></pre>
+          <p class="fragment fade-down">Returnerar ENBART det som har tagits bort</p>
+          </section>
+          <section>
+            <p><code><strong>"child_changed"</strong></code></p>
+            <pre><code class="language-js">firebase.database().ref("todos")
+  .on("child_changed", (snapshot) => {
+    console.log(snapshot.val());
+});</code></pre>
+          <p class="fragment fade-down">Returnerar ENBART det som har ändrats</p>
+          </section>
+          <section>
+            <p>Vi kan fortfarande använda <code><em>.on('value')</em></code></p>
+            <p class="fragment fade-down">Men det är mer optimerat att använda dessa funktioner</p>
+            <p class="fragment fade-down">Vi hämtar mindre data från databasen varje gång</p>
+            <p class="fragment fade-down"><strong>===</strong></p>
+            <p class="fragment fade-down">Snabbare</p>
+          </section>
+          <section>
+            <p><em>Minus för detta</em></p>
+            <p class="fragment fade-down">Vi måste skriva mer kod</p>
+            <p class="fragment fade-down">Inget problem, för det är vårt jobb</p>
+          </section>
+        </section>
+
+        <section>
+          <section><h1><strong>Filtrering / Sortering</strong></h1></section>
+          <section>
+            <p>Lättast att göra det mesta i JavaScript faktiskt</p>
+            <p class="fragment fade-down">Men vi kan optimera våra <em>queries</em></p>
+          </section>
+          <section>
+            <p><code><em>.orderByChild("childToOrderBy")</em></code></p>
+            <pre><code class="language-js">firebase.database()
+  .ref("todos")
+  .orderByChild("date") //before 'on()' and after 'ref()'
+  .on("value", (snapshot) =>{
+    console.log(snapshot.val());
+});</code></pre>
+          <p class="fragment fade-down">Sorterar informationen som kommer från databasen via en egenskap</p>
+          </section>
+          <section>
+            <p>Kopplat till detta har vi olika queries</p>
+            <p class="fragment fade-down">T.ex. <code><em>.limitToFirst()</em></code></p>
+            <pre><code class="language-js">firebase.database()
+  .ref("todos")
+  .orderByChild("date")
+  .limitToFirst(10) //Grab the first 10
+  .on("value", (snapshot) =>{
+    console.log(snapshot.val());
+});</code></pre>
+          </section>
+          <section>
+            <p class="fragment fade-down"><code><em>.limitToLast()</em></code></p>
+            <pre><code class="language-js">firebase.database()
+  .ref("todos")
+  .orderByChild("date")
+  .limitToLast(10) //Grab the last 10
+  .on("value", (snapshot) =>{
+    console.log(snapshot.val());
+});</code></pre>
+          </section>
+           <section>
+            <p class="fragment fade-down"><code><em>.startAt()</em></code></p>
+            <pre><code class="language-js">firebase.database()
+  .ref("todos")
+  .orderByChild("date")
+  .startAt("2017-01-20") // Start at value
+  .on("value", (snapshot) =>{
+    console.log(snapshot.val());
+});</code></pre>
+          </section>
+          <section>
+            <ul>
+              <li>.limitToFirst()</li>
+              <li>.limitToLast()</li>
+              <li>.startAt()</li>
+              <li>.endAt()</li>
+              <li>.equalTo()</li>
+            </ul>
+            <p class="fragment fade-down">Alla måste skrivas i kombination med <strong>.orderByChild()</strong></p>
+          </section>
+        </section>
+          
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'fade',
+      height: '90%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      {src : 'lib/prismjs/prism.js'},
+      {src : 'js/print.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

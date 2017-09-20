@@ -1,0 +1,209 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Firebase auth">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Firebase Auth 🔥</title>
+  <script type="text/javascript">
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .token.operator{background:none;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+         <section data-background-size="600px" data-background="http://www.boutikdo.com/wp-content/uploads/2017/08/New-Firebase-Logo-50-With-Additional-Example-Of-Logos-with-Firebase-Logo.jpg">
+          <h3 style="margin: 10rem 0 0 16rem; color: #757575">Auth</h3>
+         </section>
+         <section>
+           <h3><strong>Mål</strong></h3>
+           <p>I slutet av dagen ska alla ha ett fungerande loginsystem</p>
+         </section>
+      </section>
+      <section>
+         <section>
+           <h1><strong>Listeners</strong></h1>
+         </section>
+         <section>
+           <pre class="fragment fade-left"><code class="language-js">//Adding values
+firebase.database().ref("todos")
+  .on("child_added",   (snapshot) => {})
+</code></pre>
+        <pre class="fragment fade-right"><code class="language-js">//Removing values
+firebase.database().ref("todos")
+  .on("child_removed", (snapshot) => {})</code></pre> 
+          <pre class="fragment fade-left"><code class="language-js">//Changing values
+firebase.database().ref("todos")
+  .on("child_changed", (snapshot) => {})</code></pre>
+         </section>
+         <section>
+           <p>Firebase skickar bara ut värdena, vi måste själv hantera hur det lagras</p>
+           <pre><code class="language-js">firebase.database().ref("todos")
+  .on("child_added", (snapshot) => {
+    //Clone the state
+    const newTodoList = [...this.state.todos];
+    //Push new values
+    newTodoList.push(snapshot.val());
+    //Replace state
+    this.setState({ todos: newTodoList });
+});</code></pre>
+         </section>
+          <section>
+           <pre><code class="language-js">firebase.database().ref("todos")
+  .on("child_removed", (snapshot) => {
+    //Clone the state
+    const clonedList = [...this.state.todos];
+    //Filter the cloned state, return new array
+    const newTodoList = clonedList.filter((item) => {
+      //Return every object except the removed
+      return item.key !== snapshot.key;
+    });
+    //Replace state
+    this.setState({ todos: newTodoList });
+});</code></pre>
+         </section>
+         <section>
+          <ul>
+            <li>Synka databasen med state</li>
+            <li class="fragment fade-down">Gör en klon av state</li>
+            <li class="fragment fade-down">Använd <code><em>.catch()</em></code> när du kan</li>
+            <li class="fragment fade-down">Se upp för <code><em>null</em></code>-värden</li>
+          </ul>
+         </section>
+       </section>
+       <section>
+         <section>
+           <h1 style="text-transform: lowercase;"><strong><code>firebase.auth()</code></strong></h1>
+         </section>
+         <section>
+           <p>firebase autentifikation bygger på <em>OAuth2</em></p>
+           <p class="fragment fade-down">En populär lösning för frontend som lägger till ett extra steg i autentiseringen</p>
+           <p class="fragment fade-down">Jobbigt att implementera själv</p>
+         </section>
+         <section data-background-size="1200px " data-background="https://i.imgur.com/MfPhwOP.png">
+          <p class="fragment fade-down" style="margin: 0 0 5rem 10rem;"><strong>I'm learning about security</strong></p>
+          <p class="fragment fade-right" style="margin: 0 0 15rem 7rem">sup</p>
+         </section>
+         <section>
+           <blockquote><em>OAuth</em> är en <strong>öppen standard</strong> för autentisering, som används
+över internet för att autentisera användare till tredje part,
+utan att användaren skickar något lösenord.
+           </blockquote>
+         </section>
+         <section>
+           <p>Google fungerar som en notarie som säger att jag är jag utan att känslig information om mig läcker</p>
+           <p class="fragment fade-down">Allting vi gjorde i PHP händer fortfarande</p>
+           <p class="fragment fade-down">+ massa annat</p>
+           <p class="fragment fade-down">Allt detta i: <em><code>firebase.auth()</code></em></p>
+         </section>
+         <section>
+          <p><em>one function to bind them</em></p>
+           <pre><code class="language-js">firebase
+  .auth()
+  .createUserWithEmailAndPassword(email, password)
+</code></pre>
+          <p class="fragment fade-down">Sparar <strong>INTE</strong> värdet i realtidsdatabasen </p>
+         </section>
+         <section>
+          <p><em>one function to bind them</em></p>
+           <pre><code class="language-js">firebase
+  .auth()
+  .createUserWithEmailAndPassword(email, password)
+  .catch(error => console.log(error))</code></pre>
+          <p class="fragment fade-down">Errorhantering ett måste här!</p>
+
+         </section>
+         <section>
+          <p><em>one function to find them</em></p>
+           <pre><code class="language-js">firebase
+  .auth()
+  .signInWithEmailAndPassword(email, password)
+</code></pre>
+          <p class="fragment fade-down">Sparar session och i localstorage</p>
+          <p class="fragment fade-down">Behöver inte ha flera callbacks, login sköter vi i en annan funktion</p>
+         </section>
+         <section>
+          <p><em>one function to find them</em></p>
+           <pre><code class="language-js">firebase
+  .auth()
+  .signInWithEmailAndPassword(email, password)
+  .catch(error => console.log(error));
+</code></pre>
+          
+         </section>
+         <section>
+          <p><em>one function to rule them all</em></p>
+           <pre><code class="language-js">firebase.auth().onAuthStateChanged(user => {
+  if (user) {
+    //Logged in,
+  } else {
+    //Denied, user === null
+  }
+});</code></pre>
+         </section>
+         <section>
+            <p>Detta var default innan, bara om <em>auth</em> finns</p>
+           <pre><code class="language-json">{
+  "rules": {
+    ".read": "auth != null",
+    ".write": "auth != null"
+  }
+}</code></pre>
+         </section>
+         <section>
+           <p><strong>Nästa vecka:</strong></p>
+           <p><em>Hur vi strukturerar databasen</em></p>
+           <p><em>Säkerhetsregler</em></p>
+           <p><em>Deploy to production</em></p>
+           <p><em>+ Jobba på projektet</em></p>
+         </section>
+         <section>
+           <p><strong>Resten av dagen:</strong></p>
+           <p><em>Implementera login på egen hand</em></p>
+           <p>Informera mig i person eller via Slack vad du har tänkt bygga för sida</p>
+           <p>Jag ger gärna feedback på upplägget</p>
+         </section>
+       </section>
+        
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'fade',
+      height: '90%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      {src : 'lib/prismjs/prism.js'},
+      {src : 'js/print.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
