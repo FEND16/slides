@@ -1,0 +1,186 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/projects/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="JavaScript 4 - Intro">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> JavaScript 4 - Intro </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <section>
+          <h1><strong>JavaScript 4</strong></h1>
+        </section>
+        <section>
+          <p><strong>Någon som har haft användning av det jag lärt ut? 😅</strong></p>
+        </section>
+        <section>
+          <p><em>Kursplan</em></p>
+          <p><a href="https://studentportal.nackademin.se/pluginfile.php/89860/mod_resource/content/1/VT2_Javascript4.pdf">https://studentportal.nackademin.se/pluginfile.php/89860/mod_resource/content/1/VT2_Javascript4.pdf</a></p>
+        </section>
+        <section>
+          <p>Möjliga lösningar</p>
+          <ul>
+            <li>Testa en färdig egengjord applikation</li>
+            <li>Testa en färdig applikation</li>
+            <li>Skapa en egen applikation och testa</li>
+          </ul>
+        </section>
+        <section>
+          <p><em>Godkänt</em></p>
+          <ul>
+            <li>Grundläggande kunskaper om ramverk</li>
+            <li>Grundläggande kunskaper om enhetstestning</li>
+          </ul>
+          <p><em>Väl godkänt</em></p>
+          <ul>
+            <li>Självständigt genomföra väldefinierade enhetstester.</li>
+<li>Kan utan handledning köra tester med lyckade resultat</li>
+<li>Kunna avgöra när ett test är tillförlitligt och nå tillräckligt hög testtäckning för detta</li>
+          </ul>
+        </section>
+        <section>
+          <p><em>Obligatorisk examination</em></p>
+          <p>1. Jämförande analys och presentation i grupp</p>
+          <p>2. Testning av projekt</p>
+          <p>Gruppuppgiften börjar idag</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><em>Ramverk</em></h1>
+        </section>
+        <section>
+          <p>Vad är ett ramverk?</p>
+          <blockquote class="fragment fade-down">A framework is a skeleton where the application defines the "meat" of the operation by filling out the skeleton. The skeleton still has code to link up the parts but the most important work is done by the application.</blockquote>
+          <a class="reference" href="https://stackoverflow.com/a/148759/5836872">https://stackoverflow.com/a/148759/5836872</a>
+        </section>
+        <section>
+          <p>Vad är ett bibliotek</p>
+          <blockquote class="fragment fade-down">A library performs specific, well-defined operations.</blockquote>
+          <p class="fragment fade-down">Återanvändbar kod</p>
+        </section>
+        <section>
+          <p>Varför finns det så många?</p>
+          <img src="https://imgs.xkcd.com/comics/standards.png" title="Fortunately, the charging one has been solved now that we've all standardized on mini-USB. Or is it micro-USB? Shit." alt="Fortunately, the charging one has been solved now that we've all standardized on mini-USB. Or is it micro-USB? Shit.">
+        </section>
+        <section>
+          <div style="display: flex; flex-direction: row; justify-content: center; align-items: center; ">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/640px-React-icon.svg.png" width="200">
+          <img src="https://angular.io/assets/images/logos/angular/angular.svg" width="200">
+          <img src="https://vuejs.org/images/logo.png" width="200" height="auto">
+          </div>
+          <img src="https://ember-api-docs-frontend.global.ssl.fastly.net/assets/images/ember-logo-2411236a2ae1734ef2846c0e17bc4ded.png" width="200" height="auto">
+          <img src="http://1nwpo81rpsemhhigd300boj6em.wpengine.netdna-cdn.com/wp-content/uploads/2017/08/meteor-logo.png" width="200" height="auto">
+        </section>
+        <section>
+          <p>Varför react?</p>
+          <pre><code class="language-jsx">import React, { Component } from 'react';
+export default class App extends Component {
+  render(){
+    return(
+      &lt;h1&gt; Hello &lt;/h1&gt;
+    );
+  }  
+}</code></pre>
+        <p class="fragment fade-down"><em>Varför inte react?</em></p>
+        </section>
+        <section>
+        <p>MV<em>*</em>-ramverk</p>
+          <p><code class="bb">Model</code>: Business logic</p>
+          <p><code class="bb">View</code>: Presentational Layer - UI</p>
+          <p><code class="bb">Whatever</code></p>
+        </section>
+        <section>
+          <p>Varför denna uppdelning?</p>
+          <p><em>Separation of Concerns</em></p>
+          <p><strong>Underlättar att testa</strong></p>
+        </section>
+        <section>
+          <p><strong>Vilka andra typer av ramverk finns det?</strong></p>
+          <p class="fragment fade-down">SCRUM? KANBAN?</p>
+        </section>
+        <section>
+          <p><em>Testramverk</em></p>
+          <ul>
+            <li>Jest</li>
+            <li>Jasmine</li>
+            <li>Mocha</li>
+            <li>Selenium / WebDriver</li>
+            <li>Cypress</li>
+          </ul>
+        </section>
+        <section>
+          <a href="https://medium.freecodecamp.org/i-just-asked-23-000-developers-what-they-think-of-javascript-heres-what-i-learned-9a06b61998fa">State Of JavaScript</a>
+        </section>
+        <section data-background-color="#edefed" data-background-size="contain" data-background-image="https://cdn-images-1.medium.com/max/2000/1*NROwzVqGePJ-jKhL8RaVzQ.png">
+          
+        </section>
+        <section>
+          <p><em>Examinerande presentationsuppgift</em></p>
+          <p><strong>Jämför minst 2 ramverk</strong></p>
+          <ul>
+            <li>Viktigaste punkterna i valet av ramverk</li>
+            <li>Övergripande om varje ramverk</li>
+            <li>Avslutande analys: viktiga takeaways</li>
+          </ul>
+          <p>Kort och kärnfullt: <em>max 4 slides</em></p>
+          <p>Fullständiga instruktioner finns på GitHub/Studentportalen</p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>

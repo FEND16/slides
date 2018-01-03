@@ -11,7 +11,7 @@
   <meta name="author" content="jesperorb">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta charset="utf-8">
-  <title>Firebase  🔥</title>
+  <title>Firebase</title>
   <script type="text/javascript">
     var link = document.createElement( 'link' );
     link.rel = 'stylesheet';
@@ -62,8 +62,7 @@
     title: "Learn React",
     completed: false
   }
-}
-</code></pre>
+}</code></pre>
          </section>
          <section>
            <p>Det betyder att vi behöver gräva ibland</p>
@@ -79,7 +78,7 @@ console.log(todos.todo1.completed);</code></pre>
          </section>
          <section>
            <blockquote>Store and sync data between users and devices in realtime using a cloud-hosted, noSQL database</blockquote>
-           <p class="fragment fade-down">Vi är i molnet 🌤, betyder bara att det är någon annan stackars jobb att få det att fungera ÅT oss 🤔</p>
+           <p class="fragment fade-down">Vi är i molnet, betyder bara att det är någon annan stackars jobb att få det att fungera ÅT oss</p>
          </section>
          <section>
            <p>Alltid samma sak oavsett: <em>CRUD</em></p>
@@ -116,11 +115,11 @@ console.log(todos.todo1.completed);</code></pre>
          </section>
          <section>
             <p>Ska vi komma åt ett speciellt värde med <em>ID</em>:</p>
-           <pre><code class="language-js">firebase.database().ref("movie/id")</code></pre>
+           <pre><code class="language-js">firebase.database().ref("movies/id")</code></pre>
            <p class="fragment fade-down">Har det värdet flera värden?</p>
-           <pre class="fragment fade-down"><code class="language-js">firebase.database().ref("movie/id/imdbRating")</code></pre>
+           <pre class="fragment fade-down"><code class="language-js">firebase.database().ref("movies/id/imdbRating")</code></pre>
            <p class="fragment fade-down">Ännu mer nästlat??</p>
-           <pre class="fragment fade-down"><code class="language-js">firebase.database().ref("movie/id/genres/action")</code></pre>
+           <pre class="fragment fade-down"><code class="language-js">firebase.database().ref("movies/id/genres/action")</code></pre>
            <p class="fragment fade-down">Allting är <strong>key/value</strong>-objekt</p>
           </section>
           <section>

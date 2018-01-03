@@ -1,0 +1,94 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Deployment">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Deployment</title>
+  <script type="text/javascript">
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .token.operator{background:none;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      
+      <section>
+        <section>
+          <h1><strong>Deployment</strong></h1>
+        </section>
+      </section>
+        
+      <section>
+        <section>
+          <ul>
+            <li><span style="font-size: 5rem;"><em>P </em><span><span class="fragment fade-down">rogressive </span></li>
+            <li><span style="font-size: 5rem;"><em>W</em><span><span class="fragment fade-down">eb </span></li>
+            <li><span style="font-size: 5rem;"><em>A </em><span><span class="fragment fade-down">pp </span></li>
+          </ul>
+        </section>
+        <section>
+          <p><em>Progressive</em></p>
+          <blockquote>characterized by such progress, or by continuous improvement.</blockquote>
+          <p class="fragment fade-down"><strong>Progressive Enhancement</strong></p>
+        </section>
+        <section>
+          <p>I relation till vår app</p>
+          <ul>
+            <li class="fragment fade-down"><em><code>ServiceWorker</code></em> - cachar vår hemsida så att den funkar offline</li>
+            <li class="fragment fade-down"><code><em>manifest.json</em></code> - Får vår hemsida att bete sig som en App</li>
+            <li class="fragment fade-down"><strong>+ snabb & säker (HTTPS)</strong></li>
+          </ul>
+        </section>
+        <section>
+          <p><strong>Läs mer</strong></p>
+          <a href="https://developers.google.com/web/progressive-web-apps/">https://developers.google.com/web/progressive-web-apps/</a>
+          <p>Eller googla: <code><em>"progressive web apps"</em></code></p>
+        </section>
+        <section style="font-size: 4rem">
+          <p><em>Samlingar av PWAS</em></p>
+          <a href="https://pwa.rocks/">https://pwa.rocks/</a><br />
+          <a href="https://hnpwa.com/">https://hnpwa.com/</a>
+        </section>
+
+      </section>  
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'fade',
+      height: '90%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      {src : 'lib/prismjs/prism.js'},
+      {src : 'js/print.js'}
+      ]
+    });
+  </script>
+</body>
+</html>

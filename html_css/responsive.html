@@ -2,7 +2,6 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <!--<base href="file:///Users/jesperorb/Dropbox/courses/fend16/slides/">-->
   <base href="https://fend16.github.io/slides/">
   <link rel="stylesheet" href="css/reveal.css">
   <link rel="stylesheet" href="css/theme/custom.css">
@@ -17,26 +16,17 @@
     document.getElementsByTagName( 'head' )[0].appendChild( link );
   </script>
   <link rel="icon" href="F_LOGO.png"/>
+  <style type="text/css">
+    .reveal blockquote {
+      box-shadow: none;
+    }
+  </style>
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
-      <section>
-      <!-- Responsive Web Design -->
-        <section data-background="hsl(0 , 55%, 40%)">
-          <h1 class="white">Responsive Web Design</h1>   
-        </section>
-        <section data-background="hsl(0 , 55%, 40%)">
-          <blockquote class="white line15">Rather than tailoring disconnected designs to each of an ever-increasing number of web devices, we can treat them as facets of the same experience.</blockquote>
-          <em> - Ethan Marcotte</em>
-        </section>
-        <section data-background="hsl(0 , 55%, 40%)">
-          <p class="line15">Vi ska skapa hemsidor som är anpassade för alla enheter som finns och <span class="fragment fade-in" style="background: #222; padding: 5px;">alla enheter som ska släppas i framtiden.<span></p>
-          <h3 class="fragment fade-in">...ish</h3>
-        </section>
-      </section>
       <!--METODER INOM WEBBDESIGN -->
-      <section data-background="hsl(330, 55%, 40%)">
+      <section data-background="hsl(0, 45%, 40%)">
         <section >
           <h1>Web Design Strategies</h1>
         </section>
@@ -55,8 +45,7 @@
             <pre><code class="hljs css">
 .box-with-opacity{
   opacity: 0.5;
-}
-          </code></pre>
+}</code></pre>
         </section>
         <section>
             <h3>Graceful Degradation</h3>
@@ -68,8 +57,7 @@
 
   /* IE 5-7 */
   filter: alpha(opacity=50);
-}
-          </code></pre>
+}</code></pre>
         </section>
         <section class="line15">
           <h3>Progressive Enhancement</h3>
@@ -110,7 +98,7 @@
       </section>
       <!-- MOBILE FIRST VS. DESKTOP FIRST -->
       <section>
-              <section>
+        <section data-background="hsl(0, 45%, 40%)">
           <h1>Mobile First vs. Desktop First</h1>
         </section>
        <section>
@@ -141,7 +129,7 @@
 -->
 </canvas>
         </section>
-        <section>
+        <section >
           <canvas data-chart="bar">
 <!-- 
 {
@@ -171,16 +159,16 @@
 -->
 </canvas>
         </section>
-        <section>
+        <section data-background="hsl(0, 45%, 40%)">
           <a href="http://gs.statcounter.com/"><h2>http://gs.statcounter.com</h2></a>
         </section>
-        <section>
+        <section data-background="hsl(0, 45%, 40%)">
           <ul style="text-align: left">
           <li class="fragment fade-in">Ska vi anpassa för alla tänkbara besökare eller enbart vår målgrupp?</li>
           <li class="fragment fade-in">Måste vi anpassa oss till exakt alla enheter som finns? Är det OK att sidan ser annorlunda ut på vissa enheter och browsers?</li>
           <li class="fragment fade-in">Måste vi verkligen ha fallbacks eller fixes för webbläsare som 1% av befolkningen använder?</li>
           </ul>
-          <strong class="fragment fade-in">Inta en roll: den ena tycker att det ska se likadant ut på alla enheter och browsers. Den andra tycker att vi ska strunta i minoriteterna (exempelvis folk som använder IE eller äldre telefoner)</strong>
+          <strong class="fragment fade-in"><em>Inta en roll: den ena tycker att det ska se likadant ut på alla enheter och browsers. Den andra tycker att vi ska strunta i minoriteterna (exempelvis folk som använder IE eller äldre telefoner)</em></strong>
         </section>
         </section>
 
@@ -257,113 +245,7 @@ p{
         </section>
       </section>
       <!-- Media Queries -->
-      <section data-background="hsl(160, 55%, 40%)">
-        <section>
-          <h1>Media Queries</h1>
-        </section>
-        <section>
-        <h3>Responsive Meta Tag</h3>
-        <pre><code class="hljs html line15">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-        </code></pre>
-        <a href="https://css-tricks.com/snippets/html/responsive-meta-tag/">https://css-tricks.com/snippets/html/responsive-meta-tag</a>
-        </section>
-        <section>
-          <em class="line15">In general, <strong class="fragment highlight-red">a query is a question</strong>, often required to be expressed in a formal way.</em>
-          <pre class="fragment fade-in big-font"><code class="hljs js">if (expression) {
-    /*hack NASA mainframe*/
-}</code></pre>
-        </section >
-        <section>
-          <h3>Basic media query</h3>
-          <pre><code class="hljs css big-font line15">
-@media (max-width: 480px){
-  /*make NASAs mainframe responsive*/
-}
-          </code></pre>
-          <p>alla CSS-rules inom paranteserna kommer att användas om skärmen är max 480px bred</p>
-        </section>
-        <section>
-          <h3>Basic media query</h3>
-          <pre><code class="hljs css big-font line15">@media (max-width: 480px){ 
-  .container{
-    width: 100%;
-  }
-}</code></pre>
-          <p><span class="black-background">Under 480px</span> ska vår sida ta upp hela skärmens bredd</p>
-        </section>
-        <section>
-        <h3>Basic media query</h3>
-        <em>Samma mått (om man utgår från 16px font)</em>
-<pre><code class="hljs css big-font line15">
-@media (max-width: 30em){ 
-  /*make NASAs mainframe responsive */
-}
-          </code></pre>         
-        </section>
-        <section>
-        <h3>Media type</h3>
-<pre><code class="hljs css line15">
-@media screen and (max-width: 30em){
-  p{
-    font-size: 1.5em; /* Enlarge text on smaller screen */
-  }
-}
-          </code></pre> 
-          <pre><code class="hljs js line15">
-if screen && (max-width: 30em){
-  /*hack NASA mainframe
-}
-          </code></pre>       
-        </section>
-        <section>
-          <h3>Mobile first</h3>
-            <pre><code class="hljs css big-font line15">
-@media screen and (min-width: 30em){
-  .container{
-    width: 70%;
-  }
-}
-          </code></pre>
-          <p>30 em och <span class="black-background">uppåt</span>, vi anpassar för större skärmar</p>
-        </section>
-        <section>
-        <pre><code class="hljs css big-font line15">
-@media screen and (orientation: landscape){
-  .container{
-    width: 70%;
-  }
-}
-        </code></pre>
-        <p>Är mobilen liggande eller stående (portrait)</p>
-        </section>
-        <section>
-          <h3>Det vi behöver ha koll på</h3>
-          <p><code class="black-background">max-width / min-width</code></p>
-          <p><code class="black-background">all, screen, print</code></p>
-          <h4 class="fragment fade-in">samt..</h4>
-        </section>
-        <section>
-          <h2>Breakpoints</h2>
-        </section>
-        <section>
-          <h3>Låt ditt innehåll styra dina breakpoints</h3>
-          <pre><code class="hljs css big-font line15">
-@media screen and (min-width: ???){
-  /* Beror på ditt innehåll */
-}
-          </code></pre>
-        </section>
-        <section>
-          <h4>Breakpoint hunt</h4>
-          <ul>
-            <li class="fragment fade-in">Kolla på hemsidor du brukar besöka efter media queries</li>
-            <li class="fragment fade-in">Använd Responsive Mode i din webbläsare för att se vad som händer när du ändrar storleken på fönstret</li>
-          </ul>
-          <a class="fragment fade-in" href="http://material.io/resizer/"><h6>Material.io Resizer</h6></a>
-          <a class="fragment fade-in" href="https://developers.google.com/web/fundamentals/design-and-ui/responsive/patterns"><h6>Google Developers: Responsive Patterns</h6></a>
-        </section>
-      </section>
+
     </div>
   </div>
   <script src="lib/js/head.min.js"></script>

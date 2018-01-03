@@ -1,0 +1,128 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo.png"/>
+  <meta name="description" content="Redux">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>Redux</title>
+  <script type="text/javascript">
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .token.operator{background:none;}
+    .reveal em, .reveal strong{border-radius: 6px;}
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section>
+          <img style="box-shadow: none;" src="https://raw.githubusercontent.com/reactjs/redux/master/logo/logo-title-dark.png">
+          <p style="text-transform:  uppercase; letter-spacing: 0.2rem;">Predictable state container</p>
+        </section>
+        <section>
+          <p>Även kallad <code><em>state store</em></code></p>
+          <p class="fragment fade-down">Ett objekt som håller din applikations gemensamma state</p>
+          <p class="fragment fade-down">State som ska delas av flera olika komponenter</p>
+        </section>
+        <section data-background="#2f1f2e">
+          <img src="https://i.imgur.com/jMAJZGc.png">
+          <p style="position: absolute; top: 0; right: 0;"> Vi vill göra detta ibland<br/> fast utan <code><em>context</em></code></p>
+        </section>
+        <section>
+          <pre style="max-width: 400px; margin: 0 auto;"><code class="language-json">state = {
+    user: {},
+    todos: [],
+    selectedTodo: {},
+    error: ''
+}</code></pre>
+        <p style="line-height:" class="fragment fade-down">Vi plockar detta från <code><em>App.js</em></code></p>
+        <p class="fragment fade-down">och lägger det i <code><strong>store</strong></code></p>
+        </section>
+        <section>
+          <p>Vi vill också gärna ha en </p>
+          <p><em>Single source of truth</em></p>
+          <blockquote class="fragment fade-down"> is the practice of structuring information models and associated schemata such that <strong>every data element is stored exactly once</strong></blockquote>
+        </section>
+        <section>
+          <a href="http://redux.js.org/"></a>
+          <p>You can use Redux together with React, or with any other view library. </p>
+            <p>It is tiny (2kB, including dependencies).</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <ul>
+            <li class="fragment fade-down"><code><em>store</em></code>
+              <ul>
+                <li>Håller vårt övergripande state: users, todos</li>
+              </ul>
+            </li>
+            <li class="fragment fade-down"><code><em>actions</em></code>
+                <ul>
+                  <li>Handlingar som ska utfärdas</li>
+                </ul>
+            </li>
+            <li class="fragment fade-down"><code><em>reducers</em></code>
+              <ul>
+                <li>Vad som ska ske med vårt state efter handlingarna är färdiga</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <p>i <em>redux</em> så returneras alltid en modifierad kopia av ditt state</p>
+          <p class="fragment fade-down">Så det föregående statet lämnas omodiferat</p>
+          <p class="fragment fade-down">Tänk <strong><code>GIT</code></strong></p>
+        </section>
+        <section>
+          <img style="box-shadow: none;" src="https://s3.amazonaws.com/media-p.slid.es/uploads/364812/images/2484555/ARCH-Redux2.png">
+        </section>
+        <section>
+          <img style="box-shadow: none;" src="https://s3.amazonaws.com/media-p.slid.es/uploads/364812/images/2484552/ARCH-Redux2-real.gif">
+        </section>
+        <section>
+          <a href="https://egghead.io/courses/getting-started-with-redux">https://egghead.io/courses/getting-started-with-redux</a>
+          <p>Videoserie skapad av Redux skapare: Dan Abramov</p>
+        </section>
+      </section>
+      
+    </div>
+  </div>  
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'fade',
+      height: '90%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      {src : 'lib/prismjs/prism.js'},
+      {src : 'js/print.js'}
+      ]
+    });
+  </script>
+</body>
+</html>
