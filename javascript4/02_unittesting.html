@@ -1,0 +1,200 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/projects/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Testing">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> Testing </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <section>
+        <section>
+          <h1><strong>Testing</strong></h1>
+        </section>
+        <section>
+          <p><strong>Vi vill inte ha buggar och vi vill upptäcka buggar i tid</strong></p>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/8/8a/H96566k.jpg">
+          
+        </section>
+        <section>
+          <p><strong>Olika typer av buggar</strong></p>
+          <ul>
+            <li>User Interface</li>
+            <li>Business Logic</li>
+            <li>Tillgänglighet</li>
+            <li>Säkerhet</li>
+            <li>Integration</li>
+            <li>m.m</li>
+          </ul>
+        </section>
+        <section>
+          <p>Hur förhindrar vi buggar?</p>
+          <ul>
+            <li>Statisk typning: <em>Flow / TypeScript</em></li>
+            <li>Linting: <em>ESLint</em></li>
+            <li>Testing: 👷🏽</li>
+          </ul>
+        </section>
+        <section>
+          <pre><code class="language-js">// @flow
+function square(n: number): number {
+  return n * n;
+}
+
+square("2"); // Error!</code></pre>
+        </section>
+        <section>
+          <p><em>Tre huvudsakliga tester</em></p>
+          <ul>
+            <li>Unit Test</li>
+            <li>Integration Test</li>
+            <li>E2E Test</li>
+          </ul>
+        </section>
+        <section>
+          <img src="https://pbs.twimg.com/media/C81o1dkXUAIqXAi.jpg">
+          <a class="reference" href="https://twitter.com/Una/status/850451564527591424">https://twitter.com/Una/status/850451564527591424</a>
+        </section>
+        <section>
+          <img src="https://pbs.twimg.com/media/C81o1dxWAAE0aPt.jpg">
+          <a class="reference" href="https://twitter.com/Una/status/850451564527591424">https://twitter.com/Una/status/850451564527591424</a>
+        </section>
+        <section>
+          <img src="https://pbs.twimg.com/media/C81o3PSXYAAdo70.jpg">
+          <a class="reference" href="https://twitter.com/Una/status/850451564527591424">https://twitter.com/Una/status/850451564527591424</a>
+        </section>
+        <section>
+          <img src="https://martinfowler.com/bliki/images/testPyramid/test-pyramid.png">
+          <a class="reference" href="https://martinfowler.com/bliki/TestPyramid.html">https://martinfowler.com/bliki/TestPyramid.html</a>
+        </section>
+        <section>
+          <img src="https://2.bp.blogspot.com/-YTzv_O4TnkA/VTgexlumP1I/AAAAAAAAAJ8/57-rnwyvP6g/s1600/image02.png">
+          <a class="reference" href="https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html">https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html</a>
+        </section>
+        <section>
+          <p><em>Unit Testing</em></p>
+          <blockquote>In computer programming, unit testing is a software testing method by which individual units of source code  are tested to determine whether they are fit for use.</blockquote>
+        </section>
+        <section>
+          <blockquote>Ta den minsta enheten av testbar kod, <em>isolera</em> den och testa om den fungerar/returnerar det värde du förväntar dig </blockquote>
+          <p>Koden förväntas returnera samma output av likadan input</p>
+        </section>
+        <section>
+          <h3>Min fina kod</h3>
+          <pre><code class="language-js">function add( a , b ){
+  return a + b;
+}</code></pre>
+        </section>
+          <section>
+          <p><strong>assert</strong></p>
+          <p><em style="font-style: italic">state a fact or belief confidently and forcefully.</em></p>
+            <pre><code class="language-js">function assert(value) {
+  return value ? "Pass" : "Fail";      
+}</code></pre>
+          <pre><code class="language-js">assert(add(1,1) === 2); //returns "Pass"</code></pre>
+          <p class="fragment fade-down">Förväntat beteende, returnerar false om vi introducerar en bugg i koden</p>
+        </section>
+        <section>
+          <p>Introducerar <em>Dum Kod™</em></p>
+          <pre><code class="language-js">function add( a , b ){
+  return a + b + 1; //🤔 hurr durr
+}</code></pre>
+    <pre><code class="language-js">assert(add(1,1) === 2); //returns "Fail"</code></pre>
+        <p class="fragment fade-down">Följer inte längre förväntat beteende, implementationen är fel.</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><strong>Testramverk</strong></h1>
+        </section>
+         <section>
+          <p><em>Test framework</em></p>
+          <p>Ramverk för att köra flera olika tester automatiserat</p>
+          <p>Standardisera testandet</p>
+          <p>Inbyggda funktioner för de mest vanliga scenarion som ska testas</p>
+        </section>
+        <section>
+          <h3>Vi ser över <strong>Jest</strong></h3>
+          <p>Skapar ett testprojekt från grunden</p>
+        </section>
+      </section>
+      <section>
+        <section>
+          <h1><strong>TDD</strong></h1>
+          <p>Test Driven Development</p>
+        </section>
+        <section>
+          <img src="https://i.imgur.com/LScqzRl.png">
+        </section>
+        <section>
+          <ul>
+            <li>Skriv test</li>
+            <li>Få ett test att misslyckas</li>
+            <li>Få test att lyckas med så små medel som möjligt</li>
+            <li>Refaktorera</li>
+            <li>Få test att passera</li>
+          </ul>
+        </section>
+        <section>
+          <p><em>Övning: Skapa unit tests</em></p>
+          <a href="https://github.com/FEND16/unit-test-exercise">https://github.com/FEND16/unit-test-exercise</a>
+          <p>Fastställ vilken funktionalitet i appen som måste fungera</p>
+          <p>Testa sedan denna funktionalitet</p>
+        </section>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>

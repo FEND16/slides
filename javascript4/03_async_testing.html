@@ -1,0 +1,141 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/projects/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Async testing">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> Async testing </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section>
+          <h1><strong>Testning</strong></h1>
+        </section>
+        <section>
+          <p><em>Ladda ner följande repo och installera</em></p>
+          <a href="https://github.com/FEND16/jest-mock-exercise">https://github.com/FEND16/jest-mock-exercise</a>
+          <p>Finns även länkat via Studentportalen</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><strong>Async testing</strong></h1>
+        </section>
+        <section>
+          <p>Asynkronitet är oberäkneligt</p>
+          <p>Därför blir det svårt att testa</p>
+          <p><code><em>fetch()</em></code>, <code><em>setTimeout</em></code>, <code><em>$.ajax()</em></code></p>
+        </section>
+        <section>
+          <ul>
+            <li>Responsen är väldigt varierande</li>
+            <li>Svårt att återskapa vissa error</li>
+            <li>Långsamt, vi vill att test ska gå snabbt</li>
+          </ul>
+        </section>
+        <section>
+          <p>Lättast är att fejka allt</p>
+          <ul>
+            <li><strong>Mocks</strong></li>
+            <li><strong>Fakes</strong></li>
+            <li><strong>Stubs</strong></li>
+          </ul>
+          <p>Vilket ord som använd är mindre viktigt, benämns lite olika.</p>
+        </section>
+        <section>
+          <p><em>3 saker som händer, 3 testfall</em></p>
+          <ul>
+            <li>Hämta data från API</li>
+            <li>Sortera data från API</li>
+            <li>Append to DOM</li>
+          </ul>
+          <p>Att kunna appenda till DOMen samt sortera informationen behöver bara data, data måste inte komma från databasen.</p>
+        </section>
+        <section>
+          <p>Fejka response från servern</p>
+          <ul>
+            <li>npm-paketet <code><em>fetch-mock</em></code> eller liknande</li>
+            <li><code><em>jest.mock</em></code></li>
+          </ul>
+        </section>
+        <section>
+          <p>Inte fejka respons från servern</p>
+          <pre><code class="language-js">test('fetches data from actual server', () => {
+  return fetchData(url)
+    .then(returnData => {
+      expect(returnData).toBeDefined();
+    })
+})</code></pre>
+        <p>Jest har inbyggd hantering av async om du returnerar något från testfallet</p>
+        </section>
+        <section>
+          <p>Inte fejka respons från servern</p>
+          <pre><code class="language-js">test('fetches data from actual server', async () => {
+  const returnData = await fetchData(url);
+  expect(returnData).toBeDefined();
+})</code></pre>
+        <p>Med <code><em>async/await</em></code> blir det snyggare</p>
+        </section>
+        <section>
+          <h4>Vi kollar testfall med <em>Jest</em></h4>
+        </section>
+      </section>
+      
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>
