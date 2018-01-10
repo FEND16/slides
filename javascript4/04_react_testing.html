@@ -1,0 +1,177 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/projects/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="React Jest Testing">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> React Jest Testing </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+        
+      <section>
+        <section>
+          <h1><strong>Jest + React</strong></h1>
+          <p>Unit & Integration</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><em>Enzyme</em></h1>
+        </section>
+        <section>
+          <p>Skapat av Airbnb for att testa React Components</p>
+          <p>Monterar eller renderar applikationen eller komponenten i en fake DOM</p>
+          <p>Ger oss ett jQuery liknande API för att navigera</p>
+        </section>
+        <section>
+          <pre><code class="language-jsx">import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App.js';
+test('renders part of the app', () => {
+  //Whole component is now "mounted" in the variable 'wrapper'
+  const wrapper = shallow(&lt;App /&gt;);
+});</code></pre>
+        </section>
+        <section>
+          <p><em>mount</em></p>
+          <pre><code class="language-jsx">import React from 'react';
+import { mount } from 'enzyme';
+import App from './App.js';
+test('renders part of the app', () => {
+  //Actually mounts everything
+  const wrapper = mount(&lt;App /&gt;);
+});</code></pre>
+        </section>
+        <section>
+          <ul>
+            <li><code><em>shallow</em></code> renderar ut komponenten</li>
+            <li><code><em>mount</em></code> monterar hela komponenten med underkomponenter </li>
+            <li><em><code>render</code></em> visar bara markup/style (html/css)</li>
+          </ul>
+          <p><code><em>mount</em></code> kör även lifecycle methods (<strong>componentDidMount()</strong>)</p>
+        </section>
+        <section>
+          <pre><code class="language-jsx">const App = () => 
+  &lt;h1&gt;
+    Hello!
+  &lt;/h1&gt;</code></pre>
+          <pre><code class="language-js">import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App.js';
+test('renders part of the app', () => {
+  const wrapper = shallow(&lt;App /&gt;);
+  expect(wrapper.find('h1').exists()).toEqual(true);
+});</code></pre>
+        </section>
+        <section>
+          <pre><code class="language-jsx">const App = () => 
+  &lt;button&gt;
+    Click me
+  &lt;/button&gt;</code></pre>
+          <pre><code class="language-js">import React from 'react';
+import { shallow } from 'enzyme';
+import App from './App.js';
+test('renders part of the app', () => {
+  const wrapper = shallow(&lt;App /&gt;);
+  wrapper.find('button').simulate('click');
+});</code></pre>
+          <p>Vi kan simulera onClick, onChange etc. Mer utförligt exempel kommer snart.</p>
+        </section>
+        <section>
+          <p>Använd enzyme när du vill säkerställa att html/komponenter renderas rätt</p>
+          <p>När du vill simulera enklare events</p>
+          <p>När du behöver kolla props och state för komponenter</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><em>Snapshot testing</em></h1>
+          <a href="https://facebook.github.io/jest/docs/en/snapshot-testing.html">https://facebook.github.io/jest/docs/en/snapshot-testing.html</a>
+        </section>
+        <section>
+          <p>Snapshot testing lämpar sig bra för mindre komponenter</p>
+          <p>En snapshot är en bild av hur komponenter ser ut vid ett visst tillfälle</p>
+          <p>Typ som ett foto...fast i JSON-format 😅</p>
+        </section>
+        <section>
+          <p>Typiskt snapshot test</p>
+          <pre><code class="language-jsx">import toJson from 'enzyme-to-json';
+it('should match snapshot', () => {
+  //Only need render, faster if we just want markup and style
+  const wrapper = render(&lt;Button onClick={()=&gt;{}} /&gt;);
+  //Will fail when changes in snapshot happens
+  expect(toJson(wrapper)).toMatchSnapshot();
+})</code></pre>
+        </section>
+        <section>
+          <p>Bra för mindre och mindre avancerade komponenter</p>
+          <p>Supersnabba att skriva</p>
+          <p>Men vi måste manuellt verifiera dem</p>
+          <p>Failing test triggas vid minsta ändring</p>
+        </section>
+      </section>
+
+      <section>
+        <p><em>Eftermiddag</em>: Skapa integrationstest</p>
+        <p>Repots README är nu uppdaterad med övningar längst ner</p>
+        <a href="https://github.com/FEND16/jest-react-testing">https://github.com/FEND16/jest-react-testing</a>
+      </section>
+
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>
