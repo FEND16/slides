@@ -1,0 +1,219 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/projects/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Code Coverage">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> Code Coverage </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section>
+          <h1><strong>Code Coverage</strong></h1>
+          <p> Continuous integration &amp; Continuous Development </p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <p>Men först</p>
+          <img src="https://eslint.org/img/logo.svg" height="200">
+          <p><em>ESLint</em>: The pluggable linting utility for JavaScript and JSX</p>
+        </section>
+        <section>
+          <p>Kör alltid med ESLint</p>
+          <p>ESLint konfigurerar med:</p>
+          <ul>
+            <li>config-fil: <code><em>.eslintrc</em></code></li>
+            <li>fält i package.json: <code><em>"eslintConfig"</em></code></li>
+          </ul>
+        </section>
+        <section>
+          <pre><code class="language-json">{
+  "extends" : [
+      "airbnb",               //config
+      "prettier"              //config
+  ],
+  "env": {                    //enable global envs
+      "jest": true,
+      "browser": true,  
+      "es6": true
+  },
+  "parser": "babel-eslint",   //ES6 features
+  "rules" : {
+      "react/jsx-filename-extension": [
+        1, 
+        { "extensions": [".js", ".jsx"] }
+      ]
+  }
+}</code></pre>
+        </section>
+        <section>
+          <ul>
+            <li><code><em>eslint-config-airbnb</em></code></li>
+            <li><code><em>eslint-config-prettier</em></code></li>
+            <li><code><em>eslint-plugin-import</em></code></li>
+            <li><code><em>eslint-plugin-jsx-a11y</em></code></li>
+            <li><code><em>eslint-plugin-react</em></code></li>
+          </ul>
+        </section>
+        <section>
+          <p>Osäker på vad du ska använda? Använd min config</p>
+          <p>ESLint bygger på att man delar configs</p>
+          <p>Sök på: <code><em>eslint configs</em></code></p>
+          <pre><code class="language-json">{
+    "extends": "airbnb"
+}</code></pre>
+        <p>Är det någon regel som är störig? Stäng av den</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <p><em>Hur vet vi när vi skrivit tillräckligt med tester?</em></p>
+          <p><strong>Svar:</strong> genom att räkna alla rader kod som har körts</p>
+          <p>code coverage eller testtäckning</p>
+        </section>
+        <section>
+          <p><em>%</em> av täckta rader</p>
+          <p>Alla testramverk har inbyggd coverage reporting</p>
+        </section>
+        <section>
+          <h1>Passing Build</h1>
+            <blockquote>
+            <img style="height: auto; width: 400px; background: transparent;" src="https://travis-ci.org/jesperorb/karma-coveralls.svg?branch=master" alt="Build Passing">
+            <img style="height: auto; width: 400px; background: transparent;" src="https://coveralls.io/repos/github/jesperorb/karma-coveralls/badge.svg?branch=master" alt="100% Test Coverage">
+            </blockquote>
+        </section>
+        <section>
+          <p>Vad indikerar testtäckning?</p>
+          <p><strong>Låg % </strong>: skriv mer tester</p>
+          <p><strong>Hög % </strong>: positivt men säger inte så mycket</p>
+          <p><strong>100% </strong>: du har säkert fuskat</p>
+        </section>
+        <section>
+          <p>Olika typer av testtäckning</p>
+          <ul>
+            <li><strong>Overall</strong></li>
+            <li>Statements</li>
+            <li>Branches</li>
+            <li>Functions</li>
+            <li>Lines</li>
+          </ul>
+          <p><code><em>0% - 100%</em></code></p>
+        </section>
+        
+        <section>
+          <pre><code class="language-js">function sum(a,b){
+  if(isNaN(a) || isNaN(b)){
+    throw new Error("Only numbers please");
+  }
+  return Number(a) + Number(b);
+}</code></pre>
+        <pre><code class="language-js">it('should add two numbers together', () => {
+  expect(sum(5,5)).toBe(10);
+})</code></pre>
+        <p>Alla funktioner är testade, men alla rader och alla branches är inte testade, <em>inte 100%</em></p>
+        </section>
+        <section data-background-color="#282a36" data-background-size="contain" data-background-image="https://i.imgur.com/5stpOFU.png">
+        <p class="fragment fade-down" style="position: absolute; top: -270px; right: 0;"><em><code>npm test -- --coverage</code></em></p>       
+        </section>
+        <section>
+          <pre><code class="language-js">it('should throw if not a number', () => {
+  expect(() => {
+    sum(null, "falafel");
+  }).toThrowError("Only numbers please");
+})
+
+it('should add two numbers together', () => {
+  expect(sum(5,5)).toBe(10);
+})</code></pre>
+        <p>Vi måste testa alla <em>branches</em>, alla alternativa vägar</p>
+        </section>
+        <section data-background-color="#282a36" data-background-size="contain" data-background-image="https://i.imgur.com/xjiDinp.png"></section>
+        <section>
+          <p>Vår <strong>branch</strong> är viktig i det här fallet</p>
+          <p>Men utan att testa vår branch har vi ändå <strong>75%</strong> täckning</p>
+          <p class="fragment fade-down"><em>Täckningen kan vara missvisande</em></p>
+        </section>
+        <section>
+          <p><strong>Testäckning kan nås utan att skriva de tester som behövs</strong></p>
+          <p>Jag skriver "testvänlig" kod med få rader</p>
+          <h3 class="fragment fade-down"><em>=</em></h3>
+          <p class="fragment fade-down">Färre rader att täcka</p>
+          <h3 class="fragment fade-down"><em>=</em></h3>
+          <p class="fragment fade-down">Högre täckning</p>
+        </section>
+        <section>
+          <blockquote>I expect a high level of coverage. Sometimes managers require one. There's a subtle difference.</blockquote>
+          <p>- Brian Marick</p>
+        </section>
+        <section>
+          <p><strong>Vi kollar testtäckning på föregående repo</strong></p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <p><em>Eftermidagen</em>: Nå 100% coverage</p>
+          <p><a href="https://github.com/FEND16/jest-react-testing-2">https://github.com/FEND16/jest-react-testing-2</a></p>
+        </section>
+      </section>
+      
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>
