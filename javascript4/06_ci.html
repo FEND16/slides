@@ -1,0 +1,190 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/projects/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="CI">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> CI </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section data-background-size="contain" data-background-color="#282a36"data-background-image="https://i.imgur.com/5K8bgmo.png">
+          <h1 class="fragment fade-left"><strong>Nu rullar vi 😎 💯 </strong></h1>
+        </section>
+        <section>
+          <p>Olika typer av testtäckning</p>
+          <ul>
+            <li><strong>Overall</strong></li>
+            <li>Statements</li>
+            <li>Branches</li>
+            <li>Functions</li>
+            <li>Lines</li>
+          </ul>
+        </section>
+        <section>
+          <p>Testtäckning är ett bra sätt att upptäcka <em>otestad kod</em></p>
+          <p>Sikta högt</p>
+          <p>100% testtäckning betyder inte att vi har testat alla use cases</p>
+          <p>Ju mer komprimerad kod vi skriver desto högre testtäckning kan vi få 🤔</p>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <h1><strong>CI &amp; CD</strong></h1>
+          <p>Continous integration &amp; Continous Deployment</p>
+        </section>
+        <section>
+          <blockquote>
+            Continuous integration (CI) is a practice where a team of developers integrate their code early and often to the main branch or code repository. The goal is to reduce the risk of seeing <em>“integration hell”</em> by waiting for the end of a project or a sprint to merge the work of all developers.
+          </blockquote>
+          <a class="reference" href="https://www.atlassian.com/continuous-delivery/how-to-get-to-continuous-integration">https://www.atlassian.com/continuous-delivery/how-to-get-to-continuous-integration</a>
+        </section>
+        <section>
+          <ul>
+            <li>Integrera tidigt och ofta: merga din branch</li>
+            <li>Se till så att huvudbranchen alltid är grön</li>
+            <li>Skriv tester när du skriver koden/innan du skriver koden</li>
+          </ul>
+        </section>
+        <section>
+          <ol>
+            <li>Vi vill automatisera testandet</li>
+            <li>Vi vill testa på en miljö som alltid är densamma</li>
+            <li>Vi vill vara flera som kan testa under samma villkor</li>
+          </ol>
+        </section>
+        <section>
+          <img height="200" src="https://travis-ci.com/images/logos/TravisCI-Full-Color.png">
+          <img height="200" src="https://circleci.com/circleci-logo-stacked-fb.png">
+          <img height="200" src="https://image.slidesharecdn.com/fosdem2017-gitlabci-170209223337/95/fosdem-2017-gitlab-ci-1-638.jpg?cb=1486679776">
+          <img height="200" src="http://www.learntek.org/wp-content/uploads/2017/08/jenkins_image.png">
+        </section>
+        <section>
+          <p>Alla CI-tjänster gör samma sak</p>
+          <p class="fragment fade-down">Kör din kod på en isolerad server</p>
+          <p class="fragment fade-down">Du kan ställa in hela miljön i förväg</p>
+          <p class="fragment fade-down">Samt deploya/launcha när testet går igenom</p>
+        </section>
+        <section>
+           <blockquote>The main characteristic of the <strong>DevOps</strong> movement is to strongly <em>advocate automation and monitoring at all steps of software construction, from integration, testing, releasing to deployment and infrastructure management.</em> DevOps aims at shorter development cycles, increased deployment frequency, more dependable releases, in close alignment with business objectives.</blockquote>
+           <a class="reference" href="https://en.wikipedia.org/wiki/DevOps">https://en.wikipedia.org/wiki/DevOps</a>
+        </section>
+        <section>
+          <p><em>Travis</em></p>
+          <p>Det som krävs är ett Travis-konto samt</p>
+          <p>en <code><strong>.travis.yml</strong></code>-fil</p>
+          <p><a href="https://travis-ci.org/">https://travis-ci.org/</a></p>
+        </section>
+        <section>
+          <pre><code class="language-yaml">language: node_js
+node_js:
+  - 8
+script:
+  - npm test</code></pre>
+        <p><code><em>.travis.yml</em></code> ligger i root och definierar vilket script som ska köras och på vilken platform. Resten tar CI-tjänsten hand om</p>
+        </section>
+        <section>
+          <p>Travis bryr sig inte om testtäckning</p>
+          <p>Bara om alla tester lyckas eller inte</p>
+          <p class="fragment fade-down">För att spara testtäckning behövs:</p>
+          <ul class="fragment fade-down">
+            <li><a href="https://coveralls.io/">https://coveralls.io/</a></li>
+            <li><a href="https://codecov.io/">https://codecov.io/</a></li>
+            <li>Eller liknande tjänst</li>
+          </ul>
+        </section>
+        <section>
+          <p>Installera <code><em>coveralls</em></code> paketet</p>
+          <pre><code class="language-bash">npm install --save-dev coveralls</code></pre>
+          <p>Lägg till i <code><em>.travis.yml</em></code></p>
+          <pre><code class="language-">language: node_js
+node_js:
+  - 8
+script:
+  - yarn test --coverage && cat ./coverage/lcov.info | coveralls</code></pre>
+          <p>Kör coverage och skickar infon till coveralls-paketet</p>
+         </section>
+          <section>
+        <pre><code class="language-bash">language: node_js
+node_js:
+  - 8
+cache:
+  directories:
+    - node_modules
+  yarn: true
+script:
+  - yarn build
+  - yarn test --coverage && cat ./coverage/lcov.info | coveralls
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  local-dir: build
+  on:
+    branch: master</code></pre>
+      </section>
+      </section>
+
+      <section>
+        <p><em>Gruppövning</em></p>
+        <p>Skriva automatiserade tester med TDD</p>
+        <a href="https://github.com/FEND16/javascript4/blob/master/bdd_tdd.md">https://github.com/FEND16/javascript4/blob/master/bdd_tdd.md</a>
+      </section>
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>
