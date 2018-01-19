@@ -1,0 +1,119 @@
+<html>
+<head>
+  <base href="https://jesperorb.github.io/revealjs/">
+  <!-- <base href="file:///Users/jesperorb/projects/revealjs/"> -->
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Testing">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> Testing </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section>
+          <h1><strong>End-2-End testing</strong></h1>
+        </section>
+      </section>
+
+      <section>
+        <section>
+          <img src="https://pbs.twimg.com/media/C81o3PSXYAAdo70.jpg">
+          <a class="reference" href="https://twitter.com/Una/status/850451564527591424">https://twitter.com/Una/status/850451564527591424</a>
+        </section>
+        <section>
+          <img src="https://martinfowler.com/bliki/images/testPyramid/test-pyramid.png">
+          <a class="reference" href="https://martinfowler.com/bliki/TestPyramid.html">https://martinfowler.com/bliki/TestPyramid.html</a>
+        </section>
+        <section>
+          <img src="https://2.bp.blogspot.com/-YTzv_O4TnkA/VTgexlumP1I/AAAAAAAAAJ8/57-rnwyvP6g/s1600/image02.png">
+          <a class="reference" href="https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html">https://testing.googleblog.com/2015/04/just-say-no-to-more-end-to-end-tests.html</a>
+        </section>
+        <section>
+          <p><em>Vanliga e2e-verktyg</em></p>
+          <p>Nästan samtliga bygger på <strong>Selenium / WebDriver</strong></p>
+          <ul>
+            <li>Karma (Protractor för Angular)</li>
+            <li>Nigthwatch.js</li>
+            <li>Nightmare.js</li>
+            <li>CasperJS</li>
+            <li>Puppeteer</li>
+          </ul>
+          <h1 class="fragment fade-down">So spooky 👻</h1>
+        </section>
+        <section>
+          <p>En browser kan köras <em>headless</em></p>
+          <p>I princip att browsern körs men inget fönster öppnas, bakgrundsprocess</p>
+          <p><em>PhantomJS</em> var en klon av Chrome som kunde köras headless, nu finns det inbyggt i Chrome. </p>
+          <p><em>Puppeteer</em> är ett verktyg för att köra chrome headless via node</p>
+          <p class="fragment fade-down">Bra verktyg om du vill automatisera eller skrapa hemsidor</p>
+        </section>
+        <section>
+          <img src="https://www.cypress.io/img/cypress-io-logo-social-share.png" alt="Cypress io">
+          <p>Förra året kom Cypress som underlättade rejält</p>
+          <p>Dock fortfarande beta</p>
+        </section>
+        <section>
+          <p>Lättast: <em>använd Cypress</em></p>
+          <a href="https://cypress.io">https://cypress.io</a>
+          <p>I projekt (jest-react-testing):</p>
+          <pre><code class="language-bash">npm install --save-dev cypress</code></pre>
+          <p>Kör cypress i projektet:</p>
+          <pre><code class="language-js">./node_modules/.bin/cypress open</code></pre>
+        </section>
+      </section>
+      
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>
