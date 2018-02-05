@@ -1,0 +1,94 @@
+<html>
+<head>
+  <!-- <base href="https://jesperorb.github.io/revealjs/"> -->
+  <base href="file:///Users/jesperorb/projects/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Pre examensarbete">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> Pre examensarbete </title>
+  <script>
+    var link = document.createElement( 'link' );
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+    document.getElementsByTagName( 'head' )[0].appendChild( link );
+  </script>
+  <style type="text/css">
+    .reveal section img {
+      box-shadow: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section>
+          <h1><em>Examensarbete 101</em></h1>
+        </section>
+        <section>
+          <p><em>First rule of examensarbete</em></p>
+          <p>Ifrågasätt allt</p>
+          <p><em>Second rule of examensarbete</em></p>
+          <p>Glöm dina åsikter och känslor 🤖 </p>
+        </section>
+        <section>
+          <p><strong>genomföra ett projekt från koncept till färdig
+”produkt”. </strong></p>
+          <p class="fragment fade-down"><strong>Visa förmåga att med helhetssyn kritiskt, självständigt och kreativt identifiera,
+formulera och lösa komplexa problem.</strong></p>
+        </section>
+        <section>
+          <p><em>Arbetet utförs självständigt eller i grupp antingen genom ett projekt vid skolan eller som ett
+utvecklingsprojekt i samarbete med ett företag.</em></p>
+        </section>
+        <section><h2><strong>Dokumentera allt</strong></h2></section>
+        <section>
+          <p><em>Nästa vecka</em></p>
+          <p>måndag ~ Genomgång av struktur etc.</p>
+          <p>torsdag ~ Presentation av projektidé</p>
+        </section>
+      </section>
+      
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+    Reveal.initialize({
+      transition: 'zoom',
+      height: '80%',
+      width: '70%',
+      controls: true,
+      progress: true,
+      history: true,
+      keyboard: true,
+      overview: true,
+      center: true,
+      dependencies: [
+      { src: 'lib/js/classList.js',condition: function (){
+        return !document.body.classList;}},
+        { src: 'plugin/notes/notes.js', async: true },
+        {src : 'lib/prismjs/prism.js'},
+        {src : 'js/print.js'},
+        { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+        ]
+      });
+
+    const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+    for(const editableElement of editableCodeBoxes){
+      editableElement.addEventListener('blur', function(){
+        Prism.highlightAll();
+      })
+    }
+  </script>
+</body>
+</html>

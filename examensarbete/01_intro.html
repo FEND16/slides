@@ -1,0 +1,126 @@
+<html>
+<head>
+  <!-- <base href="https://jesperorb.github.io/revealjs/"> -->
+  <base href="file:///Users/jesperorb/projects/revealjs/">
+  <link rel="stylesheet" href="css/reveal.css">
+  <link rel="stylesheet" href="css/theme/default.css">
+  <link rel="stylesheet" type="text/css" href="lib/prismjs/prism.css">
+  <link rel="stylesheet" type="text/css" href="lib/css/base16-oceanicnext.dark.css">
+  <link rel="shortcut icon" type="image/png" href="favicon.png"/>
+  <meta name="description" content="Examensarbete">
+  <meta name="author" content="jesperorb">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title> Examensarbete </title>
+  <script>
+  var link = document.createElement( 'link' );
+  link.rel = 'stylesheet';
+  link.type = 'text/css';
+  link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+  document.getElementsByTagName( 'head' )[0].appendChild( link );
+</script>
+<style type="text/css">
+.reveal section img {
+  box-shadow: none;
+}
+</style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+      <section>
+        <section>
+          <h1><em>Examensarbete</em></h1>
+        </section>
+        <section>
+          <p><em>First rule of examensarbete</em></p>
+          <p>Ifrågasätt allt</p>
+          <p><em>Second rule of examensarbete</em></p>
+          <p>Glöm dina åsikter och känslor 🤖 </p>
+        </section>
+        <section>
+          <p>Kursplan</p>
+          <a href="https://studentportal.nackademin.se/pluginfile.php/91680/mod_resource/content/1/VT2_Examensarbete.pdf">https://studentportal.nackademin.se/pluginfile.php/91680/mod_resource/content/1/VT2_Examensarbete.pdf</a>
+        </section>
+        <section>
+          <ul>
+          <li class="fragment fade-down">Erhållit kompetens i frontend-utveckling genom att i praktiken ha använt erhållna kunskaper och färdigheter för att genomföra ett projekt från koncept till färdig ”produkt”.</li>
+<li class="fragment fade-down">Ha utvecklat på egen hand, eller som del i en projektgrupp, en fullt fungerande
+”produkt” eller tjänst enligt arbetslivets standard.</li>
+<li  class="fragment fade-down">Visa förmåga att med helhetssyn kritiskt, självständigt och kreativt identifiera, formulera och lösa komplexa problem.</li>
+</ul>
+        </section>
+        <section>
+          <p><em>Key takeaways</em></p>
+          <ul>
+            <li class="fragment fade-down">Källkritiskt förhållningssätt</li>
+            <li class="fragment fade-down">Förmåga att dokumentera och synliggöra utvecklingsarbete</li>
+            <li class="fragment fade-down">Planering av ett större arbete</li>
+            <li class="fragment fade-down">Fördjupning inom område</li>
+          </ul>
+        </section>
+        <section>
+          <p>Handledarmöten</p>
+          <p>Minst en avkoll på vecka</p>
+          <p>Boka tid</p>
+          <p>Kan ske på distans</p>
+        </section>
+        <section>
+          <ul>
+            <li><em>v6:</em> Tids- aktivitets- och resursplan</li>
+            <li><em>v7:</em> Bakgrund, syfte och metod</li>
+            <li><em>v8:</em> Resultat: Hur ska arbetet dokumenteras och presenteras i rapporten?</li>
+            <li><em>v9:</em> Analys/Diskussion</li>
+            <li><em>v10:</em> Källhänvisningar samt rapportstruktur i allmänhet</li>
+            <li><em>v11:</em> Färdigt utkast av rapport som vi kan diskutera</li>
+          </ul>
+        </section>  
+        <section>
+          <p>Presenteras <em>15/2</em></p>
+          <p>Opponering: kritiskt granska varandras rapporter och ge feedback</p>
+        </section>
+        <section>
+          <p>Veckans uppgift</p>
+          <p>Skriva PM: 1-2 sidor</p>
+          <p>Lämnas in: <em>7/2 16.00</em></p>
+          <p>Presenteras i smågrupper <em>8/2</em></p>
+          <p>Resterande tid är eget arbete</p>
+        </section> 
+      </section>
+      
+    </div>
+  </div>
+  <!-- reveal.js scripts -->
+  <script src="lib/js/head.min.js"></script>
+  <script src="js/reveal.js"></script>
+  <script>
+  Reveal.initialize({
+    transition: 'zoom',
+    height: '80%',
+    width: '70%',
+    controls: true,
+    progress: true,
+    history: true,
+    keyboard: true,
+    overview: true,
+    center: true,
+    dependencies: [
+    { src: 'lib/js/classList.js',condition: function (){
+      return !document.body.classList;}},
+      { src: 'plugin/notes/notes.js', async: true },
+      {src : 'lib/prismjs/prism.js'},
+      {src : 'js/print.js'},
+      { src: 'plugin/livecoding/live-coding.js', async: true, condition: function() { return !!document.body.classList; }}
+      ]
+    });
+
+  const editableCodeBoxes = document.getElementsByClassName('liveCoding');
+  for(const editableElement of editableCodeBoxes){
+    editableElement.addEventListener('blur', function(){
+      Prism.highlightAll();
+    })
+  }
+</script>
+</body>
+</html>
